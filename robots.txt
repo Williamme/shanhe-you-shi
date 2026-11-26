@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://182.92.198.247/shanhe-you-shi/sitemap.xml
+Sitemap: https://182.92.198.247/sitemap.xml
