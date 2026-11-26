@@ -1,0 +1,20 @@
+{
+  "name": "shanhe-you-shi",
+  "version": "1.0.0",
+  "private": true,
+  "description": "面向初高中学生的文史古诗文交互地图",
+  "scripts": {
+    "start": "node server.js",
+    "start:visitor": "node visitor-server.cjs",
+    "check": "node scripts/validate-data.mjs",
+    "report:source": "node scripts/compare-source.mjs --report",
+    "import:source": "node scripts/import-missing-works.mjs",
+    "import:primary": "node scripts/import-primary-works.mjs",
+    "attach:journeys": "node scripts/attach-primary-journeys.mjs",
+    "sync:links": "node scripts/sync-author-links.mjs",
+    "refine:boundaries": "node scripts/refine-boundaries.mjs",
+    "import:era": "node scripts/import-era-timeline.mjs",
+    "import:tongjia": "node scripts/import-tongjia.mjs",
+    "import:atlas": "node scripts/import-atlas-snapshots.mjs"
+  }
+}

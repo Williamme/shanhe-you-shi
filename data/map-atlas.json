@@ -1,0 +1,494 @@
+{
+  "source": "江山时序（政权轮廓层，经字段过滤与简化）",
+  "sourceUrl": "https://github.com/DeanChensj/jiangshan-map",
+  "license": "GPL-3.0",
+  "generatedAt": "2026-11-16T10:39:43.206Z",
+  "notice": "仅提取政权轮廓，不包含受 CHGIS 条款限制的郡、州、府边界。疆域为教学示意，不是测绘边界。",
+  "globalStartYear": -2070,
+  "globalEndYear": 1949,
+  "periods": [
+    {
+      "id": "xia",
+      "name": "夏",
+      "startYear": -2070,
+      "endYear": -1600,
+      "defaultYear": -2070,
+      "snapshots": [
+        {
+          "id": "xia-2070bce",
+          "year": -2070,
+          "yearLabel": "前2070年",
+          "label": "夏代核心区域（示意）",
+          "geojson": "data/geo/xia.geojson",
+          "source": "existing-approximation"
+        }
+      ]
+    },
+    {
+      "id": "shang",
+      "name": "商",
+      "startYear": -1600,
+      "endYear": -1046,
+      "defaultYear": -1600,
+      "snapshots": [
+        {
+          "id": "shang-1600bce",
+          "year": -1600,
+          "yearLabel": "前1600年",
+          "label": "商代核心区域（示意）",
+          "geojson": "data/geo/shang.geojson",
+          "source": "existing-approximation"
+        }
+      ]
+    },
+    {
+      "id": "zhou",
+      "name": "周",
+      "startYear": -1046,
+      "endYear": -256,
+      "defaultYear": -1046,
+      "snapshots": [
+        {
+          "id": "zhou-1046bce",
+          "year": -1046,
+          "yearLabel": "前1046年",
+          "label": "西周前期（示意）",
+          "geojson": "data/geo/zhou.geojson",
+          "source": "existing-approximation"
+        },
+        {
+          "id": "zhou-403",
+          "year": -403,
+          "yearLabel": "前403年",
+          "label": "战国初期 · 七雄并立",
+          "geojson": "data/atlas/zhou-403.geojson",
+          "source": "jiangshan-polity",
+          "featureCount": 38
+        },
+        {
+          "id": "zhou-260",
+          "year": -260,
+          "yearLabel": "前260年",
+          "label": "战国后期 · 长平之战后",
+          "geojson": "data/atlas/zhou-260.geojson",
+          "source": "jiangshan-polity",
+          "featureCount": 5
+        }
+      ]
+    },
+    {
+      "id": "qin",
+      "name": "秦",
+      "startYear": -221,
+      "endYear": -207,
+      "defaultYear": -221,
+      "snapshots": [
+        {
+          "id": "qin-221",
+          "year": -221,
+          "yearLabel": "前221年",
+          "label": "秦统一六国初年",
+          "geojson": "data/atlas/qin-221.geojson",
+          "source": "jiangshan-polity",
+          "featureCount": 5
+        },
+        {
+          "id": "qin-207",
+          "year": -207,
+          "yearLabel": "前207年",
+          "label": "秦末天下大乱",
+          "geojson": "data/atlas/qin-207.geojson",
+          "source": "jiangshan-polity",
+          "featureCount": 4
+        }
+      ]
+    },
+    {
+      "id": "han",
+      "name": "汉",
+      "startYear": -202,
+      "endYear": 220,
+      "defaultYear": -60,
+      "snapshots": [
+        {
+          "id": "han-bc127",
+          "year": -127,
+          "yearLabel": "前127年",
+          "label": "西汉武帝时期",
+          "geojson": "data/atlas/han-bc127.geojson",
+          "source": "jiangshan-polity",
+          "featureCount": 6
+        },
+        {
+          "id": "han-bc60",
+          "year": -60,
+          "yearLabel": "前60年",
+          "label": "西汉中后期",
+          "geojson": "data/atlas/han-bc60.geojson",
+          "source": "jiangshan-polity",
+          "featureCount": 9
+        },
+        {
+          "id": "han-91",
+          "year": 91,
+          "yearLabel": "91年",
+          "label": "东汉中期",
+          "geojson": "data/atlas/han-91.geojson",
+          "source": "jiangshan-polity",
+          "featureCount": 5
+        },
+        {
+          "id": "han-208",
+          "year": 208,
+          "yearLabel": "208年",
+          "label": "东汉末年 · 赤壁之战",
+          "geojson": "data/atlas/han-208.geojson",
+          "source": "jiangshan-polity",
+          "featureCount": 2
+        }
+      ]
+    },
+    {
+      "id": "sanguo",
+      "name": "三国",
+      "startYear": 220,
+      "endYear": 280,
+      "defaultYear": 238,
+      "snapshots": [
+        {
+          "id": "sanguo-238",
+          "year": 238,
+          "yearLabel": "238年",
+          "label": "三国中期",
+          "geojson": "data/atlas/sanguo-238.geojson",
+          "source": "jiangshan-polity",
+          "featureCount": 9
+        },
+        {
+          "id": "sanguo-280",
+          "year": 280,
+          "yearLabel": "280年",
+          "label": "三国末期 · 西晋将统",
+          "geojson": "data/atlas/sanguo-280.geojson",
+          "source": "jiangshan-polity",
+          "featureCount": 1
+        }
+      ]
+    },
+    {
+      "id": "jin",
+      "name": "晋",
+      "startYear": 266,
+      "endYear": 420,
+      "defaultYear": 306,
+      "snapshots": [
+        {
+          "id": "jin-306",
+          "year": 306,
+          "yearLabel": "306年",
+          "label": "西晋末年",
+          "geojson": "data/atlas/jin-306.geojson",
+          "source": "jiangshan-polity",
+          "featureCount": 6
+        },
+        {
+          "id": "jin-420",
+          "year": 420,
+          "yearLabel": "420年",
+          "label": "东晋末年",
+          "geojson": "data/atlas/jin-420.geojson",
+          "source": "jiangshan-polity",
+          "featureCount": 1
+        }
+      ]
+    },
+    {
+      "id": "nanbeichao",
+      "name": "南北朝",
+      "startYear": 420,
+      "endYear": 589,
+      "defaultYear": 534,
+      "snapshots": [
+        {
+          "id": "nanbei-469",
+          "year": 469,
+          "yearLabel": "469年",
+          "label": "南北朝中期",
+          "geojson": "data/atlas/nanbei-469.geojson",
+          "source": "jiangshan-polity",
+          "featureCount": 14
+        },
+        {
+          "id": "nanbei-534",
+          "year": 534,
+          "yearLabel": "534年",
+          "label": "北魏分裂前后",
+          "geojson": "data/atlas/nanbei-534.geojson",
+          "source": "jiangshan-polity",
+          "featureCount": 1
+        },
+        {
+          "id": "nanbei-581",
+          "year": 581,
+          "yearLabel": "581年",
+          "label": "南北朝末期",
+          "geojson": "data/atlas/nanbei-581.geojson",
+          "source": "jiangshan-polity",
+          "featureCount": 2
+        }
+      ]
+    },
+    {
+      "id": "sui",
+      "name": "隋",
+      "startYear": 581,
+      "endYear": 618,
+      "defaultYear": 609,
+      "snapshots": [
+        {
+          "id": "sui-587",
+          "year": 587,
+          "yearLabel": "587年",
+          "label": "隋灭陈前夕",
+          "geojson": "data/atlas/sui-587.geojson",
+          "source": "jiangshan-polity",
+          "featureCount": 23
+        },
+        {
+          "id": "sui-609",
+          "year": 609,
+          "yearLabel": "609年",
+          "label": "隋朝鼎盛",
+          "geojson": "data/atlas/sui-609.geojson",
+          "source": "jiangshan-polity",
+          "featureCount": 15
+        }
+      ]
+    },
+    {
+      "id": "tang",
+      "name": "唐",
+      "startYear": 618,
+      "endYear": 907,
+      "defaultYear": 755,
+      "snapshots": [
+        {
+          "id": "tang-621",
+          "year": 621,
+          "yearLabel": "621年",
+          "label": "唐朝初建",
+          "geojson": "data/atlas/tang-621.geojson",
+          "source": "jiangshan-polity",
+          "featureCount": 27
+        },
+        {
+          "id": "tang-755",
+          "year": 755,
+          "yearLabel": "755年",
+          "label": "天宝十四载 · 安史之乱前夕",
+          "geojson": "data/atlas/tang-755.geojson",
+          "source": "jiangshan-polity",
+          "featureCount": 3
+        },
+        {
+          "id": "tang-840",
+          "year": 840,
+          "yearLabel": "840年",
+          "label": "晚唐中期",
+          "geojson": "data/atlas/tang-840.geojson",
+          "source": "jiangshan-polity",
+          "featureCount": 18
+        },
+        {
+          "id": "tang-907",
+          "year": 907,
+          "yearLabel": "907年",
+          "label": "唐朝末年",
+          "geojson": "data/atlas/tang-907.geojson",
+          "source": "jiangshan-polity",
+          "featureCount": 18
+        }
+      ]
+    },
+    {
+      "id": "song",
+      "name": "宋",
+      "startYear": 960,
+      "endYear": 1279,
+      "defaultYear": 1072,
+      "snapshots": [
+        {
+          "id": "song-960",
+          "year": 960,
+          "yearLabel": "960年",
+          "label": "北宋建立",
+          "geojson": "data/atlas/song-960.geojson",
+          "source": "jiangshan-polity",
+          "featureCount": 33
+        },
+        {
+          "id": "song-1072",
+          "year": 1072,
+          "yearLabel": "1072年",
+          "label": "北宋中期 · 变法时期",
+          "geojson": "data/atlas/song-1072.geojson",
+          "source": "jiangshan-polity",
+          "featureCount": 18
+        },
+        {
+          "id": "song-1206",
+          "year": 1206,
+          "yearLabel": "1206年",
+          "label": "南宋中期",
+          "geojson": "data/atlas/song-1206.geojson",
+          "source": "jiangshan-polity",
+          "featureCount": 3
+        },
+        {
+          "id": "song-1279",
+          "year": 1279,
+          "yearLabel": "1279年",
+          "label": "南宋末年",
+          "geojson": "data/atlas/song-1279.geojson",
+          "source": "jiangshan-polity",
+          "featureCount": 9
+        }
+      ]
+    },
+    {
+      "id": "yuan",
+      "name": "元",
+      "startYear": 1271,
+      "endYear": 1368,
+      "defaultYear": 1288,
+      "snapshots": [
+        {
+          "id": "yuan-1288",
+          "year": 1288,
+          "yearLabel": "1288年",
+          "label": "元朝统一初期",
+          "geojson": "data/atlas/yuan-1288.geojson",
+          "source": "jiangshan-polity",
+          "featureCount": 19
+        },
+        {
+          "id": "yuan-1367",
+          "year": 1367,
+          "yearLabel": "1367年",
+          "label": "元末群雄并起",
+          "geojson": "data/atlas/yuan-1367.geojson",
+          "source": "jiangshan-polity",
+          "featureCount": 6
+        }
+      ]
+    },
+    {
+      "id": "ming",
+      "name": "明",
+      "startYear": 1368,
+      "endYear": 1644,
+      "defaultYear": 1427,
+      "snapshots": [
+        {
+          "id": "ming-1369",
+          "year": 1369,
+          "yearLabel": "1369年",
+          "label": "明初",
+          "geojson": "data/atlas/ming-1369.geojson",
+          "source": "jiangshan-polity",
+          "featureCount": 28
+        },
+        {
+          "id": "ming-1616",
+          "year": 1616,
+          "yearLabel": "1616年",
+          "label": "明末",
+          "geojson": "data/atlas/ming-1616.geojson",
+          "source": "jiangshan-polity",
+          "featureCount": 7
+        },
+        {
+          "id": "ming-1636",
+          "year": 1636,
+          "yearLabel": "1636年",
+          "label": "皇太极称帝 · 明末",
+          "geojson": "data/atlas/ming-1636.geojson",
+          "source": "jiangshan-polity",
+          "featureCount": 8
+        },
+        {
+          "id": "ming-1644",
+          "year": 1644,
+          "yearLabel": "1644年",
+          "label": "明朝灭亡",
+          "geojson": "data/atlas/ming-1644.geojson",
+          "source": "jiangshan-polity",
+          "featureCount": 4
+        }
+      ]
+    },
+    {
+      "id": "qing",
+      "name": "清",
+      "startYear": 1644,
+      "endYear": 1911,
+      "defaultYear": 1796,
+      "snapshots": [
+        {
+          "id": "qing-1645",
+          "year": 1645,
+          "yearLabel": "1645年",
+          "label": "清初",
+          "geojson": "data/atlas/qing-1645.geojson",
+          "source": "jiangshan-polity",
+          "featureCount": 28
+        },
+        {
+          "id": "qing-1796",
+          "year": 1796,
+          "yearLabel": "1796年",
+          "label": "清中期",
+          "geojson": "data/atlas/qing-1796.geojson",
+          "source": "jiangshan-polity",
+          "featureCount": 23
+        },
+        {
+          "id": "qing-1912",
+          "year": 1912,
+          "yearLabel": "1912年",
+          "label": "清朝灭亡",
+          "geojson": "data/atlas/qing-1912.geojson",
+          "source": "jiangshan-polity",
+          "featureCount": 6
+        }
+      ]
+    },
+    {
+      "id": "modern",
+      "name": "近现代",
+      "startYear": 1912,
+      "endYear": 1949,
+      "defaultYear": 1916,
+      "snapshots": [
+        {
+          "id": "modern-1916",
+          "year": 1916,
+          "yearLabel": "1916年",
+          "label": "民国初年",
+          "geojson": "data/atlas/modern-1916.geojson",
+          "source": "jiangshan-polity",
+          "featureCount": 12
+        },
+        {
+          "id": "modern-1945",
+          "year": 1945,
+          "yearLabel": "1945年",
+          "label": "抗日战争胜利",
+          "geojson": "data/atlas/modern-1945.geojson",
+          "source": "jiangshan-polity",
+          "featureCount": 12
+        }
+      ]
+    }
+  ]
+}

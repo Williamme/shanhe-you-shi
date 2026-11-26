@@ -1,0 +1,23 @@
+# Runtime data
+.runtime/
+.runtime-test/
+*.log
+
+# Test output
+browser-audit.png
+content-audit-*.png
+atlas-audit-*.png
+preview-*.png
+*.tar.gz
+
+# Editor and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Dependencies
+node_modules/
+
+# Local browser profiles
+.chrome-*/

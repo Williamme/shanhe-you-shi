@@ -1,0 +1,28 @@
+name: Validate data
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Validate project data
+        run: npm run check
+
+      - name: Check JavaScript syntax
+        run: |
+          node --check js/app.js
+          node --check js/era-timeline.js
+          node --check js/content-union.js
+          node --check visitor-server.cjs
+          node --check visitor-store.cjs

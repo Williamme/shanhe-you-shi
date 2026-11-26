@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="h-full bg-slate-950 text-slate-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国朝代并行时间轴可视化 (含大事与课内名家生平轴)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for Chinese Classical Style -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Noto Serif SC"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.8);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(51, 65, 85, 0.8);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(180, 83, 9, 0.8);
+        }
+
+        /* Timeline Grid */
+        .timeline-bg {
+            background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 100% 50px;
+        }
+
+        .drawer-transition {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .author-chip {
+            transition: all 0.2s ease;
+        }
+        .author-chip:hover {
+            transform: translateY(-50%) scale(1.08);
+            z-index: 25;
+        }
+        .event-pin:hover {
+            transform: translateY(-50%) scale(1.2);
+            z-index: 25;
+        }
+    </style>
+</head>
+<body class="h-full flex flex-col font-serif overflow-hidden select-none bg-slate-950">
+
+    <!-- Header -->
+    <header class="bg-slate-950/95 backdrop-blur border-b border-amber-900/40 px-4 md:px-8 py-3 flex-none z-30 shadow-xl">
+        <div class="w-full flex flex-col md:flex-row md:items-center justify-between gap-3">
+            <div>
+                <h1 class="text-xl md:text-2xl font-bold tracking-wide text-amber-500 flex items-center gap-2">
+                    <span class="inline-block w-2.5 h-6 bg-amber-500 rounded-full shadow-md shadow-amber-500/30"></span>
+                    中国朝代并行时间轴
+                    <span class="text-xs bg-amber-950/80 text-amber-300 border border-amber-700/50 px-2 py-0.5 rounded-full font-normal">含大事与中小学课内名家生平轴</span>
+                </h1>
+                <p class="text-xs text-slate-400 mt-1">
+                    纵轴为年份，并行政权自动分排轨道。直观展示朝代大事点与课内名家生平，点击作者或朝代查看详情。
+                </p>
+            </div>
+
+            <!-- Global Search & Quick Navigation -->
+            <div class="flex flex-wrap items-center gap-2">
+                <div class="relative min-w-[180px] md:min-w-[220px]">
+                    <input type="text" id="searchInput" placeholder="搜索朝代、名家作者、经典诗篇或事件..." 
+                           class="w-full bg-slate-900 border border-slate-700 rounded-lg pl-3 pr-7 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-amber-500 transition-colors">
+                    <span id="clearSearch" class="hidden absolute right-2.5 top-1.5 text-slate-400 hover:text-white cursor-pointer text-xs">✕</span>
+                </div>
+
+                <div class="h-4 w-px bg-slate-800 mx-1 hidden sm:block"></div>
+
+                <span class="text-xs text-slate-400 font-semibold mr-1 hidden sm:inline">快捷导航:</span>
+                <button onclick="scrollToYear(-2070)" class="px-2.5 py-1 text-xs bg-slate-900 hover:bg-amber-900/40 hover:text-amber-300 border border-slate-700 rounded transition-all">先秦</button>
+                <button onclick="scrollToYear(220)" class="px-2.5 py-1 text-xs bg-slate-900 hover:bg-amber-900/40 hover:text-amber-300 border border-slate-700 rounded transition-all">三国南北朝</button>
+                <button onclick="scrollToYear(618)" class="px-2.5 py-1 text-xs bg-slate-900 hover:bg-amber-900/40 hover:text-amber-300 border border-slate-700 rounded transition-all">唐宋</button>
+                <button onclick="scrollToYear(1368)" class="px-2.5 py-1 text-xs bg-slate-900 hover:bg-amber-900/40 hover:text-amber-300 border border-slate-700 rounded transition-all">明清</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Canvas Area -->
+    <div class="flex-1 relative overflow-hidden flex">
+        
+        <!-- Timeline Scroll Container -->
+        <div id="timelineScrollContainer" class="flex-1 overflow-auto relative timeline-bg w-full">
+            <div id="timelineCanvas" class="relative pb-32 transition-all duration-150 w-full">
+                <!-- Y-Axis Year Label Ticks -->
+                <div id="axisContainer" class="absolute left-0 top-0 bottom-0 w-20 border-r border-slate-800 bg-slate-950/80 z-20 pointer-events-none"></div>
+
+                <!-- Dynasties & Inner Timeline Components Container -->
+                <div id="lanesContainer" class="absolute left-20 right-0 top-0 bottom-0 pr-4"></div>
+            </div>
+        </div>
+
+        <!-- Right Side Drawer Panel -->
+        <aside id="detailDrawer" class="drawer-transition fixed md:absolute right-0 top-0 bottom-0 w-full md:w-[460px] bg-slate-950/95 border-l border-amber-900/40 z-40 shadow-2xl flex flex-col translate-x-full">
+            
+            <!-- Drawer Navigation Header Tabs -->
+            <div id="drawerHeader" class="p-4 border-b border-slate-800 bg-slate-900/80 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <span id="drawerBadge" class="w-3.5 h-3.5 rounded-full shadow-md"></span>
+                    <div>
+                        <h2 id="drawerTitle" class="text-xl font-bold text-amber-400">详情信息</h2>
+                        <p id="drawerSubtitle" class="text-xs text-slate-400 font-mono mt-0.5"></p>
+                    </div>
+                </div>
+                <button id="closeDrawer" class="text-slate-400 hover:text-white p-1.5 rounded-lg hover:bg-slate-800 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+
+            <!-- Drawer Dynamic Body Content -->
+            <div id="drawerBody" class="flex-1 overflow-y-auto p-5 space-y-6">
+                <!-- Dynamic Content injected via JS (Author or Dynasty Profile) -->
+            </div>
+        </aside>
+    </div>
+
+    <!-- Hover Tooltip Floating Box -->
+    <div id="tooltip" class="fixed pointer-events-none z-50 bg-slate-900/95 border border-amber-500/50 rounded-xl p-3.5 shadow-2xl backdrop-blur-md max-w-sm transition-opacity duration-150 opacity-0 hidden">
+        <div class="flex items-center gap-2 mb-1">
+            <span id="ttColor" class="w-2.5 h-2.5 rounded-full inline-block"></span>
+            <h4 id="ttTitle" class="font-bold text-amber-400 text-sm"></h4>
+            <span id="ttTag" class="text-[10px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-300 font-mono ml-auto"></span>
+        </div>
+        <p id="ttTime" class="text-xs text-slate-400 font-mono mb-2"></p>
+        <div id="ttContent" class="text-xs text-slate-300 space-y-1 border-t border-slate-800 pt-2"></div>
+    </div>
+
+    <!-- MAIN JAVASCRIPT LOGIC -->
+    <script>
+        // 1. DATASET WITH DYNASTIES, HISTORICAL EVENTS, & FAMOUS POETRY AUTHORS (K-12 CURRICULUM)
+        const RAW_DYNASTIES = [
+            { 
+                name: '夏朝', start: -2070, end: -1600, color: '#7c3aed', 
+                events: [{ year: -2070, title: '大禹建夏', desc: '夏后氏创立中国历史上首个奴隶制朝代。' }],
+                authors: [],
+                poetry: [{ title: '弹歌', author: '佚名', content: '断竹，续竹；飞土，逐宍。' }] 
+            },
+            { 
+                name: '商朝', start: -1600, end: -1046, color: '#db2777', 
+                events: [{ year: -1300, title: '盘庚迁殷', desc: '商朝国都稳定于殷，开启商朝晚期繁荣。' }],
+                authors: [],
+                poetry: [{ title: '诗经·商颂·玄鸟', author: '佚名', content: '天命玄鸟，降而生商，宅殷土芒芒。' }] 
+            },
+            { 
+                name: '西周', start: -1046, end: -771, color: '#2563eb', 
+                events: [{ year: -1046, title: '武王克商', desc: '牧野之战后建立周朝，实行分封制与礼乐制。' }],
+                authors: [],
+                poetry: [{ title: '关雎', author: '诗经', content: '关关雎鸠，在河之洲。窈窕淑女，君子好逑。' }] 
+            },
+            { 
+                name: '春秋', start: -770, end: -476, color: '#059669', 
+                events: [{ year: -651, title: '葵丘之会', desc: '齐桓公确立春秋首霸地位。' }],
+                authors: [],
+                poetry: [{ title: '曹刿论战', author: '左丘明', content: '夫战，勇气也。一鼓作气，再而衰，三而竭。' }] 
+            },
+            { 
+                name: '战国', start: -475, end: -221, color: '#10b981', 
+                events: [
+                    { year: -356, title: '商鞅变法', desc: '秦国确立国富兵强基础。' },
+                    { year: -278, title: '郢都陷落', desc: '秦将白起攻破楚国都城。' }
+                ],
+                authors: [
+                    {
+                        name: '屈原', start: -340, end: -278, tag: '战国·楚',
+                        bio: '屈原（约前340年—前278年），中国历史上第一位伟大的爱国诗人，浪漫主义文学的奠基人，被尊为“诗祖”。',
+                        milestones: ['任楚国左徒、三闾大夫，主张联齐抗秦', '遭贵族排挤流放，倾心创作《离骚》', '秦军攻破楚都郢，抱石投汨罗江殉国'],
+                        works: ['《离骚》', '《九歌·国殇》', '《天问》'],
+                        context: '战国七雄争霸，楚国衰落，秦国大举南侵时期。'
+                    }
+                ],
+                poetry: [{ title: '离骚', author: '屈原', content: '路漫漫其修远兮，吾将上下而求索。' }] 
+            },
+            { 
+                name: '秦朝', start: -221, end: -206, color: '#dc2626', 
+                events: [
+                    { year: -221, title: '六国毕一', desc: '秦始皇建立中国首个中央集权大一统帝国。' },
+                    { year: -209, title: '大泽乡起义', desc: '陈胜、吴广爆发首个农民起义。' }
+                ],
+                authors: [
+                    {
+                        name: '李斯', start: -284, end: -208, tag: '秦朝首辅',
+                        bio: '李斯（前284年—前208年），秦朝著名政治家、文学家、书法家，协助秦始皇统一度量衡与文字。',
+                        milestones: ['入秦拜客卿，上《谏逐客书》', '协助始皇废分封、立郡县，小篆统一文字', '秦始皇死后与赵高矫诏，后遭害'],
+                        works: ['《谏逐客书》', '《泰山刻石》'],
+                        context: '秦建立大一统中央集权及法家治国时期。'
+                    }
+                ],
+                poetry: [{ title: '过秦论', author: '贾谊', content: '及至始皇，奋六世之余烈，振长策而御宇内。' }] 
+            },
+            { 
+                name: '西汉', start: -202, end: 9, color: '#d97706', 
+                events: [
+                    { year: -202, title: '高祖即位', desc: '刘邦建立汉朝，定都长安。' },
+                    { year: -138, title: '张骞凿空', desc: '张骞出使西域，开辟丝绸之路。' },
+                    { year: -60, title: '西域都护府', desc: '西域正式纳入中国中央政府版图。' }
+                ],
+                authors: [
+                    {
+                        name: '司马迁', start: -145, end: -87, tag: '太史公',
+                        bio: '司马迁（前145年—前87年），西汉史学家、文学家，被后世尊为“史圣”。',
+                        milestones: ['继父职任太史令，游历名山大川', '因李陵事件身受腐刑，隐忍发愤', '撰成中国首部纪传体通史《史记》'],
+                        works: ['《史记·陈涉世家》', '《史记·廉颇蔺相如列传》', '《报任安书》'],
+                        context: '汉武帝大一统、开疆拓土与文化昌盛时期。'
+                    }
+                ],
+                poetry: [{ title: '史记·陈涉世家', author: '司马迁', content: '燕雀安知鸿鹄之志哉！王侯将相宁有种乎！' }] 
+            },
+            { name: '新朝', start: 9, end: 23, color: '#b45309', events: [{ year: 9, title: '王莽改制', desc: '改国号为新，推行新政。' }], authors: [], poetry: [] },
+            { 
+                name: '东汉', start: 25, end: 220, color: '#f59e0b', 
+                events: [
+                    { year: 25, title: '光武中兴', desc: '刘秀定都洛阳，重建汉室。' },
+                    { year: 105, title: '蔡伦献纸', desc: '改进造纸术，文化传播革命。' }
+                ],
+                authors: [
+                    {
+                        name: '曹操', start: 155, end: 220, tag: '建安风骨',
+                        bio: '曹操（155年—220年），字孟德，东汉末年杰出的政治家、军事家、文学家，曹魏政权奠基人。',
+                        milestones: ['官渡之战大破袁绍，统一北方', '南征赤壁，三国鼎立雏形形成', '创建安文学，开创四言诗新境界'],
+                        works: ['《观沧海》', '《短歌行》', '《龟虽寿》'],
+                        context: '东汉末年军阀割据、战乱频仍与建安文学兴起。'
+                    }
+                ],
+                poetry: [{ title: '观沧海', author: '曹操', content: '东临碣石，以观沧海。水何澹澹，山岛竦峙。' }] 
+            },
+
+            // 三国并存
+            { 
+                name: '曹魏', start: 220, end: 266, color: '#0891b2', 
+                events: [{ year: 220, title: '曹丕称帝', desc: '汉禅让于魏，建都洛阳。' }],
+                authors: [
+                    {
+                        name: '曹植', start: 192, end: 232, tag: '建安之杰',
+                        bio: '曹植（192年—232年），字子建，三国曹魏杰出诗人，“建安文学”代表人物，后人赞其“才高八斗”。',
+                        milestones: ['建安时期随父文采卓绝', '夺嫡失败，屡受兄弟猜忌封徙', '写下名篇《洛神赋》与《七步诗》'],
+                        works: ['《洛神赋》', '《白马篇》', '《七步诗》'],
+                        context: '三国曹魏时期政治打压与文学高潮。'
+                    }
+                ],
+                poetry: [{ title: '白马篇', author: '曹植', content: '捐躯赴国难，视死忽如归！' }] 
+            },
+            { 
+                name: '蜀汉', start: 221, end: 263, color: '#0284c7', 
+                events: [{ year: 227, title: '出师北伐', desc: '诸葛亮上《出师表》进驻汉中。' }],
+                authors: [
+                    {
+                        name: '诸葛亮', start: 181, end: 234, tag: '蜀汉丞相',
+                        bio: '诸葛亮（181年—234年），字孔明，号卧龙，三国蜀汉丞相，杰出的政治家、军事家、文学家。',
+                        milestones: ['隆中对策，辅佐刘备三分天下', '主持蜀汉内政与南征，隆中安民', '五次北伐，鞠躬尽瘁死于病榻'],
+                        works: ['《出师表》', '《诫子书》'],
+                        context: '三国鼎立，蜀汉匡扶汉室北伐时期。'
+                    }
+                ],
+                poetry: [{ title: '出师表', author: '诸葛亮', content: '亲贤臣，远小人，此先汉之所以兴隆也。' }] 
+            },
+            { 
+                name: '孙吴', start: 222, end: 280, color: '#38bdf8', 
+                events: [{ year: 222, title: '夷陵之战', desc: '陆逊破蜀军队，巩固江南。' }],
+                authors: [], poetry: [] 
+            },
+
+            // 晋朝 & 十六国
+            { 
+                name: '西晋', start: 266, end: 316, color: '#7c3aed', 
+                events: [{ year: 280, title: '三国归晋', desc: '西晋灭吴，短暂统一全国。' }],
+                authors: [], poetry: [] 
+            },
+            { 
+                name: '东晋', start: 317, end: 420, color: '#9333ea', 
+                events: [{ year: 383, title: '淝水之战', desc: '谢安以少胜多大破前秦，保全江南。' }],
+                authors: [
+                    {
+                        name: '陶渊明', start: 365, end: 427, tag: '隐逸诗人之宗',
+                        bio: '陶渊明（约365年—427年），名潜，字元亮，东晋末期至南朝宋初期伟大诗人、辞赋家，田园诗派开创者。',
+                        milestones: ['早年怀济世之志，数次出仕', '彭泽令任上不愿“为五斗米折腰”，挂冠归隐', '归隐田园，创作大量田园诗与桃花源记'],
+                        works: ['《桃花源记》', '《归园田居》', '《饮酒·其五》'],
+                        context: '东晋门阀政治腐朽、社会动荡与玄学盛行。'
+                    },
+                    {
+                        name: '王羲之', start: 303, end: 361, tag: '书圣',
+                        bio: '王羲之（303年—361年），字逸少，琅琊临沂人，东晋书法家、文学家，被誉为“书圣”。',
+                        milestones: ['任右军将军、会稽内史', '会稽山阴兰亭雅集，作《兰亭集序》', '晚年称病退隐，专心书法艺术'],
+                        works: ['《兰亭集序》'],
+                        context: '东晋士大夫尚玄谈、游山玩水与书法巅峰时期。'
+                    }
+                ],
+                poetry: [{ title: '饮酒·其五', author: '陶渊明', content: '采菊东篱下，悠然见南山。' }] 
+            },
+            { name: '十六国', start: 304, end: 439, color: '#475569', events: [], authors: [], poetry: [] },
+
+            // 南北朝
+            { name: '南朝·宋', start: 420, end: 479, color: '#e11d48', events: [], authors: [], poetry: [] },
+            { name: '南朝·齐', start: 479, end: 502, color: '#be123c', events: [], authors: [], poetry: [] },
+            { name: '南朝·梁', start: 502, end: 557, color: '#9f1239', events: [], authors: [], poetry: [] },
+            { name: '南朝·陈', start: 557, end: 589, color: '#881337', events: [], authors: [], poetry: [] },
+            { 
+                name: '北魏', start: 386, end: 534, color: '#0d9488', 
+                events: [{ year: 494, title: '孝文帝迁都', desc: '迁都洛阳，全面推行汉化改革。' }],
+                authors: [],
+                poetry: [{ title: '木兰诗', author: '北朝民歌', content: '万里赴戎机，关山度若飞。朔气传金柝，寒光照铁衣。' }] 
+            },
+            { name: '东魏', start: 534, end: 550, color: '#115e59', events: [], authors: [], poetry: [] },
+            { name: '西魏', start: 535, end: 556, color: '#134e4a', events: [], authors: [], poetry: [] },
+            { name: '北齐', start: 550, end: 577, color: '#064e3b', events: [], authors: [], poetry: [] },
+            { name: '北周', start: 557, end: 581, color: '#022c22', events: [], authors: [], poetry: [] },
+
+            // 隋唐
+            { 
+                name: '隋朝', start: 581, end: 618, color: '#65a30d', 
+                events: [
+                    { year: 589, title: '灭陈统一', desc: '结束南北朝近三百年分裂状态。' },
+                    { year: 605, title: '开凿大运河', desc: '贯通南北水运交通命脉。' }
+                ],
+                authors: [], poetry: [] 
+            },
+            { 
+                name: '唐朝', start: 618, end: 907, color: '#eab308', 
+                events: [
+                    { year: 626, title: '玄武门之变', desc: '李世民即位，开启贞观之治。' },
+                    { year: 713, title: '开元盛世', desc: '唐玄宗即位，国力达历史顶峰。' },
+                    { year: 755, title: '安史之乱', desc: '唐朝由盛转衰的重大历史拐点。' }
+                ],
+                authors: [
+                    {
+                        name: '王维', start: 701, end: 761, tag: '诗佛',
+                        bio: '王维（701年—761年），字摩诘，唐朝盛唐时期著名诗人、画家，苏轼评其“诗中有画，画中有诗”。',
+                        milestones: ['开元进土，官至尚书右丞', '晚年居终南山輞川别业，半官半隐', '开创诗画结合的山水田园诗派'],
+                        works: ['《使至塞上》', '《山居秋暝》', '《送元二使安西》'],
+                        context: '盛唐繁荣昌盛至安史之乱爆发。'
+                    },
+                    {
+                        name: '李白', start: 701, end: 762, tag: '诗仙',
+                        bio: '李白（701年—762年），字太白，号青莲居士，唐代伟大的浪漫主义诗人，被后世尊为“诗仙”。',
+                        milestones: ['二十六岁出蜀，“仗剑去国，辞亲远游”', '天宝初年供奉翰林，“赐金放还”', '安史之乱中入永王幕府，后流放夜郎', '晚年写下《早发白帝城》'],
+                        works: ['《蜀道难》', '《将进酒》', '《望庐山瀑布》', '《早发白帝城》'],
+                        context: '盛唐文化极盛与豪迈奔放的气象。'
+                    },
+                    {
+                        name: '杜甫', start: 712, end: 770, tag: '诗圣',
+                        bio: '杜甫（712年—770年），字子美，自号少陵野老，唐代伟大的现实主义诗人，作品被称为“诗史”。',
+                        milestones: ['早年游历天下，长安求官十年艰辛', '身历安史之乱，写下“三吏”“三别”', '避乱成都建立杜甫草堂', '客死湖南湘江舟中'],
+                        works: ['《春望》', '《茅屋为秋风所破歌》', '《登高》', '《闻官军收河南河北》'],
+                        context: '安史之乱前后唐朝由盛转衰的社会苦难。'
+                    },
+                    {
+                        name: '白居易', start: 772, end: 846, tag: '诗魔',
+                        bio: '白居易（772年—846年），字乐天，号香山居士，唐代现实主义诗人，新乐府运动倡导者。',
+                        milestones: ['贞元进士，任左拾遗，直言谏诤', '贬官江州司马，创作《琵琶行》', '晚年居洛阳，倡导新乐府运动，诗名远播'],
+                        works: ['《琵琶行》', '《长恨歌》', '《钱塘湖春行》'],
+                        context: '中唐藩镇割据与新乐府文学革新。'
+                    }
+                ],
+                poetry: [
+                    { title: '蜀道难', author: '李白', content: '蜀道之难，难于上青天！' },
+                    { title: '春望', author: '杜甫', content: '国破山河在，城春草木深。' }
+                ] 
+            },
+
+            // 五代十国
+            { name: '五代', start: 907, end: 960, color: '#4f46e5', events: [], authors: [], poetry: [] },
+            { name: '十国', start: 902, end: 979, color: '#4338ca', events: [], authors: [], poetry: [] },
+
+            // 宋辽金夏
+            { 
+                name: '北宋', start: 960, end: 1127, color: '#059669', 
+                events: [
+                    { year: 960, title: '陈桥兵变', desc: '赵匡胤黄袍加身建立宋朝。' },
+                    { year: 1044, title: '庆历新政', desc: '范仲淹推行政治改革。' },
+                    { year: 1069, title: '王安石变法', desc: '富国强兵的新法革新。' },
+                    { year: 1127, title: '靖康之变', desc: '金军攻陷汴京，北宋灭亡。' }
+                ],
+                authors: [
+                    {
+                        name: '范仲淹', start: 989, end: 1052, tag: '文正公',
+                        bio: '范仲淹（989年—1052年），字希文，北宋杰出的政治家、军事家、文学家。',
+                        milestones: ['戍守西北边疆，西夏不敢犯', '主持“庆历新政”，改革吏治', '应好友滕子京之请作《岳阳楼记》'],
+                        works: ['《岳阳楼记》', '《渔家傲·秋思》'],
+                        context: '北宋中叶积贫积弱与士大夫忧患意识觉醒。'
+                    },
+                    {
+                        name: '苏轼', start: 1037, end: 1101, tag: '东坡居士',
+                        bio: '苏轼（1037年—1101年），字子瞻，号东坡居士，北宋文学家、书法家、美食家，“唐宋八大家”之一。',
+                        milestones: ['嘉祐进士，篇篇震动京师', '“乌台诗案”受贬黄州，写下赤壁赋与念奴娇', '晚年连贬惠州、儋州，乐观豁达'],
+                        works: ['《水调歌头·明月几时有》', '《念奴娇·赤壁怀古》', '《题西林壁》', '《记承天寺夜游》'],
+                        context: '北宋新旧党争激化与豪放派宋词诞生。'
+                    }
+                ],
+                poetry: [{ title: '水调歌头', author: '苏轼', content: '但愿人长久，千里共婵娟。' }] 
+            },
+            { name: '辽朝', start: 916, end: 1125, color: '#f97316', events: [], authors: [], poetry: [] },
+            { name: '西夏', start: 1038, end: 1227, color: '#fb923c', events: [], authors: [], poetry: [] },
+            { name: '金朝', start: 1115, end: 1234, color: '#c2410c', events: [], authors: [], poetry: [] },
+            { 
+                name: '南宋', start: 1127, end: 1279, color: '#10b981', 
+                events: [
+                    { year: 1140, title: '郾城大捷', desc: '岳飞大破金军主力。' },
+                    { year: 1279, title: '崖山海战', desc: '宋室覆灭，陆秀夫负帝殉海。' }
+                ],
+                authors: [
+                    {
+                        name: '李清照', start: 1084, end: 1155, tag: '易安居士',
+                        bio: '李清照（1084年—约1155年），号易安居士，宋代伟大女词人，“婉约词派”代表，被称为“千古第一才女”。',
+                        milestones: ['早年生活优渥，与赵明诚赌书消得泼茶香', '靖康之变后金兵南下，丈夫病逝，文物丧失', '晚年流寓江南，词风由明快转为凄苦'],
+                        works: ['《声声慢·寻寻觅觅》', '《醉花阴》', '《夏日绝句》'],
+                        context: '国破家亡的历史剧变与金兵南侵。'
+                    },
+                    {
+                        name: '陆游', start: 1125, end: 1210, tag: '放翁',
+                        bio: '陆游（1125年—1210年），字务观，号放翁，南宋伟大爱国诗人，留存诗作9000余首。',
+                        milestones: ['生于北宋灭亡之际，一生主张抗金复中原', '入南郑王炎幕府，亲历前线军旅生活', '晚年退隐山阴，临终写下《示儿》'],
+                        works: ['《示儿》', '《游山西村》', '《陆游·卜算子·咏梅》'],
+                        context: '偏安江南、主和派打压主战派的南宋现实。'
+                    },
+                    {
+                        name: '辛弃疾', start: 1140, end: 1207, tag: '稼轩居士',
+                        bio: '辛弃疾（1140年—1207年），字幼安，号稼轩，南宋豪放派词人、抗金将领，与苏轼合称“苏辛”。',
+                        milestones: ['二十二岁率五十骑袭金营，擒贼归宋', '一生备受主和派排挤打击，落职闲居江西', '临终口呼“杀贼！杀贼！”'],
+                        works: ['《破阵子·为陈同甫赋壮词以寄之》', '《永遇乐·京口北固亭怀古》', '《青玉案·元夕》'],
+                        context: '南宋偏安与爱国志士报国无门的悲壮历史。'
+                    },
+                    {
+                        name: '文天祥', start: 1236, end: 1283, tag: '文山先生',
+                        bio: '文天祥（1236年—1283年），字宋瑞，南宋末年抗元名臣、民族英雄、文学家。',
+                        milestones: ['状元及第，南宋危亡之际举兵勤王', '五坡岭被俘，囚于大都三年坚贞不屈', '作《正气歌》与《过零丁洋》，从容就义'],
+                        works: ['《过零丁洋》', '《正气歌》'],
+                        context: '南宋末年蒙元南下、崖山国难。'
+                    }
+                ],
+                poetry: [{ title: '过零丁洋', author: '文天祥', content: '人生自古谁无死？留取丹心照汗青。' }] 
+            },
+
+            // 元明清
+            { 
+                name: '元朝', start: 1271, end: 1368, color: '#0284c7', 
+                events: [{ year: 1271, title: '忽必烈定国号', desc: '建立元朝，推行行省制度。' }],
+                authors: [
+                    {
+                        name: '马致远', start: 1250, end: 1321, tag: '曲状元',
+                        bio: '马致远（约1250年—1321年），号东篱，元代戏曲家、散曲家，“元曲四大家”之一。',
+                        milestones: ['早年热衷功名，仕途坎坷', '晚年退隐盘山，醉心散曲创作', '被誉为“散曲之冠”'],
+                        works: ['《天净沙·秋思》', '《汉宫秋》'],
+                        context: '元代科举停废与元杂剧散曲繁荣。'
+                    }
+                ],
+                poetry: [{ title: '天净沙·秋思', author: '马致远', content: '枯藤老树昏鸦，小桥流水人家。' }] 
+            },
+            { 
+                name: '明朝', start: 1368, end: 1644, color: '#b91c1c', 
+                events: [
+                    { year: 1368, title: '朱元璋建明', desc: '结束元朝统治，定都应天府。' },
+                    { year: 1405, title: '郑和下西洋', desc: '开启人类航海史壮举。' },
+                    { year: 1644, title: '崇祯殉国', desc: '李自成攻陷北京，明朝灭亡。' }
+                ],
+                authors: [
+                    {
+                        name: '于谦', start: 1398, end: 1457, tag: '少保',
+                        bio: '于谦（1398年—1457年），字廷益，明朝民族英雄、杰出的军事家与政治家。',
+                        milestones: ['土木之变英宗被俘，于谦力排众议组织北京保卫战', '击退瓦剌挽救明朝命脉', '夺门之变后惨遭诬杀，留《石灰吟》'],
+                        works: ['《石灰吟》'],
+                        context: '明朝土木堡之变与北京保卫战。'
+                    }
+                ],
+                poetry: [{ title: '石灰吟', author: '于谦', content: '粉身碎骨浑不怕，要留清白在人间。' }] 
+            },
+            { 
+                name: '清朝', start: 1636, end: 1912, color: '#6d28d9', 
+                events: [
+                    { year: 1644, title: '清兵入关', desc: '顺治帝迁都北京。' },
+                    { year: 1840, title: '鸦片战争', desc: '中国近代史开端。' },
+                    { year: 1911, title: '辛亥革命', desc: '推翻两千年封建帝制。' }
+                ],
+                authors: [
+                    {
+                        name: '纳兰性德', start: 1655, end: 1685, tag: '饮水词人',
+                        bio: '纳兰性德（1655年—1685年），叶赫那拉氏，字容若，清代著名词人，康熙帝一等侍卫。',
+                        milestones: ['进士及第，任康熙一等侍卫', '与江南文人广泛结交，词名天下', '年仅三十一岁英年早逝'],
+                        works: ['《木兰花·拟古决绝词柬友》', '《长相思·山一程》'],
+                        context: '康熙盛世与满汉文化融合。'
+                    },
+                    {
+                        name: '龚自珍', start: 1792, end: 1841, tag: '定庵',
+                        bio: '龚自珍（1792年—1841年），字璵斋，清代思想家、文学家，晚清改制思想先驱。',
+                        milestones: ['主张改革吏治，禁绝鸦片', '辞官南归，在马背上写下《己亥杂诗》315首'],
+                        works: ['《己亥杂诗·其五》', '《病梅馆记》'],
+                        context: '鸦片战争前夕清朝衰落与近代思潮萌发。'
+                    }
+                ],
+                poetry: [{ title: '己亥杂诗', author: '龚自珍', content: '落红不是无情物，化作春泥更护花。' }] 
+            }
+        ];
+
+        // CONFIGURATIONS
+        const CONFIG = {
+            startYear: -2100,
+            endYear: 1950,
+            pixelsPerYear: 2.3, // Vertical Zoom Scale
+            minHeight: 36,      // Height floor for short dynasties
+            minLaneWidth: 160,  // Minimum Width per Lane
+            laneGap: 14,        // Horizontal Gap
+            axisPadding: 80,    // Left Y-axis margin
+            rightPadding: 24
+        };
+
+        // DOM REFERENCES
+        const timelineCanvas = document.getElementById('timelineCanvas');
+        const axisContainer = document.getElementById('axisContainer');
+        const lanesContainer = document.getElementById('lanesContainer');
+        const scrollContainer = document.getElementById('timelineScrollContainer');
+        const searchInput = document.getElementById('searchInput');
+        const clearSearchBtn = document.getElementById('clearSearch');
+        const tooltip = document.getElementById('tooltip');
+        const detailDrawer = document.getElementById('detailDrawer');
+        const closeDrawerBtn = document.getElementById('closeDrawer');
+        const drawerBody = document.getElementById('drawerBody');
+
+        // 2. DYNAMIC LANE ALLOCATION ALGORITHM
+        function calculateLanes(data) {
+            const sorted = [...data].sort((a, b) => a.start - b.start);
+            const lanes = [];
+
+            return sorted.map(item => {
+                let assignedLane = -1;
+                for (let i = 0; i < lanes.length; i++) {
+                    if (item.start >= lanes[i]) {
+                        assignedLane = i;
+                        lanes[i] = item.end;
+                        break;
+                    }
+                }
+                if (assignedLane === -1) {
+                    assignedLane = lanes.length;
+                    lanes.push(item.end);
+                }
+                return { ...item, lane: assignedLane };
+            });
+        }
+
+        // 3. YEAR HELPER FORMATTERS
+        function formatYear(year) {
+            if (year < 0) return `公元前${Math.abs(year)}年`;
+            return `公元${year}年`;
+        }
+        function formatYearShort(year) {
+            if (year < 0) return `前${Math.abs(year)}`;
+            return `${year}`;
+        }
+
+        // 4. RENDER TIMELINE CANVAS & INNER AXES
+        function renderTimeline() {
+            const totalYears = CONFIG.endYear - CONFIG.startYear;
+            const totalHeight = totalYears * CONFIG.pixelsPerYear;
+            timelineCanvas.style.height = `${totalHeight}px`;
+
+            const processedData = calculateLanes(RAW_DYNASTIES);
+            const maxLane = Math.max(...processedData.map(d => d.lane), 0);
+            const totalLanes = maxLane + 1;
+
+            // Calculate Fluid Dynamic Width for Full Container Spanning
+            const viewportWidth = scrollContainer.clientWidth;
+            const availableWidth = viewportWidth - CONFIG.axisPadding - CONFIG.rightPadding;
+            const totalGaps = (totalLanes - 1) * CONFIG.laneGap;
+            let fluidLaneWidth = Math.floor((availableWidth - totalGaps) / totalLanes);
+            const actualLaneWidth = Math.max(fluidLaneWidth, CONFIG.minLaneWidth);
+
+            const totalCanvasWidth = CONFIG.axisPadding + (totalLanes * actualLaneWidth) + totalGaps + CONFIG.rightPadding;
+            timelineCanvas.style.width = `${totalCanvasWidth}px`;
+            timelineCanvas.style.minWidth = '100%';
+
+            // RENDER Y-AXIS TICKS
+            axisContainer.innerHTML = '';
+            document.querySelectorAll('.timeline-grid-line').forEach(el => el.remove());
+
+            const step = 50;
+            const startTick = Math.ceil(CONFIG.startYear / step) * step;
+
+            for (let y = startTick; y <= CONFIG.endYear; y += step) {
+                const topPos = (y - CONFIG.startYear) * CONFIG.pixelsPerYear;
+                
+                const tickLabel = document.createElement('div');
+                tickLabel.className = 'absolute right-3 transform -translate-y-1/2 text-[10px] font-mono font-medium text-slate-500';
+                tickLabel.style.top = `${topPos}px`;
+                tickLabel.textContent = formatYearShort(y);
+                axisContainer.appendChild(tickLabel);
+
+                const gridLine = document.createElement('div');
+                gridLine.className = y % 100 === 0 
+                    ? 'timeline-grid-line absolute left-20 right-0 border-b border-slate-800/80 pointer-events-none' 
+                    : 'timeline-grid-line absolute left-20 right-0 border-b border-slate-800/30 pointer-events-none';
+                gridLine.style.top = `${topPos}px`;
+                timelineCanvas.appendChild(gridLine);
+            }
+
+            // RENDER DYNASTIES & INNER AXES
+            lanesContainer.innerHTML = '';
+
+            processedData.forEach(item => {
+                const rawTop = (item.start - CONFIG.startYear) * CONFIG.pixelsPerYear;
+                const rawHeight = (item.end - item.start) * CONFIG.pixelsPerYear;
+                const actualHeight = Math.max(rawHeight, CONFIG.minHeight);
+                const leftPos = item.lane * (actualLaneWidth + CONFIG.laneGap);
+
+                // Main Dynasty Box Container
+                const block = document.createElement('div');
+                block.className = `dynasty-block absolute rounded-xl p-3 border border-white/15 shadow-xl transition-all duration-200 group hover:border-amber-400 hover:shadow-amber-500/20`;
+                block.dataset.name = item.name;
+                block.dataset.info = JSON.stringify(item);
+                
+                block.style.top = `${rawTop}px`;
+                block.style.height = `${actualHeight}px`;
+                block.style.left = `${leftPos}px`;
+                block.style.width = `${actualLaneWidth}px`;
+                block.style.backgroundColor = item.color;
+                block.style.backgroundImage = `linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.3) 100%)`;
+
+                // Dynasty Title Header
+                const dynastyHeader = document.createElement('div');
+                dynastyHeader.className = 'flex items-center justify-between cursor-pointer w-full gap-1 mb-1';
+                dynastyHeader.innerHTML = `
+                    <span class="font-bold text-xs md:text-sm text-white drop-shadow-md truncate">${item.name}</span>
+                    <span class="text-[9px] font-mono text-white/90 bg-black/40 px-1.5 py-0.5 rounded backdrop-blur-sm whitespace-nowrap">${item.end - item.start}年</span>
+                `;
+                dynastyHeader.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    openDynastyDrawer(item);
+                });
+                block.appendChild(dynastyHeader);
+
+                // Dynasty Hover Events
+                block.addEventListener('mouseenter', (e) => handleDynastyHover(e, item));
+                block.addEventListener('mousemove', (e) => positionTooltip(e));
+                block.addEventListener('mouseleave', () => hideTooltip());
+                block.addEventListener('click', () => openDynastyDrawer(item));
+
+                // ----------------------------------------------------
+                // NEW FEATURE: INNER AXIS FOR HISTORICAL EVENTS & AUTHORS
+                // ----------------------------------------------------
+                
+                // 1. Render Historical Events Pins
+                if (item.events && item.events.length > 0 && actualHeight > 40) {
+                    item.events.forEach(evt => {
+                        const evtRelTop = (evt.year - item.start) * CONFIG.pixelsPerYear;
+                        if (evtRelTop >= 0 && evtRelTop <= actualHeight) {
+                            const eventPin = document.createElement('div');
+                            eventPin.className = 'event-pin absolute left-2 flex items-center gap-1.5 cursor-pointer z-10 group/evt';
+                            eventPin.style.top = `${evtRelTop}px`;
+                            
+                            eventPin.innerHTML = `
+                                <span class="w-2 h-2 rounded-full bg-amber-400 border border-slate-900 shadow-sm shadow-amber-400/50"></span>
+                                <span class="text-[9px] text-amber-200/90 font-mono truncate max-w-[90px] bg-black/40 px-1 rounded backdrop-blur-xs">${evt.title}</span>
+                            `;
+
+                            eventPin.addEventListener('mouseenter', (e) => {
+                                e.stopPropagation();
+                                showTooltipForEvent(e, evt, item);
+                            });
+                            eventPin.addEventListener('mousemove', (e) => positionTooltip(e));
+                            eventPin.addEventListener('mouseleave', () => hideTooltip());
+                            eventPin.addEventListener('click', (e) => {
+                                e.stopPropagation();
+                                openDynastyDrawer(item);
+                            });
+
+                            block.appendChild(eventPin);
+                        }
+                    });
+                }
+
+                // 2. Render Famous Poetry Authors Timeline Chips
+                if (item.authors && item.authors.length > 0) {
+                    item.authors.forEach((author, idx) => {
+                        // Position Author along Dynasty's vertical timeline span based on author's start active year
+                        const authorRelTop = Math.max(12, (author.start - item.start) * CONFIG.pixelsPerYear);
+                        const authorSpanHeight = Math.max(22, (author.end - author.start) * CONFIG.pixelsPerYear);
+
+                        const authorChip = document.createElement('div');
+                        authorChip.className = 'author-chip absolute right-2 flex items-center gap-1 bg-amber-950/90 border border-amber-500/60 text-amber-200 px-2 py-0.5 rounded-full shadow-md text-[10px] cursor-pointer z-20 backdrop-blur-sm';
+                        authorChip.style.top = `${authorRelTop}px`;
+
+                        authorChip.innerHTML = `
+                            <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+                            <span class="font-bold">${author.name}</span>
+                            <span class="text-[8px] text-amber-300/70 font-mono hidden sm:inline">(${formatYearShort(author.start)})</span>
+                        `;
+
+                        // Author Hover Tooltip
+                        authorChip.addEventListener('mouseenter', (e) => {
+                            e.stopPropagation();
+                            showTooltipForAuthor(e, author, item);
+                        });
+                        authorChip.addEventListener('mousemove', (e) => positionTooltip(e));
+                        authorChip.addEventListener('mouseleave', () => hideTooltip());
+                        
+                        // Author CLICK -> Open Author Drawer Panel
+                        authorChip.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            openAuthorDrawer(author, item);
+                        });
+
+                        block.appendChild(authorChip);
+                    });
+                }
+
+                lanesContainer.appendChild(block);
+            });
+        }
+
+        // 5. TOOLTIP HANDLERS
+        function handleDynastyHover(e, item) {
+            document.getElementById('ttTitle').textContent = item.name;
+            document.getElementById('ttColor').style.backgroundColor = item.color;
+            document.getElementById('ttTag').textContent = '政权朝代';
+            document.getElementById('ttTime').textContent = `${formatYear(item.start)} ~ ${formatYear(item.end)} (${item.end - item.start}年)`;
+            
+            const ttContent = document.getElementById('ttContent');
+            let html = `<p class="text-slate-300 font-semibold mb-1">关键大事:</p>`;
+            if (item.events && item.events.length > 0) {
+                html += item.events.map(evt => `<div class="text-slate-300">• <span class="text-amber-300 font-mono">${formatYearShort(evt.year)}:</span> ${evt.title}</div>`).join('');
+            } else {
+                html += `<p class="text-slate-400 italic">点击查看更多朝代信息</p>`;
+            }
+            if (item.authors && item.authors.length > 0) {
+                html += `<p class="text-amber-400/90 font-semibold mt-2">课内知名名家: ${item.authors.map(a => a.name).join('、')}</p>`;
+            }
+            ttContent.innerHTML = html;
+
+            showTooltip(e);
+        }
+
+        function showTooltipForEvent(e, evt, dynasty) {
+            document.getElementById('ttTitle').textContent = evt.title;
+            document.getElementById('ttColor').style.backgroundColor = '#f59e0b';
+            document.getElementById('ttTag').textContent = '历史大事';
+            document.getElementById('ttTime').textContent = `${formatYear(evt.year)}（${dynasty.name}）`;
+            document.getElementById('ttContent').innerHTML = `<p class="text-slate-200">${evt.desc}</p>`;
+            showTooltip(e);
+        }
+
+        function showTooltipForAuthor(e, author, dynasty) {
+            document.getElementById('ttTitle').textContent = author.name;
+            document.getElementById('ttColor').style.backgroundColor = '#d97706';
+            document.getElementById('ttTag').textContent = author.tag || '课内作者';
+            document.getElementById('ttTime').textContent = `${formatYear(author.start)} ~ ${formatYear(author.end)}（${dynasty.name}）`;
+            document.getElementById('ttContent').innerHTML = `
+                <p class="text-slate-200 mb-1.5">${author.bio.slice(0, 50)}...</p>
+                <p class="text-amber-300/90 font-mono text-[10px]">点击查看名家生平履历、大事与代表名篇</p>
+            `;
+            showTooltip(e);
+        }
+
+        function showTooltip(e) {
+            tooltip.classList.remove('hidden');
+            setTimeout(() => tooltip.classList.remove('opacity-0'), 10);
+            positionTooltip(e);
+        }
+
+        function positionTooltip(e) {
+            const x = e.clientX + 15;
+            const y = e.clientY + 15;
+            const ttWidth = tooltip.offsetWidth;
+            const ttHeight = tooltip.offsetHeight;
+            const finalX = (x + ttWidth > window.innerWidth) ? e.clientX - ttWidth - 10 : x;
+            const finalY = (y + ttHeight > window.innerHeight) ? e.clientY - ttHeight - 10 : y;
+            tooltip.style.left = `${finalX}px`;
+            tooltip.style.top = `${finalY}px`;
+        }
+
+        function hideTooltip() {
+            tooltip.classList.add('opacity-0');
+            setTimeout(() => tooltip.classList.add('hidden'), 150);
+        }
+
+        // 6. DRAWER PANELS (DYNASTY VIEW VS AUTHOR DETAIL VIEW)
+
+        // A. OPEN AUTHOR PROFILE DRAWER
+        function openAuthorDrawer(author, dynasty) {
+            document.getElementById('drawerTitle').textContent = author.name;
+            document.getElementById('drawerSubtitle').textContent = `${author.tag} | ${formatYear(author.start)} ~ ${formatYear(author.end)}`;
+            document.getElementById('drawerBadge').style.backgroundColor = '#f59e0b';
+
+            drawerBody.innerHTML = `
+                <!-- Author Bio Box -->
+                <div class="bg-gradient-to-br from-amber-950/40 to-slate-900 border border-amber-900/40 rounded-xl p-4 shadow-inner">
+                    <h3 class="text-xs font-semibold text-amber-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                        <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                        生平简介
+                    </h3>
+                    <p class="text-sm text-slate-200 leading-relaxed font-serif">${author.bio}</p>
+                </div>
+
+                <!-- Life Milestones Timeline -->
+                <div>
+                    <h3 class="text-xs font-semibold text-amber-400 uppercase tracking-wider mb-3 flex items-center gap-1.5">
+                        <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        作者生平大事
+                    </h3>
+                    <div class="space-y-2.5 border-l-2 border-amber-800/60 pl-3.5 ml-1">
+                        ${author.milestones.map(m => `
+                            <div class="relative group">
+                                <span class="absolute -left-[19px] top-1.5 w-2 h-2 rounded-full bg-amber-500 border border-slate-900"></span>
+                                <p class="text-sm text-slate-300 leading-normal">${m}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <!-- Representative Works in Textbook -->
+                <div>
+                    <h3 class="text-xs font-semibold text-amber-400 uppercase tracking-wider mb-3 flex items-center gap-1.5">
+                        <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                        中小学课内代表名篇
+                    </h3>
+                    <div class="grid grid-cols-2 gap-2">
+                        ${author.works.map(w => `
+                            <div class="bg-slate-900 border border-slate-800 p-2.5 rounded-lg text-amber-300 text-xs font-bold flex items-center justify-between shadow-sm">
+                                <span>${w}</span>
+                                <span class="text-[9px] text-slate-500 font-normal">课内收录</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <!-- Era Historical Context -->
+                <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-3.5">
+                    <h3 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">时代背景（${dynasty.name}）</h3>
+                    <p class="text-xs text-slate-300 leading-relaxed">${author.context}</p>
+                </div>
+            `;
+
+            detailDrawer.classList.remove('translate-x-full');
+        }
+
+        // B. OPEN DYNASTY DETAIL DRAWER
+        function openDynastyDrawer(dynasty) {
+            document.getElementById('drawerTitle').textContent = dynasty.name;
+            document.getElementById('drawerSubtitle').textContent = `${formatYear(dynasty.start)} ~ ${formatYear(dynasty.end)}（持续 ${dynasty.end - dynasty.start} 年）`;
+            document.getElementById('drawerBadge').style.backgroundColor = dynasty.color;
+
+            let html = `
+                <!-- Dynasty Events Section -->
+                <div>
+                    <h3 class="text-xs font-semibold uppercase tracking-wider text-amber-400 mb-3 flex items-center gap-1.5">
+                        <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5m0 0h5m0 0h5"/></svg>
+                        朝代核心大事记
+                    </h3>
+                    ${dynasty.events && dynasty.events.length > 0 ? `
+                        <div class="space-y-3">
+                            ${dynasty.events.map(evt => `
+                                <div class="bg-slate-900 border border-slate-800 rounded-lg p-3">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <span class="font-bold text-amber-300 text-sm">${evt.title}</span>
+                                        <span class="text-xs font-mono text-slate-400">${formatYearShort(evt.year)}</span>
+                                    </div>
+                                    <p class="text-xs text-slate-300">${evt.desc}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    ` : '<p class="text-slate-500 text-xs italic">暂无事件明细</p>'}
+                </div>
+
+                <!-- Dynasty Famous Authors Section -->
+                <div>
+                    <h3 class="text-xs font-semibold uppercase tracking-wider text-amber-400 mb-3 flex items-center gap-1.5">
+                        <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                        课内名家诗词作者
+                    </h3>
+                    ${dynasty.authors && dynasty.authors.length > 0 ? `
+                        <div class="grid grid-cols-1 gap-2.5">
+                            ${dynasty.authors.map(a => `
+                                <div onclick='openAuthorDrawer(${JSON.stringify(a).replace(/'/g, "&apos;")}, ${JSON.stringify(dynasty).replace(/'/g, "&apos;")})' 
+                                     class="bg-slate-900 border border-slate-800 hover:border-amber-500/60 p-3 rounded-xl cursor-pointer transition-all flex items-center justify-between group">
+                                    <div>
+                                        <div class="flex items-center gap-2">
+                                            <span class="font-bold text-amber-300 text-sm group-hover:text-amber-200">${a.name}</span>
+                                            <span class="text-[10px] bg-amber-950 text-amber-400 px-1.5 py-0.5 rounded border border-amber-800">${a.tag}</span>
+                                        </div>
+                                        <p class="text-xs text-slate-400 mt-1">${formatYearShort(a.start)} ~ ${formatYearShort(a.end)}</p>
+                                    </div>
+                                    <span class="text-xs text-amber-500 group-hover:translate-x-1 transition-transform">查看生平 →</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    ` : '<p class="text-slate-500 text-xs italic">该时期无课内重点名家卡片</p>'}
+                </div>
+
+                <!-- Poetry Showcase -->
+                <div>
+                    <h3 class="text-xs font-semibold uppercase tracking-wider text-amber-400 mb-3 flex items-center gap-1.5">
+                        <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                        朝代代表课内古诗文
+                    </h3>
+                    ${dynasty.poetry && dynasty.poetry.length > 0 ? `
+                        <div class="space-y-3">
+                            ${dynasty.poetry.map(p => `
+                                <div class="bg-slate-900 border border-slate-800 rounded-xl p-3.5">
+                                    <div class="flex items-center justify-between mb-1.5">
+                                        <span class="font-bold text-amber-300 text-sm">《${p.title}》</span>
+                                        <span class="text-xs text-slate-400 font-mono">${p.author}</span>
+                                    </div>
+                                    <p class="text-xs text-slate-300 leading-relaxed bg-slate-950/60 p-2.5 rounded border border-slate-800 italic">
+                                        "${p.content}"
+                                    </p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    ` : '<p class="text-slate-500 text-xs italic">暂未收录作品</p>'}
+                </div>
+            `;
+
+            drawerBody.innerHTML = html;
+            detailDrawer.classList.remove('translate-x-full');
+        }
+
+        closeDrawerBtn.addEventListener('click', () => {
+            detailDrawer.classList.add('translate-x-full');
+        });
+
+        // 7. SMOOTH SCROLL TO YEAR
+        function scrollToYear(year) {
+            const topPos = (year - CONFIG.startYear) * CONFIG.pixelsPerYear - 100;
+            scrollContainer.scrollTo({
+                top: Math.max(0, topPos),
+                behavior: 'smooth'
+            });
+        }
+
+        // 8. GLOBAL SEARCH & FILTERING
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.trim().toLowerCase();
+            clearSearchBtn.classList.toggle('hidden', !query);
+
+            const blocks = document.querySelectorAll('.dynasty-block');
+            blocks.forEach(block => {
+                const item = JSON.parse(block.dataset.info);
+                const nameMatch = item.name.toLowerCase().includes(query);
+                const authorMatch = item.authors && item.authors.some(a => a.name.toLowerCase().includes(query) || a.bio.toLowerCase().includes(query));
+                const eventMatch = item.events && item.events.some(evt => evt.title.toLowerCase().includes(query));
+                const poetryMatch = item.poetry && item.poetry.some(p => p.title.toLowerCase().includes(query) || p.content.toLowerCase().includes(query));
+
+                if (!query || nameMatch || authorMatch || eventMatch || poetryMatch) {
+                    block.style.opacity = '1';
+                    block.style.filter = 'none';
+                } else {
+                    block.style.opacity = '0.15';
+                    block.style.filter = 'grayscale(80%)';
+                }
+            });
+        });
+
+        clearSearchBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            clearSearchBtn.classList.add('hidden');
+            searchInput.dispatchEvent(new Event('input'));
+        });
+
+        // 9. WINDOW RESIZE HANDLER
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => renderTimeline(), 100);
+        });
+
+        // INIT
+        window.onload = function() {
+            renderTimeline();
+            scrollToYear(-300); // Default scroll position to Spring & Autumn / Warring States era
+        };
+    </script>
+</body>
+</html>
+```
+
+---
+
+### 功能升级说明：
+
+1. **朝代内部双轴（大事轴 + 知名作者生平轴）**：
+   - **大事轴**：在每个朝代长条内部按真实年份绘制点（Pin）和大事标签（如“商鞅变法”、“安史之乱”、“王安石变法”等）。
+   - **名家作者轴**：按名家生卒/活跃年份定位在朝代条内部，显示带发光动画的作者芯片（如屈原、曹操、诸葛亮、陶渊明、李白、杜甫、白居易、苏轼、辛弃疾、文天祥、纳兰性德等中小学课内名家）。
+2. **点击名家弹出深度生平抽屉**：
+   - 点击任何名家作者芯片，右侧滑出抽屉面板，详细列出：
+     - **生平简介**（字号、别号、后世评价与文学成就）
+     - **生平大事记**（履历、贬谪流放、重要转折）
+     - **中小学课内代表名篇**
+     - **作者当时的时代历史背景**
+3. **响应式自适应**：保持最大 Lane 数量下的宽屏平分充满，同时留有移动端/小屏横向滚动保底。

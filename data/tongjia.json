@@ -1,0 +1,1571 @@
+{
+  "source": "文言文.txt",
+  "generatedAt": "2026-10-31T11:11:59.519Z",
+  "entryCount": 91,
+  "matchedCount": 49,
+  "unmatched": [
+    {
+      "id": "tongjia-5b504391e3",
+      "term": "惠",
+      "target": "慧",
+      "targetNote": "",
+      "meaning": "聪明",
+      "sentence": "甚矣，汝之不惠！",
+      "translation": "你也太不聪明了！",
+      "sourceTitle": "《愚公移山》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-58b3f074f1",
+      "term": "反",
+      "target": "返",
+      "targetNote": "",
+      "meaning": "往返",
+      "sentence": "寒暑易节，始一反焉",
+      "translation": "冬夏换季，才往返一次",
+      "sourceTitle": "《愚公移山》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-a57aacf45e",
+      "term": "亡",
+      "target": "无",
+      "targetNote": "",
+      "meaning": "没有",
+      "sentence": "河曲智叟亡以应",
+      "translation": "河曲的智叟没有话来回答",
+      "sourceTitle": "《愚公移山》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-688da51303",
+      "term": "厝",
+      "target": "措",
+      "targetNote": "",
+      "meaning": "放置、安放",
+      "sentence": "一厝朔东",
+      "translation": "一座放在朔方的东边",
+      "sourceTitle": "《愚公移山》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-faa373acf9",
+      "term": "陇",
+      "target": "垄",
+      "targetNote": "",
+      "meaning": "高地",
+      "sentence": "无陇断焉",
+      "translation": "再也没有山冈阻隔了",
+      "sourceTitle": "《愚公移山》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-991b2f5558",
+      "term": "转",
+      "target": "啭",
+      "targetNote": "",
+      "meaning": "鸟鸣，这里指蝉鸣",
+      "sentence": "蝉则千转不穷",
+      "translation": "蝉长久不断地鸣叫",
+      "sourceTitle": "《与朱元思书》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-60b19fbc60",
+      "term": "反",
+      "target": "返",
+      "targetNote": "",
+      "meaning": "返回",
+      "sentence": "经纶世务者，窥谷忘反",
+      "translation": "那些治理国家大事的人，看到这些幽美的山谷，就会流连忘返",
+      "sourceTitle": "《与朱元思书》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-2a4047b80b",
+      "term": "畔",
+      "target": "叛",
+      "targetNote": "",
+      "meaning": "背叛",
+      "sentence": "亲戚畔之",
+      "translation": "内外亲属都会背叛他",
+      "sourceTitle": "《得道多助，失道寡助》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-403d73681a",
+      "term": "女",
+      "target": "汝",
+      "targetNote": "",
+      "meaning": "你",
+      "sentence": "往之女家",
+      "translation": "到了你夫家",
+      "sourceTitle": "《富贵不能淫》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-818581b7f7",
+      "term": "曾",
+      "target": "增",
+      "targetNote": "",
+      "meaning": "增加",
+      "sentence": "所以动心忍性，曾益其所不能",
+      "translation": "通过这些来使他的心受到震撼，使他的性格坚忍起来，增加他原本不具备的才干",
+      "sourceTitle": "《生于忧患，死于安乐》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-1fad79ed0a",
+      "term": "衡",
+      "target": "横",
+      "targetNote": "",
+      "meaning": "梗塞、不顺",
+      "sentence": "困于心，衡于虑，而后作",
+      "translation": "内心忧困，思虑堵塞，然后才能有所作为",
+      "sourceTitle": "《生于忧患，死于安乐》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-1db35f998f",
+      "term": "拂",
+      "target": "弼",
+      "targetNote": "",
+      "meaning": "辅佐",
+      "sentence": "入则无法家拂士",
+      "translation": "在国内如果没有守法度的大臣和辅佐君王的贤士",
+      "sourceTitle": "《生于忧患，死于安乐》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-f80c12961e",
+      "term": "式",
+      "target": "轼",
+      "targetNote": "",
+      "meaning": "扶轼",
+      "sentence": "改容式车",
+      "translation": "表情严肃起来，扶着车前横木俯下身子，表示敬意",
+      "sourceTitle": "《周亚夫军细柳》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-af574da527",
+      "term": "衡",
+      "target": "横",
+      "targetNote": "",
+      "meaning": "横着的",
+      "sentence": "左手倚一衡木",
+      "translation": "左手靠在一根横木上",
+      "sourceTitle": "《核舟记》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-ae9b0df492",
+      "term": "诎",
+      "target": "屈",
+      "targetNote": "",
+      "meaning": "弯曲",
+      "sentence": "诎右臂支船",
+      "translation": "弯曲着右臂支撑在船上",
+      "sourceTitle": "《核舟记》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-3a96b19e94",
+      "term": "学",
+      "target": "敩",
+      "targetNote": "xiào",
+      "meaning": "教导",
+      "sentence": "学学半",
+      "translation": "教别人，占自己学习的一半",
+      "sourceTitle": "《虽有嘉肴》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-f03816c277",
+      "term": "与",
+      "target": "举",
+      "targetNote": "",
+      "meaning": "推举",
+      "sentence": "选贤与能",
+      "translation": "选拔推举品德高尚、有才干的人",
+      "sourceTitle": "《大道之行也》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-c449518e87",
+      "term": "矜",
+      "target": "鳏",
+      "targetNote": "guān",
+      "meaning": "老而无妻",
+      "sentence": "矜、寡、孤、独、废疾者皆有所养",
+      "translation": "老而无妻的人、老而无夫的人、幼而无父的孩子、老而无子的人、有残疾而不能做事的人，都能得到供养",
+      "sourceTitle": "《大道之行也》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-b94f76c885",
+      "term": "適",
+      "target": "谪",
+      "targetNote": "",
+      "meaning": "贬谪，强迫去守边",
+      "sentence": "发闾左適戍渔阳",
+      "translation": "征发贫苦人民去驻守渔阳",
+      "sourceTitle": "《陈涉世家》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-4a49a36163",
+      "term": "唱",
+      "target": "倡",
+      "targetNote": "",
+      "meaning": "倡导、发起",
+      "sentence": "为天下唱，宜多应者",
+      "translation": "向天下发出倡导，应当有很多响应的人",
+      "sourceTitle": "《陈涉世家》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-23017dd05f",
+      "term": "以",
+      "target": "已",
+      "targetNote": "",
+      "meaning": "已经",
+      "sentence": "固以怪之矣",
+      "translation": "本来已经对这件事感到奇怪了",
+      "sourceTitle": "《陈涉世家》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-7049b6cad9",
+      "term": "被",
+      "target": "披",
+      "targetNote": "",
+      "meaning": "穿着",
+      "sentence": "将军身被坚执锐",
+      "translation": "将军您亲身披着铠甲，拿着锐利的武器",
+      "sourceTitle": "《陈涉世家》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-8eae48f10d",
+      "term": "羞",
+      "target": "馐",
+      "targetNote": "",
+      "meaning": "美味的食物",
+      "sentence": "玉盘珍羞直万钱",
+      "translation": "玉盘里盛装的精美菜肴，价值万钱",
+      "sourceTitle": "《行路难·其一》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-4dc08166a8",
+      "term": "直",
+      "target": "值",
+      "targetNote": "",
+      "meaning": "价值",
+      "sentence": "玉盘珍羞直万钱",
+      "translation": "玉盘里盛装的精美菜肴，价值万钱",
+      "sourceTitle": "《行路难·其一》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-def9d38a1a",
+      "term": "孰",
+      "target": "熟",
+      "targetNote": "",
+      "meaning": "仔细",
+      "sentence": "孰视之",
+      "translation": "（邹忌）仔细端详他",
+      "sourceTitle": "《邹忌讽齐王纳谏》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-50aef6951c",
+      "term": "错",
+      "target": "措",
+      "targetNote": "",
+      "meaning": "安放、放置",
+      "sentence": "故不错意也",
+      "translation": "所以不把（他）放在心上",
+      "sourceTitle": "《唐雎不辱使命》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-006bc16c79",
+      "term": "仓",
+      "target": "苍",
+      "targetNote": "",
+      "meaning": "青色",
+      "sentence": "仓鹰击于殿上",
+      "translation": "苍鹰扑到宫殿上",
+      "sourceTitle": "《唐雎不辱使命》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-27d97ec84d",
+      "term": "辩",
+      "target": "变",
+      "targetNote": "",
+      "meaning": "变化",
+      "sentence": "而御六气之辩",
+      "translation": "驾驭六气的变化",
+      "sourceTitle": "《逍遥游》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-f755a0c83f",
+      "term": "冥",
+      "target": "溟",
+      "targetNote": "",
+      "meaning": "大海",
+      "sentence": "北冥有鱼",
+      "translation": "北海有一条鱼",
+      "sourceTitle": "《逍遥游》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-4909fc2ac2",
+      "term": "知",
+      "target": "智",
+      "targetNote": "",
+      "meaning": "才智",
+      "sentence": "小知不及大知",
+      "translation": "小的才智比不上大的才智",
+      "sourceTitle": "《逍遥游》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-d965f472df",
+      "term": "辩",
+      "target": "辨",
+      "targetNote": "",
+      "meaning": "区别",
+      "sentence": "此小大之辩也",
+      "translation": "这就是小和大的区别",
+      "sourceTitle": "《逍遥游》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-581726883b",
+      "term": "已",
+      "target": "矣",
+      "targetNote": "",
+      "meaning": "语气词",
+      "sentence": "无以，则王乎",
+      "translation": "如果一定要说，那还是说王道吧",
+      "sourceTitle": "《齐桓晋文之事》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-a9873c5562",
+      "term": "说",
+      "target": "悦",
+      "targetNote": "",
+      "meaning": "高兴",
+      "sentence": "王说，曰：“诗云：‘他人有心，予忖度之。’”",
+      "translation": "齐宣王很高兴，说：《诗经》说：别人有心思，我能揣测到",
+      "sourceTitle": "《齐桓晋文之事》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-5b164e9f78",
+      "term": "为",
+      "target": "谓",
+      "targetNote": "",
+      "meaning": "说",
+      "sentence": "为长者折枝",
+      "translation": "对长辈弯腰作揖",
+      "sourceTitle": "《齐桓晋文之事》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-42776f1936",
+      "term": "枝",
+      "target": "肢",
+      "targetNote": "",
+      "meaning": "肢体",
+      "sentence": "为长者折枝",
+      "translation": "对长辈弯腰作揖",
+      "sourceTitle": "《齐桓晋文之事》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-0f4328bfbc",
+      "term": "刑",
+      "target": "型",
+      "targetNote": "",
+      "meaning": "做榜样",
+      "sentence": "刑于寡妻，至于兄弟",
+      "translation": "给自己的妻子做榜样，推广到兄弟",
+      "sourceTitle": "《齐桓晋文之事》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-df09d814fc",
+      "term": "盖",
+      "target": "盍",
+      "targetNote": "",
+      "meaning": "何不",
+      "sentence": "盖亦反其本矣",
+      "translation": "何不回到根本上来呢",
+      "sourceTitle": "《齐桓晋文之事》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-e55a23b58e",
+      "term": "反",
+      "target": "返",
+      "targetNote": "",
+      "meaning": "返回",
+      "sentence": "盖亦反其本矣",
+      "translation": "何不回到根本上来呢",
+      "sourceTitle": "《齐桓晋文之事》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-c62ed4b3de",
+      "term": "颁",
+      "target": "斑",
+      "targetNote": "",
+      "meaning": "花白",
+      "sentence": "颁白者不负戴于道路矣",
+      "translation": "头发花白的老人不会在路上背着、顶着东西",
+      "sourceTitle": "《齐桓晋文之事》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-65c441c013",
+      "term": "闵",
+      "target": "悯",
+      "targetNote": "",
+      "meaning": "忧患、不幸",
+      "sentence": "臣以险衅，夙遭闵凶",
+      "translation": "我因为命运坎坷，很早就遭遇不幸",
+      "sourceTitle": "《陈情表》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-7d26f2954d",
+      "term": "零丁",
+      "target": "伶仃",
+      "targetNote": "",
+      "meaning": "孤单无靠",
+      "sentence": "零丁孤苦，至于成立",
+      "translation": "孤单无依，一直到成人自立",
+      "sourceTitle": "《陈情表》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-da7480f155",
+      "term": "蓐",
+      "target": "褥",
+      "targetNote": "",
+      "meaning": "草垫子",
+      "sentence": "而刘夙婴疾病，常在床蓐",
+      "translation": "祖母刘氏很早就被疾病缠身，常年卧床不起",
+      "sourceTitle": "《陈情表》",
+      "workIds": []
+    }
+  ],
+  "entries": [
+    {
+      "id": "tongjia-92b309eddd",
+      "term": "说",
+      "target": "悦",
+      "targetNote": "",
+      "meaning": "高兴、愉快",
+      "sentence": "学而时习之，不亦说乎？",
+      "translation": "学习并且按时温习，不也是很愉快吗？",
+      "sourceTitle": "《论语》十二章（小学选篇）",
+      "workIds": [
+        "lunyu"
+      ]
+    },
+    {
+      "id": "tongjia-1665a20e51",
+      "term": "知",
+      "target": "智",
+      "targetNote": "",
+      "meaning": "智慧",
+      "sentence": "知之为知之，不知为不知，是知也",
+      "translation": "知道就是知道，不知道就是不知道，这才是智慧",
+      "sourceTitle": "《论语》（小学）",
+      "workIds": [
+        "lunyu"
+      ]
+    },
+    {
+      "id": "tongjia-57474ee37c",
+      "term": "女",
+      "target": "汝",
+      "targetNote": "",
+      "meaning": "你",
+      "sentence": "由，诲女知之乎",
+      "translation": "仲由，我教给你的道理知道了吗",
+      "sourceTitle": "《论语》（小学，部分版本选编，很多新版小学不再选，保留备注）",
+      "workIds": [
+        "lunyu"
+      ]
+    },
+    {
+      "id": "tongjia-c144ae336c",
+      "term": "说",
+      "target": "悦",
+      "targetNote": "",
+      "meaning": "愉快",
+      "sentence": "子曰：“学而时习之，不亦说乎？”",
+      "translation": "孔子说：“学习知识然后按时温习它，不也是很愉快吗？”",
+      "sourceTitle": "《〈论语〉十二章》",
+      "workIds": [
+        "lunyu"
+      ]
+    },
+    {
+      "id": "tongjia-c98706a551",
+      "term": "有",
+      "target": "又",
+      "targetNote": "",
+      "meaning": "用于整数和零数之间",
+      "sentence": "吾十有五而志于学",
+      "translation": "我十五岁立志于学习",
+      "sourceTitle": "《〈论语〉十二章》",
+      "workIds": [
+        "lunyu"
+      ]
+    },
+    {
+      "id": "tongjia-80cd3ad25f",
+      "term": "不",
+      "target": "否",
+      "targetNote": "",
+      "meaning": "表疑问",
+      "sentence": "尊君在不？",
+      "translation": "令尊在不在？",
+      "sourceTitle": "《陈太丘与友期行》",
+      "workIds": [
+        "chentaiqiu"
+      ]
+    },
+    {
+      "id": "tongjia-493a2ef704",
+      "term": "舍",
+      "target": "释",
+      "targetNote": "",
+      "meaning": "解除、消除",
+      "sentence": "其人舍然大喜",
+      "translation": "那个人消除疑虑，十分高兴",
+      "sourceTitle": "《杞人忧天》",
+      "workIds": [
+        "qirenyoutian"
+      ]
+    },
+    {
+      "id": "tongjia-736d935467",
+      "term": "邪",
+      "target": "耶",
+      "targetNote": "",
+      "meaning": "语气词，吗",
+      "sentence": "孤岂欲卿治经为博士邪！",
+      "translation": "我难道想要你研究儒家经典，成为专掌经学传授的学官吗？",
+      "sourceTitle": "《孙权劝学》",
+      "workIds": [
+        "sunquanquanxue"
+      ]
+    },
+    {
+      "id": "tongjia-9b3e077084",
+      "term": "尔",
+      "target": "耳",
+      "targetNote": "",
+      "meaning": "罢了",
+      "sentence": "但手熟尔",
+      "translation": "只是手法熟练罢了",
+      "sourceTitle": "《卖油翁》",
+      "workIds": [
+        "maiyouweng"
+      ]
+    },
+    {
+      "id": "tongjia-886c95ec94",
+      "term": "杓",
+      "target": "勺",
+      "targetNote": "",
+      "meaning": "勺子",
+      "sentence": "徐以杓酌油沥之",
+      "translation": "慢慢地用勺子舀油滴入葫芦",
+      "sourceTitle": "《卖油翁》",
+      "workIds": [
+        "maiyouweng"
+      ]
+    },
+    {
+      "id": "tongjia-e84fde91cf",
+      "term": "帖",
+      "target": "贴",
+      "targetNote": "",
+      "meaning": "粘贴",
+      "sentence": "当窗理云鬓，对镜帖花黄",
+      "translation": "对着窗户梳理如云的鬓发，对着镜子贴上花黄",
+      "sourceTitle": "《木兰诗》",
+      "workIds": [
+        "mulanshi"
+      ]
+    },
+    {
+      "id": "tongjia-22a17bee1b",
+      "term": "火",
+      "target": "伙",
+      "targetNote": "",
+      "meaning": "同伴",
+      "sentence": "出门看火伴",
+      "translation": "出门去看望同伍的伙伴",
+      "sourceTitle": "《木兰诗》",
+      "workIds": [
+        "mulanshi"
+      ]
+    },
+    {
+      "id": "tongjia-614ef11f0a",
+      "term": "阙",
+      "target": "缺",
+      "targetNote": "",
+      "meaning": "空隙、缺口",
+      "sentence": "略无阙处",
+      "translation": "完全没有中断的地方",
+      "sourceTitle": "《三峡》",
+      "workIds": [
+        "sanxia"
+      ]
+    },
+    {
+      "id": "tongjia-5b504391e3",
+      "term": "惠",
+      "target": "慧",
+      "targetNote": "",
+      "meaning": "聪明",
+      "sentence": "甚矣，汝之不惠！",
+      "translation": "你也太不聪明了！",
+      "sourceTitle": "《愚公移山》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-58b3f074f1",
+      "term": "反",
+      "target": "返",
+      "targetNote": "",
+      "meaning": "往返",
+      "sentence": "寒暑易节，始一反焉",
+      "translation": "冬夏换季，才往返一次",
+      "sourceTitle": "《愚公移山》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-a57aacf45e",
+      "term": "亡",
+      "target": "无",
+      "targetNote": "",
+      "meaning": "没有",
+      "sentence": "河曲智叟亡以应",
+      "translation": "河曲的智叟没有话来回答",
+      "sourceTitle": "《愚公移山》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-688da51303",
+      "term": "厝",
+      "target": "措",
+      "targetNote": "",
+      "meaning": "放置、安放",
+      "sentence": "一厝朔东",
+      "translation": "一座放在朔方的东边",
+      "sourceTitle": "《愚公移山》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-faa373acf9",
+      "term": "陇",
+      "target": "垄",
+      "targetNote": "",
+      "meaning": "高地",
+      "sentence": "无陇断焉",
+      "translation": "再也没有山冈阻隔了",
+      "sourceTitle": "《愚公移山》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-991b2f5558",
+      "term": "转",
+      "target": "啭",
+      "targetNote": "",
+      "meaning": "鸟鸣，这里指蝉鸣",
+      "sentence": "蝉则千转不穷",
+      "translation": "蝉长久不断地鸣叫",
+      "sourceTitle": "《与朱元思书》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-60b19fbc60",
+      "term": "反",
+      "target": "返",
+      "targetNote": "",
+      "meaning": "返回",
+      "sentence": "经纶世务者，窥谷忘反",
+      "translation": "那些治理国家大事的人，看到这些幽美的山谷，就会流连忘返",
+      "sourceTitle": "《与朱元思书》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-2a4047b80b",
+      "term": "畔",
+      "target": "叛",
+      "targetNote": "",
+      "meaning": "背叛",
+      "sentence": "亲戚畔之",
+      "translation": "内外亲属都会背叛他",
+      "sourceTitle": "《得道多助，失道寡助》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-403d73681a",
+      "term": "女",
+      "target": "汝",
+      "targetNote": "",
+      "meaning": "你",
+      "sentence": "往之女家",
+      "translation": "到了你夫家",
+      "sourceTitle": "《富贵不能淫》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-818581b7f7",
+      "term": "曾",
+      "target": "增",
+      "targetNote": "",
+      "meaning": "增加",
+      "sentence": "所以动心忍性，曾益其所不能",
+      "translation": "通过这些来使他的心受到震撼，使他的性格坚忍起来，增加他原本不具备的才干",
+      "sourceTitle": "《生于忧患，死于安乐》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-1fad79ed0a",
+      "term": "衡",
+      "target": "横",
+      "targetNote": "",
+      "meaning": "梗塞、不顺",
+      "sentence": "困于心，衡于虑，而后作",
+      "translation": "内心忧困，思虑堵塞，然后才能有所作为",
+      "sourceTitle": "《生于忧患，死于安乐》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-1db35f998f",
+      "term": "拂",
+      "target": "弼",
+      "targetNote": "",
+      "meaning": "辅佐",
+      "sentence": "入则无法家拂士",
+      "translation": "在国内如果没有守法度的大臣和辅佐君王的贤士",
+      "sourceTitle": "《生于忧患，死于安乐》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-f80c12961e",
+      "term": "式",
+      "target": "轼",
+      "targetNote": "",
+      "meaning": "扶轼",
+      "sentence": "改容式车",
+      "translation": "表情严肃起来，扶着车前横木俯下身子，表示敬意",
+      "sourceTitle": "《周亚夫军细柳》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-1dfc18bfd2",
+      "term": "要",
+      "target": "邀",
+      "targetNote": "",
+      "meaning": "邀请",
+      "sentence": "便要还家，设酒杀鸡作食",
+      "translation": "（渔人）就被邀请到家中，摆酒杀鸡做饭款待他",
+      "sourceTitle": "《桃花源记》",
+      "workIds": [
+        "taohuayuan"
+      ]
+    },
+    {
+      "id": "tongjia-af574da527",
+      "term": "衡",
+      "target": "横",
+      "targetNote": "",
+      "meaning": "横着的",
+      "sentence": "左手倚一衡木",
+      "translation": "左手靠在一根横木上",
+      "sourceTitle": "《核舟记》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-ae9b0df492",
+      "term": "诎",
+      "target": "屈",
+      "targetNote": "",
+      "meaning": "弯曲",
+      "sentence": "诎右臂支船",
+      "translation": "弯曲着右臂支撑在船上",
+      "sourceTitle": "《核舟记》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-85396eb2d2",
+      "term": "冥",
+      "target": "溟",
+      "targetNote": "",
+      "meaning": "海",
+      "sentence": "北冥有鱼，其名为鲲",
+      "translation": "北海有一条鱼，它的名字叫鲲",
+      "sourceTitle": "《北冥有鱼》",
+      "workIds": [
+        "beimingyouyu"
+      ]
+    },
+    {
+      "id": "tongjia-3a96b19e94",
+      "term": "学",
+      "target": "敩",
+      "targetNote": "xiào",
+      "meaning": "教导",
+      "sentence": "学学半",
+      "translation": "教别人，占自己学习的一半",
+      "sourceTitle": "《虽有嘉肴》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-f03816c277",
+      "term": "与",
+      "target": "举",
+      "targetNote": "",
+      "meaning": "推举",
+      "sentence": "选贤与能",
+      "translation": "选拔推举品德高尚、有才干的人",
+      "sourceTitle": "《大道之行也》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-c449518e87",
+      "term": "矜",
+      "target": "鳏",
+      "targetNote": "guān",
+      "meaning": "老而无妻",
+      "sentence": "矜、寡、孤、独、废疾者皆有所养",
+      "translation": "老而无妻的人、老而无夫的人、幼而无父的孩子、老而无子的人、有残疾而不能做事的人，都能得到供养",
+      "sourceTitle": "《大道之行也》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-4bf726a475",
+      "term": "祗",
+      "target": "只",
+      "targetNote": "",
+      "meaning": "只、仅仅",
+      "sentence": "祗辱于奴隶人之手",
+      "translation": "只能在奴仆的手下受到屈辱",
+      "sourceTitle": "《马说》",
+      "workIds": [
+        "mashuo"
+      ]
+    },
+    {
+      "id": "tongjia-1f0197a464",
+      "term": "食",
+      "target": "饲",
+      "targetNote": "",
+      "meaning": "喂",
+      "sentence": "食马者不知其能千里而食也",
+      "translation": "喂马的人不知道它能日行千里，像普通马一样喂养",
+      "sourceTitle": "《马说》",
+      "workIds": [
+        "mashuo"
+      ]
+    },
+    {
+      "id": "tongjia-8a6da43df1",
+      "term": "见",
+      "target": "现",
+      "targetNote": "",
+      "meaning": "显现",
+      "sentence": "才美不外见",
+      "translation": "才能和优点不能表现在外面",
+      "sourceTitle": "《马说》",
+      "workIds": [
+        "mashuo"
+      ]
+    },
+    {
+      "id": "tongjia-b94f76c885",
+      "term": "適",
+      "target": "谪",
+      "targetNote": "",
+      "meaning": "贬谪，强迫去守边",
+      "sentence": "发闾左適戍渔阳",
+      "translation": "征发贫苦人民去驻守渔阳",
+      "sourceTitle": "《陈涉世家》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-4a49a36163",
+      "term": "唱",
+      "target": "倡",
+      "targetNote": "",
+      "meaning": "倡导、发起",
+      "sentence": "为天下唱，宜多应者",
+      "translation": "向天下发出倡导，应当有很多响应的人",
+      "sourceTitle": "《陈涉世家》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-23017dd05f",
+      "term": "以",
+      "target": "已",
+      "targetNote": "",
+      "meaning": "已经",
+      "sentence": "固以怪之矣",
+      "translation": "本来已经对这件事感到奇怪了",
+      "sourceTitle": "《陈涉世家》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-7049b6cad9",
+      "term": "被",
+      "target": "披",
+      "targetNote": "",
+      "meaning": "穿着",
+      "sentence": "将军身被坚执锐",
+      "translation": "将军您亲身披着铠甲，拿着锐利的武器",
+      "sourceTitle": "《陈涉世家》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-5f40471fb3",
+      "term": "阙",
+      "target": "缺",
+      "targetNote": "",
+      "meaning": "缺失、疏漏",
+      "sentence": "必能裨补阙漏",
+      "translation": "一定能够弥补缺失疏漏",
+      "sourceTitle": "《出师表》",
+      "workIds": [
+        "chushibiao"
+      ]
+    },
+    {
+      "id": "tongjia-bf10c1337a",
+      "term": "属",
+      "target": "嘱",
+      "targetNote": "",
+      "meaning": "嘱托",
+      "sentence": "属予作文以记之",
+      "translation": "嘱托我写一篇文章来记述这件事",
+      "sourceTitle": "《岳阳楼记》",
+      "workIds": [
+        "yueyanglou"
+      ]
+    },
+    {
+      "id": "tongjia-8eae48f10d",
+      "term": "羞",
+      "target": "馐",
+      "targetNote": "",
+      "meaning": "美味的食物",
+      "sentence": "玉盘珍羞直万钱",
+      "translation": "玉盘里盛装的精美菜肴，价值万钱",
+      "sourceTitle": "《行路难·其一》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-4dc08166a8",
+      "term": "直",
+      "target": "值",
+      "targetNote": "",
+      "meaning": "价值",
+      "sentence": "玉盘珍羞直万钱",
+      "translation": "玉盘里盛装的精美菜肴，价值万钱",
+      "sourceTitle": "《行路难·其一》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-def9d38a1a",
+      "term": "孰",
+      "target": "熟",
+      "targetNote": "",
+      "meaning": "仔细",
+      "sentence": "孰视之",
+      "translation": "（邹忌）仔细端详他",
+      "sourceTitle": "《邹忌讽齐王纳谏》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-3acf63d1d9",
+      "term": "辩",
+      "target": "辨",
+      "targetNote": "",
+      "meaning": "辨别",
+      "sentence": "万钟则不辩礼义而受之",
+      "translation": "优厚的俸禄如果不辨别是否合乎礼义就接受它",
+      "sourceTitle": "《鱼我所欲也》",
+      "workIds": [
+        "yuwosuoyu"
+      ]
+    },
+    {
+      "id": "tongjia-cc68a98844",
+      "term": "得",
+      "target": "德",
+      "targetNote": "",
+      "meaning": "感恩、感激",
+      "sentence": "所识穷乏者得我与",
+      "translation": "所认识的穷困的人感激我吗",
+      "sourceTitle": "《鱼我所欲也》",
+      "workIds": [
+        "yuwosuoyu"
+      ]
+    },
+    {
+      "id": "tongjia-374ba08f05",
+      "term": "与",
+      "target": "欤",
+      "targetNote": "",
+      "meaning": "语气词",
+      "sentence": "所识穷乏者得我与",
+      "translation": "所认识的穷困的人感激我吗",
+      "sourceTitle": "《鱼我所欲也》",
+      "workIds": [
+        "yuwosuoyu"
+      ]
+    },
+    {
+      "id": "tongjia-8956c378ae",
+      "term": "乡",
+      "target": "向",
+      "targetNote": "",
+      "meaning": "先前、从前",
+      "sentence": "乡为身死而不受",
+      "translation": "先前为了“礼义”，宁愿死也不接受施舍",
+      "sourceTitle": "《鱼我所欲也》",
+      "workIds": [
+        "yuwosuoyu"
+      ]
+    },
+    {
+      "id": "tongjia-f3a265c237",
+      "term": "辟",
+      "target": "避",
+      "targetNote": "",
+      "meaning": "躲避",
+      "sentence": "故患有所不辟也",
+      "translation": "所以有的祸患我不躲避",
+      "sourceTitle": "《鱼我所欲也》",
+      "workIds": [
+        "yuwosuoyu"
+      ]
+    },
+    {
+      "id": "tongjia-5572f0c2b7",
+      "term": "徧",
+      "target": "遍",
+      "targetNote": "",
+      "meaning": "遍及、普遍",
+      "sentence": "小惠未徧，民弗从也",
+      "translation": "这种小恩惠不能遍及百姓，老百姓是不会听从您的",
+      "sourceTitle": "《曹刿论战》",
+      "workIds": [
+        "caogui"
+      ]
+    },
+    {
+      "id": "tongjia-50aef6951c",
+      "term": "错",
+      "target": "措",
+      "targetNote": "",
+      "meaning": "安放、放置",
+      "sentence": "故不错意也",
+      "translation": "所以不把（他）放在心上",
+      "sourceTitle": "《唐雎不辱使命》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-006bc16c79",
+      "term": "仓",
+      "target": "苍",
+      "targetNote": "",
+      "meaning": "青色",
+      "sentence": "仓鹰击于殿上",
+      "translation": "苍鹰扑到宫殿上",
+      "sourceTitle": "《唐雎不辱使命》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-13ddb50401",
+      "term": "支",
+      "target": "肢",
+      "targetNote": "",
+      "meaning": "肢体",
+      "sentence": "四支僵劲不能动",
+      "translation": "四肢僵硬不能动弹",
+      "sourceTitle": "《送东阳马生序》",
+      "workIds": [
+        "songdongyang"
+      ]
+    },
+    {
+      "id": "tongjia-bcbc67db8c",
+      "term": "辨",
+      "target": "辩",
+      "targetNote": "",
+      "meaning": "辩驳",
+      "sentence": "与之论辨",
+      "translation": "同他辩论道理",
+      "sourceTitle": "《送东阳马生序》",
+      "workIds": [
+        "songdongyang"
+      ]
+    },
+    {
+      "id": "tongjia-9b57952035",
+      "term": "距",
+      "target": "拒",
+      "targetNote": "",
+      "meaning": "把守",
+      "sentence": "距关，毋内诸侯",
+      "translation": "把守函谷关，不要让诸侯进来",
+      "sourceTitle": "《鸿门宴》",
+      "workIds": [
+        "hongmenyan"
+      ]
+    },
+    {
+      "id": "tongjia-9b1687129a",
+      "term": "内",
+      "target": "纳",
+      "targetNote": "",
+      "meaning": "接纳",
+      "sentence": "距关，毋内诸侯",
+      "translation": "把守函谷关，不要让诸侯进来",
+      "sourceTitle": "《鸿门宴》",
+      "workIds": [
+        "hongmenyan"
+      ]
+    },
+    {
+      "id": "tongjia-368104297c",
+      "term": "要",
+      "target": "邀",
+      "targetNote": "",
+      "meaning": "邀请",
+      "sentence": "张良出，要项伯",
+      "translation": "张良出去，邀请项伯",
+      "sourceTitle": "《鸿门宴》",
+      "workIds": [
+        "hongmenyan"
+      ]
+    },
+    {
+      "id": "tongjia-23701e7523",
+      "term": "倍",
+      "target": "背",
+      "targetNote": "",
+      "meaning": "背叛",
+      "sentence": "愿伯具言臣之不敢倍德也",
+      "translation": "希望您详细告诉项王，我不敢背叛恩德",
+      "sourceTitle": "《鸿门宴》",
+      "workIds": [
+        "hongmenyan"
+      ]
+    },
+    {
+      "id": "tongjia-2b1896dd2d",
+      "term": "蚤",
+      "target": "早",
+      "targetNote": "",
+      "meaning": "早早地",
+      "sentence": "旦日不可不蚤自来谢项王",
+      "translation": "第二天不能不早早地亲自来向项王谢罪",
+      "sourceTitle": "《鸿门宴》",
+      "workIds": [
+        "hongmenyan"
+      ]
+    },
+    {
+      "id": "tongjia-d0555307ad",
+      "term": "郤",
+      "target": "隙",
+      "targetNote": "",
+      "meaning": "隔阂、嫌怨",
+      "sentence": "令将军与臣有郤",
+      "translation": "使将军和我产生隔阂",
+      "sourceTitle": "《鸿门宴》",
+      "workIds": [
+        "hongmenyan"
+      ]
+    },
+    {
+      "id": "tongjia-1509b6da29",
+      "term": "景",
+      "target": "影",
+      "targetNote": "",
+      "meaning": "影子",
+      "sentence": "天下云集响应，赢粮而景从",
+      "translation": "天下人像云一样聚集，像回声一样应和，担着粮食如影随形跟着",
+      "sourceTitle": "《过秦论》",
+      "workIds": [
+        "guoqinlun"
+      ]
+    },
+    {
+      "id": "tongjia-9a772a3d17",
+      "term": "甿",
+      "target": "氓",
+      "targetNote": "",
+      "meaning": "百姓",
+      "sentence": "然陈涉瓮牖绳枢之子，甿隶之人",
+      "translation": "可是陈涉是个用破瓮做窗户、草绳拴门轴的穷人家子弟，是耕田的人",
+      "sourceTitle": "《过秦论》",
+      "workIds": [
+        "guoqinlun"
+      ]
+    },
+    {
+      "id": "tongjia-7e93297bfe",
+      "term": "从",
+      "target": "纵",
+      "targetNote": "",
+      "meaning": "合纵",
+      "sentence": "合从缔交，相与为一",
+      "translation": "采用合纵的策略缔结盟约，互相援助，成为一体",
+      "sourceTitle": "《过秦论》",
+      "workIds": [
+        "guoqinlun"
+      ]
+    },
+    {
+      "id": "tongjia-c52488ffd2",
+      "term": "知",
+      "target": "智",
+      "targetNote": "",
+      "meaning": "智慧",
+      "sentence": "君子生非异也，善假于物也",
+      "translation": "君子天性同一般人没有差别，只是善于借助外物罢了",
+      "sourceTitle": "《劝学》",
+      "workIds": [
+        "quanxue"
+      ]
+    },
+    {
+      "id": "tongjia-091defd207",
+      "term": "生",
+      "target": "性",
+      "targetNote": "",
+      "meaning": "天性、禀赋",
+      "sentence": "君子生非异也，善假于物也",
+      "translation": "君子天性同一般人没有差别，只是善于借助外物罢了",
+      "sourceTitle": "《劝学》",
+      "workIds": [
+        "quanxue"
+      ]
+    },
+    {
+      "id": "tongjia-42ebb7d841",
+      "term": "有",
+      "target": "又",
+      "targetNote": "",
+      "meaning": "再、还有",
+      "sentence": "虽有槁暴，不复挺者",
+      "translation": "即使又晒干了，也不会再挺直",
+      "sourceTitle": "《劝学》",
+      "workIds": [
+        "quanxue"
+      ]
+    },
+    {
+      "id": "tongjia-b947290b0a",
+      "term": "暴",
+      "target": "曝",
+      "targetNote": "",
+      "meaning": "晒干",
+      "sentence": "虽有槁暴，不复挺者",
+      "translation": "即使又晒干了，也不会再挺直",
+      "sourceTitle": "《劝学》",
+      "workIds": [
+        "quanxue"
+      ]
+    },
+    {
+      "id": "tongjia-19e67eded9",
+      "term": "𫐓",
+      "target": "煣",
+      "targetNote": "",
+      "meaning": "用火烘烤使弯曲",
+      "sentence": "木直中绳，𫐓以为轮",
+      "translation": "木材直得合乎墨线，用火烘烤使它弯曲做成车轮",
+      "sourceTitle": "《劝学》",
+      "workIds": [
+        "quanxue"
+      ]
+    },
+    {
+      "id": "tongjia-27d97ec84d",
+      "term": "辩",
+      "target": "变",
+      "targetNote": "",
+      "meaning": "变化",
+      "sentence": "而御六气之辩",
+      "translation": "驾驭六气的变化",
+      "sourceTitle": "《逍遥游》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-f755a0c83f",
+      "term": "冥",
+      "target": "溟",
+      "targetNote": "",
+      "meaning": "大海",
+      "sentence": "北冥有鱼",
+      "translation": "北海有一条鱼",
+      "sourceTitle": "《逍遥游》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-4909fc2ac2",
+      "term": "知",
+      "target": "智",
+      "targetNote": "",
+      "meaning": "才智",
+      "sentence": "小知不及大知",
+      "translation": "小的才智比不上大的才智",
+      "sourceTitle": "《逍遥游》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-d965f472df",
+      "term": "辩",
+      "target": "辨",
+      "targetNote": "",
+      "meaning": "区别",
+      "sentence": "此小大之辩也",
+      "translation": "这就是小和大的区别",
+      "sourceTitle": "《逍遥游》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-581726883b",
+      "term": "已",
+      "target": "矣",
+      "targetNote": "",
+      "meaning": "语气词",
+      "sentence": "无以，则王乎",
+      "translation": "如果一定要说，那还是说王道吧",
+      "sourceTitle": "《齐桓晋文之事》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-a9873c5562",
+      "term": "说",
+      "target": "悦",
+      "targetNote": "",
+      "meaning": "高兴",
+      "sentence": "王说，曰：“诗云：‘他人有心，予忖度之。’”",
+      "translation": "齐宣王很高兴，说：《诗经》说：别人有心思，我能揣测到",
+      "sourceTitle": "《齐桓晋文之事》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-5b164e9f78",
+      "term": "为",
+      "target": "谓",
+      "targetNote": "",
+      "meaning": "说",
+      "sentence": "为长者折枝",
+      "translation": "对长辈弯腰作揖",
+      "sourceTitle": "《齐桓晋文之事》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-42776f1936",
+      "term": "枝",
+      "target": "肢",
+      "targetNote": "",
+      "meaning": "肢体",
+      "sentence": "为长者折枝",
+      "translation": "对长辈弯腰作揖",
+      "sourceTitle": "《齐桓晋文之事》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-0f4328bfbc",
+      "term": "刑",
+      "target": "型",
+      "targetNote": "",
+      "meaning": "做榜样",
+      "sentence": "刑于寡妻，至于兄弟",
+      "translation": "给自己的妻子做榜样，推广到兄弟",
+      "sourceTitle": "《齐桓晋文之事》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-df09d814fc",
+      "term": "盖",
+      "target": "盍",
+      "targetNote": "",
+      "meaning": "何不",
+      "sentence": "盖亦反其本矣",
+      "translation": "何不回到根本上来呢",
+      "sourceTitle": "《齐桓晋文之事》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-e55a23b58e",
+      "term": "反",
+      "target": "返",
+      "targetNote": "",
+      "meaning": "返回",
+      "sentence": "盖亦反其本矣",
+      "translation": "何不回到根本上来呢",
+      "sourceTitle": "《齐桓晋文之事》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-c62ed4b3de",
+      "term": "颁",
+      "target": "斑",
+      "targetNote": "",
+      "meaning": "花白",
+      "sentence": "颁白者不负戴于道路矣",
+      "translation": "头发花白的老人不会在路上背着、顶着东西",
+      "sourceTitle": "《齐桓晋文之事》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-65c441c013",
+      "term": "闵",
+      "target": "悯",
+      "targetNote": "",
+      "meaning": "忧患、不幸",
+      "sentence": "臣以险衅，夙遭闵凶",
+      "translation": "我因为命运坎坷，很早就遭遇不幸",
+      "sourceTitle": "《陈情表》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-7d26f2954d",
+      "term": "零丁",
+      "target": "伶仃",
+      "targetNote": "",
+      "meaning": "孤单无靠",
+      "sentence": "零丁孤苦，至于成立",
+      "translation": "孤单无依，一直到成人自立",
+      "sourceTitle": "《陈情表》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-da7480f155",
+      "term": "蓐",
+      "target": "褥",
+      "targetNote": "",
+      "meaning": "草垫子",
+      "sentence": "而刘夙婴疾病，常在床蓐",
+      "translation": "祖母刘氏很早就被疾病缠身，常年卧床不起",
+      "sourceTitle": "《陈情表》",
+      "workIds": []
+    },
+    {
+      "id": "tongjia-075976fb33",
+      "term": "悟",
+      "target": "寤",
+      "targetNote": "",
+      "meaning": "醒悟",
+      "sentence": "悟言一室之内",
+      "translation": "在室内面对面交谈",
+      "sourceTitle": "《兰亭集序》",
+      "workIds": [
+        "lanxuting"
+      ]
+    },
+    {
+      "id": "tongjia-73f638e3d6",
+      "term": "趣",
+      "target": "取",
+      "targetNote": "",
+      "meaning": "趋向、取向",
+      "sentence": "虽趣舍万殊，静躁不同",
+      "translation": "虽然人们取舍千差万别，安静和躁动各不相同",
+      "sourceTitle": "《兰亭集序》",
+      "workIds": [
+        "lanxuting"
+      ]
+    },
+    {
+      "id": "tongjia-b3e66d592f",
+      "term": "销",
+      "target": "消",
+      "targetNote": "",
+      "meaning": "消散",
+      "sentence": "云销雨霁，彩彻区明",
+      "translation": "云气消散，雨过天晴，阳光普照天空明朗",
+      "sourceTitle": "《滕王阁序》",
+      "workIds": [
+        "tengwangge"
+      ]
+    },
+    {
+      "id": "tongjia-b2366a2d8e",
+      "term": "机",
+      "target": "几",
+      "targetNote": "",
+      "meaning": "预兆",
+      "sentence": "所赖君子见机",
+      "translation": "依靠君子能够事前看见细微的预兆",
+      "sourceTitle": "《滕王阁序》",
+      "workIds": [
+        "tengwangge"
+      ]
+    },
+    {
+      "id": "tongjia-cdd50b4595",
+      "term": "属",
+      "target": "嘱",
+      "targetNote": "",
+      "meaning": "劝请",
+      "sentence": "举酒属客",
+      "translation": "举起酒杯劝客人饮酒",
+      "sourceTitle": "《赤壁赋》",
+      "workIds": [
+        "chibifu"
+      ]
+    },
+    {
+      "id": "tongjia-623fc17f16",
+      "term": "冯",
+      "target": "凭",
+      "targetNote": "",
+      "meaning": "乘",
+      "sentence": "浩浩乎如冯虚御风",
+      "translation": "浩荡的样子，像凌空乘风飞去",
+      "sourceTitle": "《赤壁赋》",
+      "workIds": [
+        "chibifu"
+      ]
+    },
+    {
+      "id": "tongjia-55ddf8aae8",
+      "term": "缪",
+      "target": "缭",
+      "targetNote": "",
+      "meaning": "盘绕",
+      "sentence": "山川相缪，郁乎苍苍",
+      "translation": "山水环绕，草木茂盛苍翠",
+      "sourceTitle": "《赤壁赋》",
+      "workIds": [
+        "chibifu"
+      ]
+    }
+  ]
+}

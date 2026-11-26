@@ -1,0 +1,150 @@
+{
+  "generatedAt": "2026-11-26T14:18:52.982Z",
+  "source": "detail.txt",
+  "matchedCount": 20,
+  "unmatched": [
+    {
+      "name": "安西军",
+      "title": "作者讲解视频",
+      "url": "https://www.bilibili.com/video/BV1YR4y1g74e/"
+    }
+  ],
+  "authors": {
+    "quyuan": [
+      {
+        "name": "屈原",
+        "title": "作者讲解视频",
+        "url": "https://www.bilibili.com/video/BV16h4y137Zt/"
+      }
+    ],
+    "kongzi": [
+      {
+        "name": "孔子",
+        "title": "作者讲解视频",
+        "url": "https://www.bilibili.com/video/BV1xU4y1f7K7/"
+      }
+    ],
+    "mengzi": [
+      {
+        "name": "孟子",
+        "title": "作者讲解视频",
+        "url": "https://www.bilibili.com/video/BV1s8BxBGEoU/"
+      }
+    ],
+    "zhugeliang": [
+      {
+        "name": "诸葛亮",
+        "title": "作者讲解视频",
+        "url": "https://www.bilibili.com/video/BV1Run2zsEY6/"
+      }
+    ],
+    "taoyuanming": [
+      {
+        "name": "陶渊明",
+        "title": "作者讲解视频",
+        "url": "https://www.bilibili.com/video/BV1wpqAYjE5J/"
+      }
+    ],
+    "dufu": [
+      {
+        "name": "杜甫",
+        "title": "作者讲解视频",
+        "url": "https://www.bilibili.com/video/BV11C4y197u8/"
+      }
+    ],
+    "libai": [
+      {
+        "name": "李白",
+        "title": "作者讲解视频",
+        "url": "https://www.bilibili.com/video/BV1H64y1P7Mw/"
+      }
+    ],
+    "baijuyi": [
+      {
+        "name": "白居易",
+        "title": "作者讲解视频",
+        "url": "https://www.bilibili.com/video/BV1Tw411X79J/"
+      }
+    ],
+    "hanyu": [
+      {
+        "name": "韩愈",
+        "title": "作者讲解视频",
+        "url": "https://www.bilibili.com/video/BV18R4y1f7ML/"
+      }
+    ],
+    "liuzongyuan": [
+      {
+        "name": "柳宗元",
+        "title": "作者讲解视频",
+        "url": "https://www.bilibili.com/video/BV16J4m1u7Q3/"
+      },
+      {
+        "name": "柳宗元",
+        "title": "作者讲解视频",
+        "url": "https://www.bilibili.com/video/BV1grAzeFEYs/"
+      }
+    ],
+    "wangwei": [
+      {
+        "name": "王维",
+        "title": "作者讲解视频",
+        "url": "https://www.bilibili.com/video/BV1Gc411Z7Wa/"
+      }
+    ],
+    "fanzhongyan": [
+      {
+        "name": "范仲淹",
+        "title": "作者讲解视频",
+        "url": "https://www.bilibili.com/video/BV1Fs25BxEgF/"
+      }
+    ],
+    "ouyangxiu": [
+      {
+        "name": "欧阳修",
+        "title": "作者讲解视频",
+        "url": "https://www.bilibili.com/video/BV1z44y127mY/"
+      }
+    ],
+    "wanganshi": [
+      {
+        "name": "王安石",
+        "title": "作者讲解视频",
+        "url": "https://www.bilibili.com/video/BV13P4y1d7EZ/"
+      },
+      {
+        "name": "王安石",
+        "title": "作者讲解视频",
+        "url": "https://www.bilibili.com/video/BV14x4y1s7JV/"
+      }
+    ],
+    "xinqiji": [
+      {
+        "name": "辛弃疾",
+        "title": "作者讲解视频",
+        "url": "https://www.bilibili.com/video/BV1wL411e77T/"
+      }
+    ],
+    "sushi": [
+      {
+        "name": "苏轼",
+        "title": "作者讲解视频",
+        "url": "https://www.bilibili.com/video/BV1Wu411N7yn/"
+      }
+    ],
+    "luyou": [
+      {
+        "name": "陆游",
+        "title": "作者讲解视频",
+        "url": "https://www.bilibili.com/video/BV1Gx421m7Zt/"
+      }
+    ],
+    "liqingzhao": [
+      {
+        "name": "李清照",
+        "title": "作者讲解视频",
+        "url": "https://www.bilibili.com/video/BV1cC4y1L7YK/"
+      }
+    ]
+  }
+}

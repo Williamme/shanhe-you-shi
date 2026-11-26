@@ -1,0 +1,716 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta
+      name="description"
+      content="面向小学高年级至高中学生的文史古诗文交互地图：历代疆域、教材诗文、作者漫游、时代编年与讲解视频。"
+    />
+    <meta name="theme-color" content="#f4efe4" />
+    <title>山河有诗 · 文史古诗文交互地图</title>
+    <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      crossorigin=""
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="返回首页">
+          <span class="brand-seal" aria-hidden="true">文</span>
+          <span class="brand-copy">
+            <strong>山河有诗</strong>
+            <small>文史古诗文交互地图</small>
+          </span>
+        </a>
+
+        <nav class="module-tabs" aria-label="核心模块">
+          <button class="module-tab is-active" type="button" data-module="dynasty">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 7h16M6 7v11m4-11v11m4-11v11m4-11v11M3 18h18M12 3l8 4H4l8-4Z" />
+            </svg>
+            <span>历代疆域</span>
+          </button>
+          <button class="module-tab" type="button" data-module="author">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 19c2.5-5.2 4.6-8 8.4-11.2M9 5.2a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4ZM16.5 12.3a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Z" />
+            </svg>
+            <span>作者漫游</span>
+          </button>
+          <button class="module-tab" type="button" data-module="era">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3v18M7 6.5h10M5 11h14M8 15.5h8M10 20h4" />
+              <circle cx="12" cy="6.5" r="1.2"></circle>
+              <circle cx="7" cy="11" r="1.2"></circle>
+              <circle cx="17" cy="15.5" r="1.2"></circle>
+            </svg>
+            <span>时代编年</span>
+          </button>
+        </nav>
+
+        <div class="global-search" id="searchRoot">
+          <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="11" cy="11" r="6.5"></circle>
+            <path d="m16 16 4.2 4.2"></path>
+          </svg>
+          <input
+            id="globalSearch"
+            type="search"
+            role="combobox"
+            aria-label="搜索篇目、作者、朝代或历史大事"
+            aria-autocomplete="list"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            placeholder="搜索篇目、作者、朝代或大事"
+            autocomplete="off"
+          />
+          <kbd title="按斜杠键快速搜索">/</kbd>
+          <div class="search-results" id="searchResults" role="listbox" hidden></div>
+        </div>
+
+        <button class="icon-text-button" id="aboutButton" type="button" aria-label="查看使用说明">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="8.5"></circle>
+            <path d="M9.7 9.2a2.4 2.4 0 0 1 4.7.7c0 1.9-2.4 2.1-2.4 3.7M12 17.1h.01"></path>
+          </svg>
+          <span>说明</span>
+        </button>
+      </header>
+
+      <main class="main-area">
+        <section class="module-view is-active" id="dynastyModule" aria-label="历代朝代疆域地图">
+          <div class="module-workspace">
+            <aside class="side-panel dynasty-panel" id="dynastyPanel">
+              <div class="panel-scroll">
+                <section class="dynasty-overview">
+                  <p class="eyebrow">时空坐标 · <span id="dynastyOrder">01</span></p>
+                  <div class="dynasty-title-row">
+                    <h1 id="dynastyName">夏</h1>
+                    <span id="dynastyPeriod" class="period-pill">约前 2070—前 1600</span>
+                  </div>
+                  <p class="dynasty-summary" id="dynastySummary"></p>
+                  <div class="fact-grid">
+                    <div class="fact-card">
+                      <span>都邑</span>
+                      <strong id="dynastyCapital">—</strong>
+                    </div>
+                    <div class="fact-card">
+                      <span>疆域尺度</span>
+                      <strong id="dynastyScale">—</strong>
+                    </div>
+                  </div>
+                  <div class="snapshot-selector">
+                    <div class="snapshot-selector-head">
+                      <span>疆域阶段</span>
+                      <small id="snapshotYearLabel">—</small>
+                    </div>
+                    <div class="snapshot-options" id="dynastySnapshots" role="group" aria-label="选择疆域阶段"></div>
+                  </div>
+                  <button class="chronicle-trigger" id="chronicleButton" type="button">
+                    <span class="chronicle-trigger-icon" aria-hidden="true">史</span>
+                    <span class="chronicle-trigger-copy">
+                      <strong>朝代大事年表</strong>
+                      <small>看王朝兴替与诗文事件</small>
+                    </span>
+                    <span class="chronicle-trigger-count" id="chronicleCount">0 则</span>
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="m9 18 6-6-6-6"></path>
+                    </svg>
+                  </button>
+                  <button class="place-toggle" id="placeToggle" type="button" aria-expanded="false">
+                    <span>
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 21s6-5.7 6-11a6 6 0 1 0-12 0c0 5.3 6 11 6 11Z"></path>
+                        <circle cx="12" cy="10" r="2"></circle>
+                      </svg>
+                      古今地名对照
+                    </span>
+                    <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="m8 10 4 4 4-4"></path>
+                    </svg>
+                  </button>
+                  <div class="place-compare" id="placeCompare"></div>
+                </section>
+
+                <section class="works-section">
+                  <div class="section-heading">
+                    <div>
+                      <p class="eyebrow">部编教材关联</p>
+                      <h2>此地此时 · 诗文</h2>
+                    </div>
+                    <span class="count-badge" id="workCount">0 篇</span>
+                  </div>
+                  <div class="filter-row" role="group" aria-label="按学段筛选篇目">
+                    <button class="filter-chip is-active" type="button" data-level="all">全部</button>
+                    <button class="filter-chip" type="button" data-level="primary">
+                      <span class="filter-dot primary"></span>小学
+                    </button>
+                    <button class="filter-chip" type="button" data-level="junior">
+                      <span class="filter-dot junior"></span>初中
+                    </button>
+                    <button class="filter-chip" type="button" data-level="senior">
+                      <span class="filter-dot senior"></span>高中
+                    </button>
+                  </div>
+                  <div class="works-list" id="worksList"></div>
+                </section>
+              </div>
+            </aside>
+
+            <section class="map-stage" aria-label="朝代疆域地图区域">
+              <div class="map-canvas" id="dynastyMap"></div>
+              <div class="map-wash" aria-hidden="true"></div>
+
+              <div class="map-title-card">
+                <span class="map-title-seal" id="mapDynastySeal">夏</span>
+                <div>
+                  <span id="mapDynastyYears">约前 2070—前 1600</span>
+                  <strong id="mapDynastyLabel">华夏初兴 · 邦国时代</strong>
+                </div>
+              </div>
+              <div class="map-layer-control">
+                <button class="map-layer-trigger" id="mapLayerButton" type="button" aria-expanded="false">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="m12 3 9 5-9 5-9-5 9-5Z"></path>
+                    <path d="m3 12 9 5 9-5M3 16l9 5 9-5"></path>
+                  </svg>
+                  图层
+                </button>
+                <div class="map-layer-panel" id="mapLayerPanel" hidden>
+                  <label><input type="checkbox" data-map-layer="territory" checked /><span>历史疆域</span></label>
+                  <label><input type="checkbox" data-map-layer="poems" checked /><span>诗文地点</span></label>
+                  <label><input type="checkbox" data-map-layer="labels" checked /><span>古今地名</span></label>
+                  <label><input type="checkbox" data-map-layer="terrain" checked /><span>浅色地形</span></label>
+                  <label><input type="checkbox" data-map-layer="provinces" /><span>现代省界</span></label>
+                </div>
+              </div>
+              <button class="map-chronicle-button" id="mapChronicleButton" type="button">
+                <span>史</span>
+                朝代大事
+              </button>
+
+              <div class="map-legend" aria-label="地图图例">
+                <span><i class="legend-square"></i>诗文地点</span>
+                <span><i class="legend-area"></i>历史疆域</span>
+              </div>
+              <div class="map-regime-key" id="mapRegimeKey" aria-label="当前疆域政权图例"></div>
+
+              <div class="map-note">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4 5.5c3.1-1 5.8-.6 8 1.2 2.2-1.8 4.9-2.2 8-1.2v13c-3.1-1-5.8-.6-8 1.2-2.2-1.8-4.9-2.2-8-1.2v-13Z"></path>
+                  <path d="M12 6.7v13"></path>
+                </svg>
+                <span>疆域轮廓改编自“江山时序”，仅供教学示意</span>
+              </div>
+
+              <div class="map-loading" id="dynastyLoading" hidden>
+                <span></span>
+                <p>正在铺展疆域图…</p>
+              </div>
+            </section>
+          </div>
+
+          <footer class="dynasty-timeline" aria-label="朝代时间轴">
+            <div class="timeline-heading">
+              <button class="timeline-arrow" id="prevDynasty" type="button" aria-label="上一个朝代">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg>
+              </button>
+              <div class="timeline-current">
+                <span id="timelineName">夏</span>
+                <small id="timelineHint">拖动时间轴，穿行三千年</small>
+              </div>
+              <button class="timeline-arrow" id="nextDynasty" type="button" aria-label="下一个朝代">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+              </button>
+            </div>
+            <div class="timeline-track-wrap">
+              <div class="timeline-rail">
+                <div class="timeline-phase-dots" id="timelinePhases" aria-label="疆域阶段"></div>
+                <div class="timeline-progress" id="timelineProgress"></div>
+                <input
+                  class="timeline-range"
+                  id="dynastyRange"
+                  type="range"
+                  min="-2070"
+                  max="1949"
+                  step="1"
+                  value="-2070"
+                  aria-label="选择历史年份与疆域阶段"
+                />
+                <div class="timeline-dots" id="timelineDots"></div>
+              </div>
+              <div class="timeline-end-labels">
+                <span id="timelineStartLabel">约前 2070</span>
+                <span id="timelineEndLabel">1949</span>
+              </div>
+            </div>
+            <div class="timeline-zoom" role="group" aria-label="缩放时代轴">
+              <button id="timelineZoomOut" type="button" aria-label="缩小时代轴" title="缩小时代轴">−</button>
+              <button id="timelineZoomReset" type="button" class="timeline-zoom-reset" title="显示全部年代">全览</button>
+              <button id="timelineZoomIn" type="button" aria-label="放大时代轴" title="放大时代轴">＋</button>
+            </div>
+          </footer>
+        </section>
+
+        <section class="module-view" id="authorModule" aria-label="作者漫游路线地图">
+          <div class="module-workspace">
+            <aside class="side-panel author-panel" id="authorPanel">
+              <div class="panel-scroll">
+                <section class="author-intro">
+                  <div class="section-heading author-heading">
+                    <div>
+                      <p class="eyebrow">循迹 · 见人见诗</p>
+                      <h1>作者漫游</h1>
+                    </div>
+                    <span class="count-badge" id="authorCount">51 位</span>
+                  </div>
+                  <p class="author-lead">选一位文人，随他的行旅读诗，也读时代。</p>
+                  <label class="author-filter">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <circle cx="11" cy="11" r="6.5"></circle>
+                      <path d="m16 16 4.2 4.2"></path>
+                    </svg>
+                    <input id="authorFilter" type="search" placeholder="筛选作者" autocomplete="off" />
+                  </label>
+                  <div class="author-picker" id="authorPicker" role="listbox" aria-label="选择作者"></div>
+                </section>
+
+                <section class="author-profile" id="authorProfile">
+                  <div class="author-profile-head">
+                    <span class="author-avatar" id="authorAvatar">李</span>
+                    <div>
+                      <p class="eyebrow" id="authorEra">盛唐</p>
+                      <h2 id="authorName">李白</h2>
+                      <p id="authorAlias">字太白 · 号青莲居士</p>
+                    </div>
+                  </div>
+                  <p class="author-bio" id="authorBio"></p>
+                  <div class="author-stats">
+                    <span><strong id="authorStopCount">7</strong> 处行迹</span>
+                    <span><strong id="authorWorkCount">4</strong> 篇诗文</span>
+                    <span><strong id="authorYearSpan">701—762</strong></span>
+                  </div>
+                  <section class="author-archive" id="authorArchive">
+                    <div class="author-archive-head">
+                      <div>
+                        <p class="eyebrow">作者漫游 × 时代编年</p>
+                        <h3>人物档案</h3>
+                      </div>
+                      <span id="authorArchiveTag">诗仙</span>
+                    </div>
+                    <ol class="author-milestones" id="authorMilestones"></ol>
+                    <div class="author-archive-works">
+                      <span>代表名篇</span>
+                      <div id="authorArchiveWorks"></div>
+                    </div>
+                    <div class="author-archive-context">
+                      <span>时代背景</span>
+                      <p id="authorContext"></p>
+                    </div>
+                  </section>
+                  <section class="author-resources">
+                    <div class="author-resource-head">
+                      <div>
+                        <p class="eyebrow">延伸讲解</p>
+                        <h3>作者视频</h3>
+                      </div>
+                      <button class="sync-links-button" id="syncAuthorLinks" type="button">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M20 7v5h-5M4 17v-5h5"></path>
+                          <path d="M6.1 9a7 7 0 0 1 11.2-2.2L20 9M4 15l2.7 2.2A7 7 0 0 0 17.9 15"></path>
+                        </svg>
+                        同步 detail.txt
+                      </button>
+                    </div>
+                    <div class="author-link-list" id="authorLinksList"></div>
+                    <p class="author-link-status" id="authorLinksStatus" aria-live="polite"></p>
+                  </section>
+                </section>
+
+                <section class="route-section">
+                  <div class="section-heading compact">
+                    <div>
+                      <p class="eyebrow">按时间顺序</p>
+                      <h2>一生行旅</h2>
+                    </div>
+                    <span class="route-note">点击定位</span>
+                  </div>
+                  <ol class="route-list" id="routeList"></ol>
+                  <div class="author-loose-works" id="authorLooseWorks"></div>
+                </section>
+              </div>
+            </aside>
+
+            <section class="map-stage author-map-stage" aria-label="作者漫游地图区域">
+              <div class="map-canvas" id="authorMap"></div>
+              <div class="map-wash" aria-hidden="true"></div>
+
+              <div class="map-title-card author-title-card">
+                <span class="map-title-seal round" id="authorMapSeal">李</span>
+                <div>
+                  <span id="authorMapYears">701—762</span>
+                  <strong id="authorMapLabel">李白 · 山河入梦</strong>
+                </div>
+              </div>
+
+              <div class="map-legend author-legend" aria-label="地图图例">
+                <span><i class="legend-circle"></i>生平节点</span>
+                <span><i class="legend-route"></i>漫游路线</span>
+              </div>
+
+              <article class="journey-card" id="journeyCard" aria-live="polite">
+                <div class="journey-card-top">
+                  <span class="journey-index" id="journeyIndex">01</span>
+                  <span id="journeyYear">开元十三年（725）</span>
+                </div>
+                <h3 id="journeyPlace">江油</h3>
+                <p class="journey-ancient" id="journeyAncient">古称绵州昌隆 · 今四川江油</p>
+                <p class="journey-purpose" id="journeyPurpose"></p>
+                <p class="journey-story" id="journeyStory"></p>
+                <div class="journey-works" id="journeyWorks"></div>
+              </article>
+
+              <div class="map-loading" id="authorLoading" hidden>
+                <span></span>
+                <p>正在寻访行旅…</p>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="module-view era-module" id="eraModule" aria-label="中国时代编年">
+          <div class="era-shell">
+            <header class="era-toolbar">
+              <div class="era-heading">
+                <span class="era-heading-mark" aria-hidden="true">史</span>
+                <div>
+                  <p class="eyebrow">纵览 · 王朝与诗文</p>
+                  <h1>时代编年</h1>
+                  <p>沿时间纵轴观察并行政权、历史大事与课内名家，把诗文放回它发生的时代。</p>
+                </div>
+              </div>
+
+              <div class="era-toolbar-controls">
+                <div class="era-quick-nav" aria-label="时代编年快捷导航">
+                  <span>快速前往</span>
+                  <button type="button" data-era-year="-2070">先秦</button>
+                  <button type="button" data-era-year="220">三国</button>
+                  <button type="button" data-era-year="618">唐宋</button>
+                  <button type="button" data-era-year="1368">明清</button>
+                </div>
+              </div>
+
+              <div class="era-toolbar-meta" aria-live="polite">
+                <span id="eraDynastyCount">并览时代与人物</span>
+                <span>点击色块、事件或作者查看详情</span>
+              </div>
+            </header>
+
+            <div class="era-stage">
+              <div
+                class="era-timeline-scroll"
+                id="eraTimelineScroll"
+                tabindex="0"
+                aria-label="时代时间轴，上下滚动查看年代，左右滚动查看并行政权"
+              >
+                <div class="era-timeline-canvas" id="eraTimelineCanvas">
+                  <div class="era-year-axis" id="eraYearAxis" aria-hidden="true"></div>
+                  <div class="era-lanes" id="eraLanes"></div>
+                </div>
+              </div>
+
+              <div class="era-empty-state" id="eraEmptyState" hidden>
+                <span>史</span>
+                <strong>时代资料暂未载入</strong>
+                <p>请检查 data/era-timeline.json 是否存在且格式完整。</p>
+              </div>
+
+              <aside class="era-detail" id="eraDetail" aria-hidden="true" aria-labelledby="eraDetailTitle">
+                <header class="era-detail-head">
+                  <div>
+                    <p class="eyebrow" id="eraDetailEyebrow">时代档案</p>
+                    <h2 id="eraDetailTitle">唐朝</h2>
+                    <p id="eraDetailSubtitle">618—907</p>
+                  </div>
+                  <button class="era-detail-close" id="eraDetailClose" type="button" aria-label="关闭详情">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg>
+                  </button>
+                </header>
+                <div class="era-detail-body" id="eraDetailBody"></div>
+              </aside>
+
+              <div class="era-tooltip" id="eraTooltip" role="tooltip" hidden>
+                <div class="era-tooltip-head">
+                  <i id="eraTooltipDot"></i>
+                  <strong id="eraTooltipTitle"></strong>
+                  <span id="eraTooltipTag"></span>
+                </div>
+                <p id="eraTooltipTime"></p>
+                <div id="eraTooltipBody"></div>
+              </div>
+
+              <div class="era-status-note">
+                <span></span>
+                时间轴采用通行历史分期示意，并行政权的起止与称谓存在不同史学口径
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="modal" id="workModal" hidden>
+      <div class="modal-backdrop" data-close-modal="work"></div>
+      <article class="work-dialog" role="dialog" aria-modal="true" aria-labelledby="workModalTitle">
+        <button class="modal-close" type="button" data-close-modal="work" aria-label="关闭诗文详情">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg>
+        </button>
+        <header class="work-dialog-head">
+          <div class="work-heading-copy">
+            <p class="eyebrow" id="workModalEyebrow">唐诗 · 初中必考</p>
+            <h2 id="workModalTitle">春望</h2>
+            <p class="work-byline" id="workModalByline">杜甫 · 至德二载（757）</p>
+          </div>
+          <div class="work-place-stamp">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 21s6-5.7 6-11a6 6 0 1 0-12 0c0 5.3 6 11 6 11Z"></path>
+              <circle cx="12" cy="10" r="2"></circle>
+            </svg>
+            <div>
+              <span>创作地点</span>
+              <strong id="workModalPlace">长安</strong>
+              <small id="workModalModern">今陕西西安</small>
+            </div>
+          </div>
+        </header>
+
+        <div class="work-dialog-tabs" role="tablist" aria-label="诗文详情">
+          <button class="detail-tab is-active" type="button" data-detail-tab="text">原文 · 译文</button>
+          <button class="detail-tab" type="button" data-detail-tab="notes">注释 · 背景</button>
+        </div>
+
+        <div class="work-dialog-body">
+          <section class="detail-pane is-active" data-detail-pane="text">
+            <div class="text-grid">
+              <div class="original-column">
+                <p class="column-label">
+                  原文
+                  <span id="workOriginalLabel">全篇</span>
+                  <span class="tongjia-count" id="workTongjiaCount" hidden>0 个通假字</span>
+                </p>
+                <div class="original-text" id="workModalOriginal"></div>
+              </div>
+              <div class="translation-column">
+                <p class="column-label">白话译文 <span>帮助理解</span></p>
+                <div class="translation-text" id="workModalTranslation"></div>
+              </div>
+            </div>
+          </section>
+          <section class="detail-pane" data-detail-pane="notes">
+            <div class="notes-grid">
+              <div class="annotation-block">
+                <p class="column-label">重点注释</p>
+                <dl class="annotation-list" id="workModalAnnotations"></dl>
+              </div>
+              <aside class="background-block">
+                <p class="column-label">一句读懂时代</p>
+                <p id="workModalBackground"></p>
+                <span class="source-note" id="workModalSource"></span>
+              </aside>
+            </div>
+          </section>
+        </div>
+
+        <footer class="work-dialog-footer">
+          <span id="workModalLevel" class="level-badge junior">初中必考</span>
+          <div class="dialog-actions">
+            <button class="text-action" id="locateWorkOnMap" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="6"></circle>
+                <path d="M12 2v4M12 18v4M2 12h4M18 12h4"></path>
+              </svg>
+              地图定位
+            </button>
+            <button class="text-action" id="openAuthorJourney" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 19c2.5-5.2 4.6-8 8.4-11.2M9 5.2a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4Z"></path>
+              </svg>
+              作者漫游
+            </button>
+          </div>
+        </footer>
+      </article>
+    </div>
+
+    <div class="modal" id="chronicleModal" hidden>
+      <div class="modal-backdrop" data-close-modal="chronicle"></div>
+      <article class="chronicle-dialog" role="dialog" aria-modal="true" aria-labelledby="chronicleTitle">
+        <button class="modal-close" type="button" data-close-modal="chronicle" aria-label="关闭朝代大事年表">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg>
+        </button>
+        <header class="chronicle-head">
+          <div>
+            <p class="eyebrow">朝代档案 · DYNASTIC CHRONICLE</p>
+            <h2 id="chronicleTitle">唐 · 大事年表</h2>
+            <p class="chronicle-period" id="chroniclePeriod">618—907</p>
+          </div>
+          <span class="chronicle-seal" id="chronicleSeal">唐</span>
+        </header>
+        <div class="chronicle-body">
+          <section class="chronicle-overview">
+            <p class="column-label">朝代变迁</p>
+            <p id="chronicleIntro"></p>
+            <p class="chronicle-summary" id="chronicleSummary"></p>
+          </section>
+          <section class="chronicle-timeline">
+            <div class="section-heading compact">
+              <div>
+                <p class="eyebrow">按时间顺序</p>
+                <h3>大事与诗文</h3>
+              </div>
+              <span class="route-note">点击篇目查看详情</span>
+            </div>
+            <ol class="chronicle-list" id="chronicleList"></ol>
+          </section>
+        </div>
+      </article>
+    </div>
+
+    <div class="modal" id="eventModal" hidden>
+      <div class="modal-backdrop" data-close-modal="event"></div>
+      <article class="event-dialog" role="dialog" aria-modal="true" aria-labelledby="eventModalTitle">
+        <button class="modal-close" type="button" data-close-modal="event" aria-label="关闭历史事件详情">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg>
+        </button>
+        <header class="event-dialog-head">
+          <div class="event-dialog-heading">
+            <p class="eyebrow" id="eventModalEyebrow">历史事件 · 时代档案</p>
+            <h2 id="eventModalTitle"></h2>
+            <p class="event-dialog-meta" id="eventModalMeta"></p>
+          </div>
+          <span class="event-dialog-seal" id="eventModalSeal">史</span>
+        </header>
+        <div class="event-dialog-body">
+          <section class="event-dialog-summary">
+            <p class="column-label">事件概述</p>
+            <p id="eventModalSummary"></p>
+            <span id="eventModalSources"></span>
+          </section>
+          <div class="event-analysis-grid">
+            <section>
+              <span>起</span>
+              <h3>起因</h3>
+              <p id="eventModalCause"></p>
+            </section>
+            <section>
+              <span>经</span>
+              <h3>过程</h3>
+              <p id="eventModalProcess"></p>
+            </section>
+            <section>
+              <span>果</span>
+              <h3>结果</h3>
+              <p id="eventModalResult"></p>
+            </section>
+            <section>
+              <span>义</span>
+              <h3>意义</h3>
+              <p id="eventModalSignificance"></p>
+            </section>
+            <section class="event-evaluation">
+              <span>评</span>
+              <h3>评价</h3>
+              <p id="eventModalEvaluation"></p>
+            </section>
+          </div>
+          <section class="event-related" id="eventRelatedSection" hidden>
+            <p class="column-label">相关诗文</p>
+            <div id="eventModalWorks"></div>
+          </section>
+        </div>
+      </article>
+    </div>
+
+    <div class="modal" id="aboutModal" hidden>
+      <div class="modal-backdrop" data-close-modal="about"></div>
+      <article class="about-dialog" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
+        <button class="modal-close" type="button" data-close-modal="about" aria-label="关闭说明">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg>
+        </button>
+        <p class="eyebrow">使用说明 · ABOUT</p>
+        <h2 id="aboutTitle">把诗放回山河里</h2>
+        <p class="about-lead">
+          这是一份为初高中语文、历史跨学科学习设计的轻量教具，也可用于小学古诗启蒙。疆域用示意图形帮助建立时代框架；诗文地点用于连接作品与空间，不作严密历史地理考证。
+        </p>
+        <div class="about-grid">
+          <section>
+            <span>01</span>
+            <h3>历代疆域</h3>
+            <p>拖动底部时间轴按年份切换疆域，或使用“＋ / − / 全览”缩放年代。方形标记代表诗文创作地；点击“朝代大事”可查看王朝变迁、大事年表与相关诗文。</p>
+          </section>
+          <section>
+            <span>02</span>
+            <h3>作者漫游</h3>
+            <p>选择作者后，按年代顺序查看行旅节点。点击任一站或路线标记，即可查看行旅缘由、生平故事与相关诗文。</p>
+          </section>
+          <section>
+            <span>03</span>
+            <h3>时代编年</h3>
+            <p>沿纵向时间轴查看并行政权、历史大事与课内名家。点击事件可展开起因、过程、结果、意义与评价。</p>
+          </section>
+          <section>
+            <span>04</span>
+            <h3>内容维护</h3>
+            <p>诗文与作者位于 <code>data.json</code>，分阶段疆域位于 <code>data/map-atlas.json</code> 和 <code>data/atlas/</code>，时代编年与事件解读分别位于独立 JSON。</p>
+          </section>
+        </div>
+        <div class="about-notice">
+          <strong>学习提示</strong>
+          <p>历史疆域仅作学习参考，不同史学版本存在争议。政权轮廓改编自 GPL-3.0 开源的“江山时序”，不包含其受 CHGIS 条款限制的州府边界；现代省界来自 DataV GeoAtlas。篇目与学段标注以现行部编教材通行版本为参照。</p>
+        </div>
+        <div class="about-visitors" aria-live="polite">
+          <span class="about-visitors-seal" aria-hidden="true">访</span>
+          <div>
+            <span>累计访客</span>
+            <strong id="visitorCount">—</strong>
+          </div>
+          <small>按匿名浏览器去重 · 不记录 IP 与个人信息</small>
+        </div>
+        <div class="about-shortcuts">
+          <span><kbd>/</kbd> 快速搜索</span>
+          <span><kbd>←</kbd><kbd>→</kbd> 切换朝代</span>
+          <span><kbd>Esc</kbd> 关闭弹窗</span>
+        </div>
+      </article>
+    </div>
+
+    <aside class="tongjia-popover" id="tongjiaPopover" role="dialog" aria-labelledby="tongjiaPopoverTitle" hidden>
+      <button class="tongjia-popover-close" id="tongjiaPopoverClose" type="button" aria-label="关闭通假字说明">×</button>
+      <p class="eyebrow">文言通假 · 点击释义</p>
+      <h3 id="tongjiaPopoverTitle">
+        <span id="tongjiaSource">说</span>
+        <i>通</i>
+        <span id="tongjiaTarget">悦</span>
+        <em id="tongjiaTargetNote"></em>
+      </h3>
+      <p class="tongjia-meaning" id="tongjiaMeaning"></p>
+      <div class="tongjia-context">
+        <span>原句</span>
+        <blockquote id="tongjiaSentence"></blockquote>
+        <p id="tongjiaTranslation"></p>
+      </div>
+      <small id="tongjiaWork"></small>
+    </aside>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <div class="fatal-message" id="fatalMessage" hidden></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script type="module" src="./js/app.js"></script>
+  </body>
+</html>
