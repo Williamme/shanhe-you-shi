@@ -1497,6 +1497,15 @@ svg {
   box-shadow: 0 0 0 1px var(--jade);
 }
 
+.legend-work-node {
+  width: 11px;
+  height: 11px;
+  border: 2px solid #f9f3e8;
+  border-radius: 50%;
+  background: var(--cinnabar);
+  box-shadow: 0 0 0 2px rgba(155, 61, 47, 0.28);
+}
+
 .legend-route {
   width: 15px;
   height: 0;
@@ -2191,11 +2200,14 @@ svg {
 }
 
 .journey-div-icon {
+  display: grid;
+  place-items: center;
   border: 0;
   background: transparent;
 }
 
 .journey-marker {
+  position: relative;
   display: grid;
   width: 27px;
   height: 27px;
@@ -2211,6 +2223,46 @@ svg {
   transition: all 220ms ease;
 }
 
+.journey-marker.has-works {
+  width: 32px;
+  height: 32px;
+  color: var(--cinnabar-deep);
+  border-color: #fffaf1;
+  background: #f6e8d6;
+  box-shadow:
+    0 0 0 2px rgba(155, 61, 47, 0.7),
+    0 0 0 6px rgba(155, 61, 47, 0.13),
+    0 6px 18px rgba(76, 40, 30, 0.24);
+  font-size: 10px;
+}
+
+.journey-marker.has-works::after {
+  position: absolute;
+  inset: -5px;
+  z-index: -1;
+  border: 1px solid rgba(155, 61, 47, 0.16);
+  border-radius: 50%;
+  content: "";
+}
+
+.journey-marker-poem {
+  position: absolute;
+  top: -9px;
+  right: -9px;
+  display: grid;
+  width: 17px;
+  height: 17px;
+  place-items: center;
+  border: 1px solid #fffaf1;
+  border-radius: 50%;
+  color: #fffaf1;
+  background: var(--cinnabar);
+  box-shadow: 0 2px 7px rgba(90, 41, 31, 0.25);
+  font-family: var(--serif);
+  font-size: 7px;
+  font-weight: 700;
+}
+
 .journey-marker.is-active {
   color: #fffaf1;
   border-color: #fffaf1;
@@ -2223,6 +2275,21 @@ svg {
   color: #fffaf1;
   background: var(--jade);
   box-shadow: 0 0 0 1px rgba(53, 83, 75, 0.68), 0 4px 13px rgba(42, 66, 59, 0.18);
+}
+
+.journey-marker.has-works.is-active {
+  box-shadow:
+    0 0 0 2px rgba(155, 61, 47, 0.9),
+    0 0 0 7px rgba(155, 61, 47, 0.18),
+    0 7px 20px rgba(76, 40, 30, 0.28);
+}
+
+.journey-marker.has-works.is-visited {
+  background: var(--cinnabar);
+  box-shadow:
+    0 0 0 2px rgba(155, 61, 47, 0.7),
+    0 0 0 6px rgba(155, 61, 47, 0.12),
+    0 5px 16px rgba(76, 40, 30, 0.22);
 }
 
 .author-map-stage .leaflet-control-zoom {
@@ -2791,6 +2858,27 @@ svg {
   background: rgba(76, 113, 103, 0.065);
 }
 
+.route-stop.has-works {
+  border-color: rgba(155, 61, 47, 0.13);
+  background:
+    linear-gradient(90deg, rgba(155, 61, 47, 0.075), transparent 72%),
+    rgba(255, 253, 248, 0.38);
+}
+
+.route-stop.has-works:hover {
+  border-color: rgba(155, 61, 47, 0.24);
+  background:
+    linear-gradient(90deg, rgba(155, 61, 47, 0.11), transparent 78%),
+    rgba(255, 253, 248, 0.6);
+}
+
+.route-stop.has-works.is-active {
+  border-color: rgba(155, 61, 47, 0.34);
+  background:
+    linear-gradient(90deg, rgba(155, 61, 47, 0.12), transparent 75%),
+    rgba(255, 250, 242, 0.66);
+}
+
 .route-number {
   position: relative;
   z-index: 1;
@@ -2813,6 +2901,18 @@ svg {
   color: #fbf7ee;
   border-color: var(--jade);
   background: var(--jade);
+}
+
+.route-stop.has-works .route-number {
+  color: var(--cinnabar-deep);
+  border-color: rgba(155, 61, 47, 0.58);
+  background: #fff9ef;
+}
+
+.route-stop.has-works.is-active .route-number {
+  color: #fffaf1;
+  border-color: var(--cinnabar);
+  background: var(--cinnabar);
 }
 
 .route-copy {
@@ -2880,6 +2980,13 @@ svg {
   box-shadow: 0 12px 40px rgba(54, 46, 32, 0.14);
   backdrop-filter: blur(15px);
   transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.journey-card.has-works {
+  border-color: rgba(155, 61, 47, 0.28);
+  box-shadow:
+    inset 3px 0 0 rgba(155, 61, 47, 0.55),
+    0 12px 40px rgba(54, 46, 32, 0.16);
 }
 
 .journey-card.is-changing {

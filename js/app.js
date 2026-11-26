@@ -1595,23 +1595,33 @@ async function syncAuthorLinksFromText() {
 function renderRouteList(author) {
   dom.routeList.innerHTML = author.route
     .map((stop, index) => {
-      const count = (stop.workIds || []).length;
+      const works = getStopWorks(stop);
+      const count = works.length;
       return `
         <li class="route-item">
-          <button class="route-stop${index === 0 ? " is-active" : ""}" type="button" data-stop-index="${index}">
+          <button
+            class="route-stop${index === 0 ? " is-active" : ""}${count ? " has-works" : ""}"
+            type="button"
+            data-stop-index="${index}"
+            aria-label="${escapeHTML(stop.name)}，${escapeHTML(stop.year)}${count ? `，有 ${count} 篇诗文` : "，暂无关联诗文"}"
+          >
             <span class="route-number">${String(index + 1).padStart(2, "0")}</span>
             <span class="route-copy">
               <strong>${escapeHTML(stop.name)}</strong>
               <small>${escapeHTML(stop.year)} · ${escapeHTML(stop.modern)}</small>
               <em class="route-purpose">行旅：${escapeHTML(stop.purpose || "行旅与交游")}</em>
             </span>
-            ${count ? `<span class="route-work-count">${count} 篇</span>` : ""}
+            ${count ? `<span class="route-work-count">诗 · ${count} 篇</span>` : ""}
           </button>
         </li>
       `;
     })
     .join("");
   renderLooseWorks(author);
+}
+
+function getStopWorks(stop) {
+  return (stop.workIds || []).map((id) => state.worksById.get(id)).filter(Boolean);
 }
 
 function renderLooseWorks(author) {
@@ -1653,16 +1663,25 @@ function renderAuthorRoute(author) {
   }).addTo(map);
 
   state.authorMarkers = author.route.map((stop, index) => {
+    const works = getStopWorks(stop);
+    const hasWorks = works.length > 0;
+    const iconSize = hasWorks ? 38 : 30;
     const icon = L.divIcon({
       className: "journey-div-icon",
-      iconSize: [30, 30],
-      iconAnchor: [15, 15],
-      html: `<div class="journey-marker" aria-hidden="true">${String(index + 1).padStart(2, "0")}</div>`
+      iconSize: [iconSize, iconSize],
+      iconAnchor: [iconSize / 2, iconSize / 2],
+      html: `
+        <div class="journey-marker${hasWorks ? " has-works" : ""}" aria-hidden="true">
+          <span>${String(index + 1).padStart(2, "0")}</span>
+          ${hasWorks ? `<span class="journey-marker-poem">诗</span>` : ""}
+        </div>
+      `
     });
     const marker = L.marker([Number(stop.lat), Number(stop.lng)], {
       icon,
-      title: `${index + 1}. ${stop.name}`,
-      keyboard: true
+      title: `${index + 1}. ${stop.name}${hasWorks ? ` · ${works.length} 篇诗文` : ""}`,
+      keyboard: true,
+      zIndexOffset: hasWorks ? 220 : 0
     }).addTo(map);
     marker.on("click", () => setStop(index, { fly: true }));
     return marker;
@@ -1769,6 +1788,8 @@ function updateTravelLine(index, previousIndex, immediate = false) {
 }
 
 function updateJourneyCard(stop, index) {
+  const works = getStopWorks(stop);
+  dom.journeyCard.classList.toggle("has-works", works.length > 0);
   dom.journeyCard.classList.add("is-changing");
   dom.journeyIndex.textContent = String(index + 1).padStart(2, "0");
   dom.journeyYear.textContent = stop.year;
@@ -1777,7 +1798,6 @@ function updateJourneyCard(stop, index) {
   dom.journeyPurpose.textContent = `此行缘由：${stop.purpose || "行旅与交游"}`;
   dom.journeyStory.textContent = stop.story;
 
-  const works = (stop.workIds || []).map((id) => state.worksById.get(id)).filter(Boolean);
   dom.journeyWorks.innerHTML = works.length
     ? works
         .map(
