@@ -186,6 +186,10 @@ const dom = {
   eventModalWorks: $("#eventModalWorks"),
   aboutModal: $("#aboutModal"),
   aboutButton: $("#aboutButton"),
+  emailContactButton: $("#emailContactButton"),
+  emailPopover: $("#emailPopover"),
+  emailPopoverClose: $("#emailPopoverClose"),
+  copyContactEmail: $("#copyContactEmail"),
   visitorCount: $("#visitorCount"),
   tongjiaPopover: $("#tongjiaPopover"),
   tongjiaPopoverClose: $("#tongjiaPopoverClose"),
@@ -221,6 +225,38 @@ function showToast(message) {
   dom.toast.classList.add("is-visible");
   window.clearTimeout(showToast.timer);
   showToast.timer = window.setTimeout(() => dom.toast.classList.remove("is-visible"), 2600);
+}
+
+function setEmailPopoverOpen(open) {
+  dom.emailPopover.hidden = !open;
+  dom.emailContactButton.setAttribute("aria-expanded", String(open));
+  if (open) {
+    window.requestAnimationFrame(() => dom.emailPopover.querySelector(".contact-email")?.focus());
+  }
+}
+
+function closeEmailPopover({ restoreFocus = false } = {}) {
+  if (dom.emailPopover.hidden) return;
+  setEmailPopoverOpen(false);
+  if (restoreFocus) dom.emailContactButton.focus();
+}
+
+async function copyContactEmail() {
+  const email = "1615863414@qq.com";
+  try {
+    await navigator.clipboard.writeText(email);
+  } catch {
+    const field = document.createElement("textarea");
+    field.value = email;
+    field.setAttribute("readonly", "");
+    field.style.position = "fixed";
+    field.style.opacity = "0";
+    document.body.append(field);
+    field.select();
+    document.execCommand("copy");
+    field.remove();
+  }
+  showToast("邮箱已复制：1615863414@qq.com");
 }
 
 function createVisitorId() {
@@ -2489,6 +2525,9 @@ function bindGlobalEvents() {
 
   document.addEventListener("click", (event) => {
     if (!dom.searchRoot.contains(event.target)) closeSearch();
+    if (!dom.emailPopover.hidden && !event.target.closest(".header-actions")) {
+      closeEmailPopover();
+    }
     if (!event.target.closest(".map-layer-control")) {
       dom.mapLayerButton.setAttribute("aria-expanded", "false");
       dom.mapLayerPanel.hidden = true;
@@ -2530,6 +2569,11 @@ function bindGlobalEvents() {
 
   dom.openAuthorJourney.addEventListener("click", openActiveAuthorJourney);
   dom.aboutButton.addEventListener("click", openAbout);
+  dom.emailContactButton.addEventListener("click", () => {
+    setEmailPopoverOpen(dom.emailPopover.hidden);
+  });
+  dom.emailPopoverClose.addEventListener("click", () => closeEmailPopover({ restoreFocus: true }));
+  dom.copyContactEmail.addEventListener("click", copyContactEmail);
 
   document.addEventListener("keydown", (event) => {
     const tag = document.activeElement?.tagName;
@@ -2568,6 +2612,10 @@ function bindGlobalEvents() {
     }
 
     if (event.key === "Escape") {
+      if (!dom.emailPopover.hidden) {
+        closeEmailPopover({ restoreFocus: true });
+        return;
+      }
       if (!dom.tongjiaPopover.hidden) {
         hideTongjiaPopover({ restoreFocus: true });
         return;
