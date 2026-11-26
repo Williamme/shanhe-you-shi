@@ -114,6 +114,10 @@ css/styles.css                     书卷风视觉、响应式布局和地图样
 js/app.js                          地图、筛选、搜索、作者漫游和事件交互
 js/era-timeline.js                 时代编年纵轴与并行泳道
 js/content-union.js                作者资料和大事件年表的运行时合并
+robots.txt                         搜索引擎抓取规则与站点地图入口
+sitemap.xml                        公开页面站点地图
+site.webmanifest                   浏览器名称、主题色与安装信息
+assets/social-preview.png          1200×630 链接分享封面
 visitor-server.cjs                 独立访客统计服务
 visitor-store.cjs                  匿名访客哈希、去重和持久化
 
@@ -132,6 +136,21 @@ data/author-links.json             作者视频链接索引
 detail.txt                         作者视频链接源材料
 时代轴.html                        时代编年源材料
 ```
+
+## SEO 与分享
+
+首页包含中文搜索引擎描述、关键词、Canonical、Open Graph、Twitter Card、WebSite、WebApplication、LearningResource 和 Dataset 结构化数据，并提供静态专题介绍与常见问题内容。
+
+部署后应确认以下地址可以访问：
+
+```text
+/robots.txt
+/sitemap.xml
+/shanhe-you-shi/site.webmanifest
+/shanhe-you-shi/assets/social-preview.png
+```
+
+如后续启用正式域名，需要同步修改 `index.html` 中的 Canonical、Open Graph 地址、结构化数据，以及 `robots.txt` 和 `sitemap.xml` 中的站点地址。
 
 ## 数据说明
 
