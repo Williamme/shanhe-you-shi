@@ -2326,6 +2326,17 @@ function bindGlobalEvents() {
     tab.addEventListener("click", () => switchModule(tab.dataset.module));
   });
 
+  $$("[data-seo-module]").forEach((link) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      switchModule(link.dataset.seoModule);
+      document.querySelector(".app-shell")?.scrollIntoView({
+        behavior: REDUCED_MOTION ? "auto" : "smooth",
+        block: "start"
+      });
+    });
+  });
+
   let timelineSelectionTimer = null;
   dom.timelineRange.addEventListener("input", (event) => {
     window.clearTimeout(timelineSelectionTimer);

@@ -1,0 +1,19 @@
+{
+  "name": "山河有诗 · 历史地图与古诗文学习",
+  "short_name": "山河有诗",
+  "description": "中国历史地图、诗人地图与教材古诗文交互学习工具",
+  "lang": "zh-CN",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4efe4",
+  "theme_color": "#f4efe4",
+  "icons": [
+    {
+      "src": "./assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
