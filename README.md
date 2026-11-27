@@ -37,6 +37,7 @@
 - 按生平时间绘制迁徙、宦游、被贬和游历路线。
 - 每个行旅节点展示年代、今古地名、旅行缘由和生平故事。
 - 点击节点可查看该地写下的诗文。
+- 在作者介绍中打开人物关系图，查看亲属、师友、交游、君臣与文学群体关联，并可沿关系切换人物。
 - 支持作者讲解视频链接，并可从 `detail.txt` 一键重新同步。
 
 ### 时代编年
@@ -131,6 +132,7 @@ data/history-event-details.json    事件起因、过程、结果、意义和评
 data/era-timeline.json             时代编年原始资料
 data/tongjia.json                  通假字、原句与篇目关联
 data/author-links.json             作者视频链接索引
+data/person-relations.json         教材人物节点与人物关系
 
 文言文.txt                         教材篇目和通假字源材料
 detail.txt                         作者视频链接源材料
@@ -197,6 +199,22 @@ npm run sync:links
 ```
 
 页面中的“同步 detail.txt”按钮也会即时重新匹配。
+
+### 人物关系
+
+在 `data/person-relations.json` 的 `nodes` 数组中增加人物，在 `links` 数组中增加关系：
+
+```json
+{
+  "source": "ou-yang-xiu",
+  "target": "su-shi",
+  "relation": "知贡举，识拔苏轼",
+  "relationType": "师友",
+  "sourceType": "拓展"
+}
+```
+
+`source` 和 `target` 必须引用已有节点 ID。当前关系类型包括亲属、师友、交游、君臣同朝、政治论争、军事对手、文学群体、文学传承和历史关联。
 
 ### 时代编年
 

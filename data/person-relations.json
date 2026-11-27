@@ -1,0 +1,1820 @@
+{
+  "meta": {
+    "version": 1,
+    "title": "作者人物关系",
+    "description": "面向小学、初中、高中教材人物的人物关系种子数据，可在 nodes 与 links 中继续增补。",
+    "updatedAt": "2026-11-27",
+    "sourceNote": "依据用户整理的人物关系表清洗；学段与作品关联会与当前 data.json 自动合并。“文学群体”和“文学传承”不表示人物一定存在直接交往。"
+  },
+  "nodes": [
+    {
+      "id": "qu-yuan",
+      "name": "屈原",
+      "type": "文人",
+      "dynasty": "战国楚",
+      "stage": [
+        "高中"
+      ],
+      "remark": "《离骚》《渔父》",
+      "aliases": [],
+      "workIds": [
+        "lisao"
+      ]
+    },
+    {
+      "id": "song-yu",
+      "name": "宋玉",
+      "type": "文人",
+      "dynasty": "战国楚",
+      "stage": [
+        "高中"
+      ],
+      "remark": "屈原后学",
+      "aliases": [],
+      "workIds": []
+    },
+    {
+      "id": "jia-yi",
+      "name": "贾谊",
+      "type": "文人",
+      "dynasty": "西汉",
+      "stage": [
+        "高中"
+      ],
+      "remark": "《过秦论》",
+      "aliases": [],
+      "workIds": [
+        "guoqinlun"
+      ]
+    },
+    {
+      "id": "tao-yuanming",
+      "name": "陶渊明",
+      "type": "文人",
+      "dynasty": "东晋",
+      "stage": [
+        "初中",
+        "高中"
+      ],
+      "remark": "田园诗鼻祖",
+      "aliases": [],
+      "workIds": [
+        "taohuayuan",
+        "yinjiu",
+        "guiqulaixi",
+        "guiyuantianju1"
+      ]
+    },
+    {
+      "id": "xie-lingyun",
+      "name": "谢灵运",
+      "type": "文人",
+      "dynasty": "南朝宋",
+      "stage": [
+        "高中"
+      ],
+      "remark": "山水诗鼻祖",
+      "aliases": [],
+      "workIds": []
+    },
+    {
+      "id": "cao-cao",
+      "name": "曹操",
+      "type": "文人",
+      "dynasty": "三国魏",
+      "stage": [
+        "初中",
+        "高中"
+      ],
+      "remark": "建安文学",
+      "aliases": [],
+      "workIds": [
+        "duangexing",
+        "guancanghai"
+      ]
+    },
+    {
+      "id": "cao-pi",
+      "name": "曹丕",
+      "type": "文人",
+      "dynasty": "三国魏",
+      "stage": [
+        "高中"
+      ],
+      "remark": "《典论·论文》",
+      "aliases": [],
+      "workIds": []
+    },
+    {
+      "id": "cao-zhi",
+      "name": "曹植",
+      "type": "文人",
+      "dynasty": "三国魏",
+      "stage": [
+        "高中"
+      ],
+      "remark": "建安风骨代表",
+      "aliases": [],
+      "workIds": []
+    },
+    {
+      "id": "wang-can",
+      "name": "王粲",
+      "type": "文人",
+      "dynasty": "三国魏",
+      "stage": [
+        "高中"
+      ],
+      "remark": "建安七子",
+      "aliases": [],
+      "workIds": []
+    },
+    {
+      "id": "liu-zhen",
+      "name": "刘桢",
+      "type": "文人",
+      "dynasty": "三国魏",
+      "stage": [
+        "高中"
+      ],
+      "remark": "建安七子",
+      "aliases": [],
+      "workIds": []
+    },
+    {
+      "id": "xu-gan",
+      "name": "徐干",
+      "type": "文人",
+      "dynasty": "三国魏",
+      "stage": [
+        "高中"
+      ],
+      "remark": "建安七子",
+      "aliases": [],
+      "workIds": []
+    },
+    {
+      "id": "ying-yang",
+      "name": "应玚",
+      "type": "文人",
+      "dynasty": "三国魏",
+      "stage": [
+        "高中"
+      ],
+      "remark": "建安七子",
+      "aliases": [],
+      "workIds": []
+    },
+    {
+      "id": "chen-lin",
+      "name": "陈琳",
+      "type": "文人",
+      "dynasty": "三国魏",
+      "stage": [
+        "高中"
+      ],
+      "remark": "建安七子",
+      "aliases": [],
+      "workIds": []
+    },
+    {
+      "id": "li-bai",
+      "name": "李白",
+      "type": "文人",
+      "dynasty": "唐",
+      "stage": [
+        "小学",
+        "初中",
+        "高中"
+      ],
+      "remark": "诗仙",
+      "aliases": [],
+      "workIds": [
+        "chunyeluo",
+        "shudaonan",
+        "mengyou",
+        "wenwangchangling",
+        "emeishanyuege",
+        "primary-005",
+        "primary-008",
+        "primary-009",
+        "primary-014",
+        "primary-024",
+        "primary-045"
+      ]
+    },
+    {
+      "id": "du-fu",
+      "name": "杜甫",
+      "type": "文人",
+      "dynasty": "唐",
+      "stage": [
+        "小学",
+        "初中",
+        "高中"
+      ],
+      "remark": "诗圣",
+      "aliases": [],
+      "workIds": [
+        "wangyue",
+        "chunwang",
+        "maowu",
+        "denggao",
+        "jiangnanfengliguinian",
+        "primary-020",
+        "primary-027",
+        "primary-043",
+        "primary-061",
+        "primary-071"
+      ]
+    },
+    {
+      "id": "wang-wei",
+      "name": "王维",
+      "type": "文人",
+      "dynasty": "唐",
+      "stage": [
+        "小学",
+        "初中"
+      ],
+      "remark": "诗佛，山水田园",
+      "aliases": [],
+      "workIds": [
+        "primary-033",
+        "primary-058"
+      ]
+    },
+    {
+      "id": "meng-hao-ran",
+      "name": "孟浩然",
+      "type": "文人",
+      "dynasty": "唐",
+      "stage": [
+        "小学",
+        "初中"
+      ],
+      "remark": "山水田园",
+      "aliases": [],
+      "workIds": [
+        "primary-007",
+        "primary-062",
+        "primary-065"
+      ]
+    },
+    {
+      "id": "gao-shi",
+      "name": "高适",
+      "type": "文人",
+      "dynasty": "唐",
+      "stage": [
+        "初中"
+      ],
+      "remark": "边塞诗人",
+      "aliases": [],
+      "workIds": []
+    },
+    {
+      "id": "cen-shen",
+      "name": "岑参",
+      "type": "文人",
+      "dynasty": "唐",
+      "stage": [
+        "初中"
+      ],
+      "remark": "边塞诗人",
+      "aliases": [],
+      "workIds": [
+        "xingjunjiuri"
+      ]
+    },
+    {
+      "id": "bai-juyi",
+      "name": "白居易",
+      "type": "文人",
+      "dynasty": "唐",
+      "stage": [
+        "小学",
+        "初中",
+        "高中"
+      ],
+      "remark": "新乐府运动",
+      "aliases": [],
+      "workIds": [
+        "pipaxing",
+        "maichaweng",
+        "qiantanghu",
+        "primary-011",
+        "primary-018",
+        "primary-030",
+        "primary-034"
+      ]
+    },
+    {
+      "id": "liu-yuxi",
+      "name": "刘禹锡",
+      "type": "文人",
+      "dynasty": "唐",
+      "stage": [
+        "初中"
+      ],
+      "remark": "诗豪，和白居易唱和",
+      "aliases": [],
+      "workIds": [
+        "loushiming"
+      ]
+    },
+    {
+      "id": "liu-zongyuan",
+      "name": "柳宗元",
+      "type": "文人",
+      "dynasty": "唐",
+      "stage": [
+        "初中",
+        "高中"
+      ],
+      "remark": "唐宋八大家",
+      "aliases": [],
+      "workIds": [
+        "xiaoshitan",
+        "jiangxue"
+      ]
+    },
+    {
+      "id": "han-yu",
+      "name": "韩愈",
+      "type": "文人",
+      "dynasty": "唐",
+      "stage": [
+        "初中",
+        "高中"
+      ],
+      "remark": "古文运动领袖、唐宋八大家",
+      "aliases": [],
+      "workIds": [
+        "mashuo",
+        "shishuo"
+      ]
+    },
+    {
+      "id": "ou-yang-xiu",
+      "name": "欧阳修",
+      "type": "文人",
+      "dynasty": "北宋",
+      "stage": [
+        "初中",
+        "高中"
+      ],
+      "remark": "唐宋八大家",
+      "aliases": [],
+      "workIds": [
+        "zuwengting",
+        "maiyouweng"
+      ]
+    },
+    {
+      "id": "su-xun",
+      "name": "苏洵",
+      "type": "文人",
+      "dynasty": "北宋",
+      "stage": [
+        "初中"
+      ],
+      "remark": "三苏，唐宋八大家",
+      "aliases": [],
+      "workIds": []
+    },
+    {
+      "id": "su-shi",
+      "name": "苏轼",
+      "type": "文人",
+      "dynasty": "北宋",
+      "stage": [
+        "初中",
+        "高中",
+        "小学"
+      ],
+      "remark": "东坡，唐宋八大家",
+      "aliases": [],
+      "workIds": [
+        "shuidiao",
+        "jiangchengzi",
+        "niannujiao",
+        "chibifu",
+        "primary-022",
+        "primary-025",
+        "primary-028",
+        "primary-035",
+        "primary-063",
+        "primary-074"
+      ]
+    },
+    {
+      "id": "su-zhe",
+      "name": "苏辙",
+      "type": "文人",
+      "dynasty": "北宋",
+      "stage": [
+        "高中"
+      ],
+      "remark": "三苏，唐宋八大家",
+      "aliases": [],
+      "workIds": []
+    },
+    {
+      "id": "wang-anshi",
+      "name": "王安石",
+      "type": "文人",
+      "dynasty": "北宋",
+      "stage": [
+        "初中",
+        "高中",
+        "小学"
+      ],
+      "remark": "唐宋八大家，变法",
+      "aliases": [],
+      "workIds": [
+        "dengfeilaifeng",
+        "dashou",
+        "boshuanguazhou",
+        "primary-031"
+      ]
+    },
+    {
+      "id": "si-ma-guang",
+      "name": "司马光",
+      "type": "文人",
+      "dynasty": "北宋",
+      "stage": [
+        "初中"
+      ],
+      "remark": "《资治通鉴》，反变法",
+      "aliases": [],
+      "workIds": [
+        "sunquanquanxue"
+      ]
+    },
+    {
+      "id": "huang-tingjian",
+      "name": "黄庭坚",
+      "type": "文人",
+      "dynasty": "北宋",
+      "stage": [
+        "高中",
+        "小学"
+      ],
+      "remark": "苏门四学士、江西诗派",
+      "aliases": [],
+      "workIds": [
+        "primary-075"
+      ]
+    },
+    {
+      "id": "qin-guan",
+      "name": "秦观",
+      "type": "文人",
+      "dynasty": "北宋",
+      "stage": [
+        "高中"
+      ],
+      "remark": "苏门四学士",
+      "aliases": [],
+      "workIds": []
+    },
+    {
+      "id": "zhang-lei",
+      "name": "张耒",
+      "type": "文人",
+      "dynasty": "北宋",
+      "stage": [
+        "高中"
+      ],
+      "remark": "苏门四学士",
+      "aliases": [],
+      "workIds": []
+    },
+    {
+      "id": "chao-buzhi",
+      "name": "晁补之",
+      "type": "文人",
+      "dynasty": "北宋",
+      "stage": [
+        "高中"
+      ],
+      "remark": "苏门四学士",
+      "aliases": [],
+      "workIds": []
+    },
+    {
+      "id": "li-qingzhao",
+      "name": "李清照",
+      "type": "文人",
+      "dynasty": "两宋之交",
+      "stage": [
+        "初中",
+        "高中",
+        "小学"
+      ],
+      "remark": "易安，婉约词宗",
+      "aliases": [],
+      "workIds": [
+        "shengshengman",
+        "yujiaao-li",
+        "primary-039"
+      ]
+    },
+    {
+      "id": "liu-yong",
+      "name": "柳永",
+      "type": "文人",
+      "dynasty": "北宋",
+      "stage": [
+        "高中"
+      ],
+      "remark": "慢词开创",
+      "aliases": [],
+      "workIds": []
+    },
+    {
+      "id": "yan-shu",
+      "name": "晏殊",
+      "type": "文人",
+      "dynasty": "北宋",
+      "stage": [
+        "初中"
+      ],
+      "remark": "婉约词人",
+      "aliases": [],
+      "workIds": []
+    },
+    {
+      "id": "yan-jiadao",
+      "name": "晏几道",
+      "type": "文人",
+      "dynasty": "北宋",
+      "stage": [
+        "高中"
+      ],
+      "remark": "晏殊之子，婉约",
+      "aliases": [],
+      "workIds": []
+    },
+    {
+      "id": "xin-qiji",
+      "name": "辛弃疾",
+      "type": "文人",
+      "dynasty": "南宋",
+      "stage": [
+        "初中",
+        "高中",
+        "小学"
+      ],
+      "remark": "豪放词，与苏轼并称苏辛",
+      "aliases": [],
+      "workIds": [
+        "poyizhenzi",
+        "yongyule",
+        "nanxiangzi",
+        "primary-042",
+        "primary-064"
+      ]
+    },
+    {
+      "id": "lu-you",
+      "name": "陆游",
+      "type": "文人",
+      "dynasty": "南宋",
+      "stage": [
+        "小学",
+        "初中",
+        "高中"
+      ],
+      "remark": "爱国诗人",
+      "aliases": [],
+      "workIds": [
+        "youshanxicun",
+        "shiyiyue",
+        "shufen",
+        "primary-051",
+        "primary-060"
+      ]
+    },
+    {
+      "id": "fan-chengda",
+      "name": "范成大",
+      "type": "文人",
+      "dynasty": "南宋",
+      "stage": [
+        "初中",
+        "小学"
+      ],
+      "remark": "中兴四大诗人",
+      "aliases": [],
+      "workIds": [
+        "primary-040",
+        "primary-054"
+      ]
+    },
+    {
+      "id": "yang-wanli",
+      "name": "杨万里",
+      "type": "文人",
+      "dynasty": "南宋",
+      "stage": [
+        "初中",
+        "小学"
+      ],
+      "remark": "中兴四大诗人",
+      "aliases": [],
+      "workIds": [
+        "primary-012",
+        "primary-019",
+        "primary-041",
+        "primary-055"
+      ]
+    },
+    {
+      "id": "wen-tianxiang",
+      "name": "文天祥",
+      "type": "文人",
+      "dynasty": "南宋",
+      "stage": [
+        "初中"
+      ],
+      "remark": "《过零丁洋》",
+      "aliases": [],
+      "workIds": [
+        "guolingdingyang"
+      ]
+    },
+    {
+      "id": "zhu-xi",
+      "name": "朱熹",
+      "type": "文人",
+      "dynasty": "南宋",
+      "stage": [
+        "高中"
+      ],
+      "remark": "理学集大成",
+      "aliases": [],
+      "workIds": []
+    },
+    {
+      "id": "guan-hanqing",
+      "name": "关汉卿",
+      "type": "文人",
+      "dynasty": "元",
+      "stage": [
+        "高中"
+      ],
+      "remark": "元曲四大家",
+      "aliases": [],
+      "workIds": []
+    },
+    {
+      "id": "ma-zhiyuan",
+      "name": "马致远",
+      "type": "文人",
+      "dynasty": "元",
+      "stage": [
+        "初中"
+      ],
+      "remark": "元曲四大家",
+      "aliases": [],
+      "workIds": [
+        "tianjingsha"
+      ]
+    },
+    {
+      "id": "bai-pu",
+      "name": "白朴",
+      "type": "文人",
+      "dynasty": "元",
+      "stage": [
+        "高中"
+      ],
+      "remark": "元曲四大家",
+      "aliases": [],
+      "workIds": []
+    },
+    {
+      "id": "zheng-guangzu",
+      "name": "郑光祖",
+      "type": "文人",
+      "dynasty": "元",
+      "stage": [
+        "高中"
+      ],
+      "remark": "元曲四大家",
+      "aliases": [],
+      "workIds": []
+    },
+    {
+      "id": "zhu-ge-liang",
+      "name": "诸葛亮",
+      "type": "历史人物",
+      "dynasty": "三国",
+      "stage": [
+        "初中"
+      ],
+      "remark": "《出师表》",
+      "aliases": [],
+      "workIds": [
+        "chushibiao",
+        "jiezishu"
+      ]
+    },
+    {
+      "id": "sun-quan",
+      "name": "孙权",
+      "type": "历史人物",
+      "dynasty": "三国",
+      "stage": [
+        "初中"
+      ],
+      "remark": "《孙权劝学》",
+      "aliases": [],
+      "workIds": []
+    },
+    {
+      "id": "liu-bei",
+      "name": "刘备",
+      "type": "历史人物",
+      "dynasty": "三国",
+      "stage": [
+        "初中"
+      ],
+      "remark": "隆中对",
+      "aliases": [],
+      "workIds": []
+    },
+    {
+      "id": "zhou-yu",
+      "name": "周瑜",
+      "type": "历史人物",
+      "dynasty": "三国",
+      "stage": [
+        "高中"
+      ],
+      "remark": "赤壁",
+      "aliases": [],
+      "workIds": []
+    },
+    {
+      "id": "xiang-yu",
+      "name": "项羽",
+      "type": "历史人物",
+      "dynasty": "秦末",
+      "stage": [
+        "高中"
+      ],
+      "remark": "《项羽之死》",
+      "aliases": [],
+      "workIds": []
+    },
+    {
+      "id": "liu-bang",
+      "name": "刘邦",
+      "type": "历史人物",
+      "dynasty": "秦末汉初",
+      "stage": [
+        "高中"
+      ],
+      "remark": "《鸿门宴》",
+      "aliases": [],
+      "workIds": []
+    },
+    {
+      "id": "chen-sheng",
+      "name": "陈胜",
+      "type": "历史人物",
+      "dynasty": "秦",
+      "stage": [
+        "初中"
+      ],
+      "remark": "《陈涉世家》",
+      "aliases": [],
+      "workIds": []
+    },
+    {
+      "id": "wu-qi",
+      "name": "吴起",
+      "type": "历史人物",
+      "dynasty": "战国",
+      "stage": [
+        "高中"
+      ],
+      "remark": "《吴起》相关古文",
+      "aliases": [],
+      "workIds": []
+    },
+    {
+      "id": "cao-gui",
+      "name": "曹刿",
+      "type": "历史人物",
+      "dynasty": "春秋",
+      "stage": [
+        "初中"
+      ],
+      "remark": "《曹刿论战》",
+      "aliases": [],
+      "workIds": []
+    },
+    {
+      "id": "kongzi",
+      "name": "孔子",
+      "type": "文人",
+      "dynasty": "春秋",
+      "stage": [
+        "小学",
+        "初中",
+        "高中"
+      ],
+      "remark": "儒家学派创始人；《论语》",
+      "aliases": [],
+      "workIds": [
+        "lunyu",
+        "zilu"
+      ]
+    },
+    {
+      "id": "mengzi",
+      "name": "孟子",
+      "type": "文人",
+      "dynasty": "战国",
+      "stage": [
+        "初中",
+        "高中"
+      ],
+      "remark": "儒家学派代表；《孟子》",
+      "aliases": [],
+      "workIds": [
+        "yuwosuoyu"
+      ]
+    },
+    {
+      "id": "fan-zhongyan",
+      "name": "范仲淹",
+      "type": "文人",
+      "dynasty": "北宋",
+      "stage": [
+        "小学",
+        "初中"
+      ],
+      "remark": "庆历新政；《岳阳楼记》",
+      "aliases": [],
+      "workIds": [
+        "yueyanglou",
+        "yujiaao-fan"
+      ]
+    },
+    {
+      "id": "luo-binwang",
+      "name": "骆宾王",
+      "type": "文人",
+      "dynasty": "唐",
+      "stage": [
+        "小学"
+      ],
+      "remark": "初唐四杰；《咏鹅》",
+      "aliases": [],
+      "workIds": [
+        "primary-001"
+      ]
+    },
+    {
+      "id": "li-shen",
+      "name": "李绅",
+      "type": "文人",
+      "dynasty": "唐",
+      "stage": [
+        "小学"
+      ],
+      "remark": "新乐府运动；《悯农》",
+      "aliases": [],
+      "workIds": [
+        "primary-004"
+      ]
+    },
+    {
+      "id": "li-qiao",
+      "name": "李峤",
+      "type": "文人",
+      "dynasty": "唐",
+      "stage": [
+        "小学"
+      ],
+      "remark": "《风》",
+      "aliases": [],
+      "workIds": [
+        "primary-006"
+      ]
+    },
+    {
+      "id": "jia-dao",
+      "name": "贾岛",
+      "type": "文人",
+      "dynasty": "唐",
+      "stage": [
+        "小学",
+        "初中",
+        "高中"
+      ],
+      "remark": "苦吟诗人；推敲典故",
+      "aliases": [],
+      "workIds": [
+        "primary-010"
+      ]
+    },
+    {
+      "id": "wang-zhihuan",
+      "name": "王之涣",
+      "type": "文人",
+      "dynasty": "唐",
+      "stage": [
+        "小学"
+      ],
+      "remark": "边塞诗人；《登鹳雀楼》",
+      "aliases": [],
+      "workIds": [
+        "primary-013"
+      ]
+    },
+    {
+      "id": "gao-ding",
+      "name": "高鼎",
+      "type": "文人",
+      "dynasty": "清",
+      "stage": [
+        "小学"
+      ],
+      "remark": "《村居》",
+      "aliases": [],
+      "workIds": [
+        "primary-016"
+      ]
+    },
+    {
+      "id": "he-zhizhang",
+      "name": "贺知章",
+      "type": "文人",
+      "dynasty": "唐",
+      "stage": [
+        "小学"
+      ],
+      "remark": "《咏柳》《回乡偶书》",
+      "aliases": [],
+      "workIds": [
+        "primary-017"
+      ]
+    },
+    {
+      "id": "wang-wan",
+      "name": "王湾",
+      "type": "文人",
+      "dynasty": "唐",
+      "stage": [
+        "初中"
+      ],
+      "remark": "《次北固山下》",
+      "aliases": [],
+      "workIds": [
+        "cibeigushanxia"
+      ]
+    },
+    {
+      "id": "ye-shaoweng",
+      "name": "叶绍翁",
+      "type": "文人",
+      "dynasty": "南宋",
+      "stage": [
+        "小学"
+      ],
+      "remark": "《游园不值》",
+      "aliases": [],
+      "workIds": [
+        "primary-023",
+        "primary-072"
+      ]
+    },
+    {
+      "id": "zeng-ji",
+      "name": "曾几",
+      "type": "文人",
+      "dynasty": "南宋",
+      "stage": [
+        "小学"
+      ],
+      "remark": "陆游曾从其学诗；《三衢道中》",
+      "aliases": [],
+      "workIds": [
+        "primary-029"
+      ]
+    },
+    {
+      "id": "wang-han",
+      "name": "王翰",
+      "type": "文人",
+      "dynasty": "唐",
+      "stage": [
+        "小学"
+      ],
+      "remark": "《凉州词》",
+      "aliases": [],
+      "workIds": [
+        "primary-038"
+      ]
+    },
+    {
+      "id": "lu-yue",
+      "name": "卢钺",
+      "type": "文人",
+      "dynasty": "南宋",
+      "stage": [
+        "小学"
+      ],
+      "remark": "《雪梅》",
+      "aliases": [],
+      "workIds": [
+        "primary-036"
+      ]
+    },
+    {
+      "id": "luo-yin",
+      "name": "罗隐",
+      "type": "文人",
+      "dynasty": "唐",
+      "stage": [
+        "小学"
+      ],
+      "remark": "《蜂》",
+      "aliases": [],
+      "workIds": [
+        "primary-044"
+      ]
+    },
+    {
+      "id": "lu-lun",
+      "name": "卢纶",
+      "type": "文人",
+      "dynasty": "唐",
+      "stage": [
+        "小学"
+      ],
+      "remark": "《塞下曲》",
+      "aliases": [],
+      "workIds": [
+        "primary-047"
+      ]
+    },
+    {
+      "id": "wang-mian",
+      "name": "王冕",
+      "type": "文人",
+      "dynasty": "元",
+      "stage": [
+        "小学"
+      ],
+      "remark": "《墨梅》",
+      "aliases": [],
+      "workIds": [
+        "primary-048"
+      ]
+    },
+    {
+      "id": "yu-shinan",
+      "name": "虞世南",
+      "type": "文人",
+      "dynasty": "唐",
+      "stage": [
+        "小学"
+      ],
+      "remark": "《蝉》",
+      "aliases": [],
+      "workIds": [
+        "primary-049"
+      ]
+    },
+    {
+      "id": "lin-jie",
+      "name": "林杰",
+      "type": "文人",
+      "dynasty": "唐",
+      "stage": [
+        "小学"
+      ],
+      "remark": "《乞巧》",
+      "aliases": [],
+      "workIds": [
+        "primary-050"
+      ]
+    },
+    {
+      "id": "lin-sheng",
+      "name": "林升",
+      "type": "文人",
+      "dynasty": "南宋",
+      "stage": [
+        "小学"
+      ],
+      "remark": "《题临安邸》",
+      "aliases": [],
+      "workIds": [
+        "primary-052"
+      ]
+    },
+    {
+      "id": "gong-zhen",
+      "name": "龚自珍",
+      "type": "文人",
+      "dynasty": "清",
+      "stage": [
+        "小学",
+        "初中"
+      ],
+      "remark": "《己亥杂诗》",
+      "aliases": [],
+      "workIds": [
+        "jihai",
+        "primary-053"
+      ]
+    },
+    {
+      "id": "lei-zhen",
+      "name": "雷震",
+      "type": "文人",
+      "dynasty": "南宋",
+      "stage": [
+        "小学"
+      ],
+      "remark": "《村晚》",
+      "aliases": [],
+      "workIds": [
+        "primary-056"
+      ]
+    },
+    {
+      "id": "meng-jiao",
+      "name": "孟郊",
+      "type": "文人",
+      "dynasty": "唐",
+      "stage": [
+        "小学"
+      ],
+      "remark": "《游子吟》",
+      "aliases": [],
+      "workIds": [
+        "primary-057"
+      ]
+    },
+    {
+      "id": "han-hong",
+      "name": "韩翃",
+      "type": "文人",
+      "dynasty": "唐",
+      "stage": [
+        "小学"
+      ],
+      "remark": "《寒食》",
+      "aliases": [],
+      "workIds": [
+        "primary-077"
+      ]
+    },
+    {
+      "id": "wang-jian",
+      "name": "王建",
+      "type": "文人",
+      "dynasty": "唐",
+      "stage": [
+        "小学"
+      ],
+      "remark": "《十五夜望月》",
+      "aliases": [],
+      "workIds": [
+        "primary-078"
+      ]
+    },
+    {
+      "id": "wang-guan",
+      "name": "王观",
+      "type": "文人",
+      "dynasty": "北宋",
+      "stage": [
+        "小学"
+      ],
+      "remark": "《卜算子·送鲍浩然之浙东》",
+      "aliases": [],
+      "workIds": [
+        "primary-073"
+      ]
+    },
+    {
+      "id": "wang-bo",
+      "name": "王勃",
+      "type": "文人",
+      "dynasty": "唐",
+      "stage": [
+        "小学",
+        "初中",
+        "高中"
+      ],
+      "remark": "初唐四杰；《送杜少府之任蜀州》",
+      "aliases": [],
+      "workIds": [
+        "tengwangge",
+        "primary-070"
+      ]
+    },
+    {
+      "id": "du-mu",
+      "name": "杜牧",
+      "type": "文人",
+      "dynasty": "唐",
+      "stage": [
+        "小学",
+        "初中",
+        "高中"
+      ],
+      "remark": "晚唐诗人；《山行》",
+      "aliases": [],
+      "workIds": [
+        "chibi",
+        "afanggongfu",
+        "primary-021",
+        "primary-032"
+      ]
+    },
+    {
+      "id": "mao-zedong",
+      "name": "毛泽东",
+      "type": "文人",
+      "dynasty": "近现代",
+      "stage": [
+        "小学",
+        "初中",
+        "高中"
+      ],
+      "remark": "近现代诗词作者",
+      "aliases": [],
+      "workIds": [
+        "primary-066",
+        "primary-067"
+      ]
+    },
+    {
+      "id": "wang-chang-ling",
+      "name": "王昌龄",
+      "type": "文人",
+      "dynasty": "唐",
+      "stage": [
+        "小学",
+        "初中"
+      ],
+      "remark": "边塞诗人；《出塞》",
+      "aliases": [],
+      "workIds": [
+        "primary-026",
+        "primary-037",
+        "primary-046",
+        "primary-059"
+      ]
+    },
+    {
+      "id": "teng-zijing",
+      "name": "滕子京",
+      "type": "历史人物",
+      "dynasty": "北宋",
+      "stage": [
+        "初中"
+      ],
+      "remark": "范仲淹《岳阳楼记》所记同僚",
+      "aliases": [],
+      "workIds": []
+    },
+    {
+      "id": "yuan-zhen",
+      "name": "元稹",
+      "type": "文人",
+      "dynasty": "唐",
+      "stage": [
+        "高中"
+      ],
+      "remark": "新乐府运动代表，与白居易并称元白",
+      "aliases": [],
+      "workIds": []
+    },
+    {
+      "id": "li-shangyin",
+      "name": "李商隐",
+      "type": "文人",
+      "dynasty": "唐",
+      "stage": [
+        "高中"
+      ],
+      "remark": "与杜牧并称小李杜",
+      "aliases": [],
+      "workIds": []
+    },
+    {
+      "id": "zhao-mingcheng",
+      "name": "赵明诚",
+      "type": "历史人物",
+      "dynasty": "两宋之交",
+      "stage": [
+        "初中",
+        "高中"
+      ],
+      "remark": "李清照之夫，金石学家",
+      "aliases": [],
+      "workIds": []
+    }
+  ],
+  "links": [
+    {
+      "source": "qu-yuan",
+      "target": "song-yu",
+      "relation": "后学传人",
+      "sourceType": "拓展",
+      "relationType": "师友",
+      "direction": "undirected",
+      "id": "seed-qu-yuan--song-yu--1"
+    },
+    {
+      "source": "cao-cao",
+      "target": "cao-pi",
+      "relation": "父子",
+      "sourceType": "课内",
+      "relationType": "亲属",
+      "direction": "undirected",
+      "id": "seed-cao-cao--cao-pi--2"
+    },
+    {
+      "source": "cao-cao",
+      "target": "cao-zhi",
+      "relation": "父子",
+      "sourceType": "课内",
+      "relationType": "亲属",
+      "direction": "undirected",
+      "id": "seed-cao-cao--cao-zhi--3"
+    },
+    {
+      "source": "cao-pi",
+      "target": "cao-zhi",
+      "relation": "兄弟",
+      "sourceType": "课内",
+      "relationType": "亲属",
+      "direction": "undirected",
+      "id": "seed-cao-pi--cao-zhi--4"
+    },
+    {
+      "source": "cao-cao",
+      "target": "wang-can",
+      "relation": "府中僚属（建安七子）",
+      "sourceType": "拓展",
+      "relationType": "君臣同朝",
+      "direction": "undirected",
+      "id": "seed-cao-cao--wang-can--5"
+    },
+    {
+      "source": "wang-can",
+      "target": "liu-zhen",
+      "relation": "同列建安七子",
+      "sourceType": "拓展",
+      "relationType": "文学群体",
+      "direction": "undirected",
+      "id": "seed-wang-can--liu-zhen--6"
+    },
+    {
+      "source": "wang-can",
+      "target": "xu-gan",
+      "relation": "同列建安七子",
+      "sourceType": "拓展",
+      "relationType": "文学群体",
+      "direction": "undirected",
+      "id": "seed-wang-can--xu-gan--7"
+    },
+    {
+      "source": "wang-can",
+      "target": "ying-yang",
+      "relation": "同列建安七子",
+      "sourceType": "拓展",
+      "relationType": "文学群体",
+      "direction": "undirected",
+      "id": "seed-wang-can--ying-yang--8"
+    },
+    {
+      "source": "wang-can",
+      "target": "chen-lin",
+      "relation": "同列建安七子",
+      "sourceType": "拓展",
+      "relationType": "文学群体",
+      "direction": "undirected",
+      "id": "seed-wang-can--chen-lin--9"
+    },
+    {
+      "source": "li-bai",
+      "target": "du-fu",
+      "relation": "交游唱和",
+      "sourceType": "拓展",
+      "relationType": "交游",
+      "direction": "undirected",
+      "id": "seed-li-bai--du-fu--10"
+    },
+    {
+      "source": "wang-wei",
+      "target": "meng-hao-ran",
+      "relation": "交游唱和",
+      "sourceType": "拓展",
+      "relationType": "交游",
+      "direction": "undirected",
+      "id": "seed-wang-wei--meng-hao-ran--11"
+    },
+    {
+      "source": "gao-shi",
+      "target": "cen-shen",
+      "relation": "同代边塞诗人群",
+      "sourceType": "拓展",
+      "relationType": "交游",
+      "direction": "undirected",
+      "id": "seed-gao-shi--cen-shen--12"
+    },
+    {
+      "source": "han-yu",
+      "target": "liu-zongyuan",
+      "relation": "同为古文运动领袖、唐宋八大家",
+      "sourceType": "拓展",
+      "relationType": "文学群体",
+      "direction": "undirected",
+      "id": "seed-han-yu--liu-zongyuan--13"
+    },
+    {
+      "source": "bai-juyi",
+      "target": "liu-yuxi",
+      "relation": "晚年交游唱和（刘白）",
+      "sourceType": "课内",
+      "relationType": "交游",
+      "direction": "undirected",
+      "id": "seed-bai-juyi--liu-yuxi--14"
+    },
+    {
+      "source": "su-xun",
+      "target": "su-shi",
+      "relation": "父子",
+      "sourceType": "课内",
+      "relationType": "亲属",
+      "direction": "undirected",
+      "id": "seed-su-xun--su-shi--15"
+    },
+    {
+      "source": "su-xun",
+      "target": "su-zhe",
+      "relation": "父子",
+      "sourceType": "课内",
+      "relationType": "亲属",
+      "direction": "undirected",
+      "id": "seed-su-xun--su-zhe--16"
+    },
+    {
+      "source": "su-shi",
+      "target": "su-zhe",
+      "relation": "兄弟",
+      "sourceType": "课内",
+      "relationType": "亲属",
+      "direction": "undirected",
+      "id": "seed-su-shi--su-zhe--17"
+    },
+    {
+      "source": "su-shi",
+      "target": "huang-tingjian",
+      "relation": "师友，苏门四学士",
+      "sourceType": "拓展",
+      "relationType": "师友",
+      "direction": "undirected",
+      "id": "seed-su-shi--huang-tingjian--18"
+    },
+    {
+      "source": "su-shi",
+      "target": "qin-guan",
+      "relation": "师友，苏门四学士",
+      "sourceType": "拓展",
+      "relationType": "师友",
+      "direction": "undirected",
+      "id": "seed-su-shi--qin-guan--19"
+    },
+    {
+      "source": "su-shi",
+      "target": "zhang-lei",
+      "relation": "师友，苏门四学士",
+      "sourceType": "拓展",
+      "relationType": "师友",
+      "direction": "undirected",
+      "id": "seed-su-shi--zhang-lei--20"
+    },
+    {
+      "source": "su-shi",
+      "target": "chao-buzhi",
+      "relation": "师友，苏门四学士",
+      "sourceType": "拓展",
+      "relationType": "师友",
+      "direction": "undirected",
+      "id": "seed-su-shi--chao-buzhi--21"
+    },
+    {
+      "source": "su-shi",
+      "target": "wang-anshi",
+      "relation": "同朝、政见分歧，晚年和解",
+      "sourceType": "课内",
+      "relationType": "君臣同朝",
+      "direction": "undirected",
+      "id": "seed-su-shi--wang-anshi--22"
+    },
+    {
+      "source": "wang-anshi",
+      "target": "si-ma-guang",
+      "relation": "政见对立（变法之争）",
+      "sourceType": "课内",
+      "relationType": "政治论争",
+      "direction": "undirected",
+      "id": "seed-wang-anshi--si-ma-guang--23"
+    },
+    {
+      "source": "ou-yang-xiu",
+      "target": "su-shi",
+      "relation": "知贡举，识拔苏轼",
+      "sourceType": "拓展",
+      "relationType": "师友",
+      "direction": "undirected",
+      "id": "seed-ou-yang-xiu--su-shi--24"
+    },
+    {
+      "source": "ou-yang-xiu",
+      "target": "wang-anshi",
+      "relation": "同朝，早期赏识王安石",
+      "sourceType": "拓展",
+      "relationType": "君臣同朝",
+      "direction": "undirected",
+      "id": "seed-ou-yang-xiu--wang-anshi--25"
+    },
+    {
+      "source": "yan-shu",
+      "target": "yan-jiadao",
+      "relation": "父子",
+      "sourceType": "拓展",
+      "relationType": "亲属",
+      "direction": "undirected",
+      "id": "seed-yan-shu--yan-jiadao--26"
+    },
+    {
+      "source": "su-shi",
+      "target": "xin-qiji",
+      "relation": "并称苏辛，豪放词代表",
+      "sourceType": "拓展",
+      "relationType": "文学群体",
+      "direction": "undirected",
+      "id": "seed-su-shi--xin-qiji--27"
+    },
+    {
+      "source": "lu-you",
+      "target": "fan-chengda",
+      "relation": "同代交游，中兴四大诗人",
+      "sourceType": "拓展",
+      "relationType": "交游",
+      "direction": "undirected",
+      "id": "seed-lu-you--fan-chengda--28"
+    },
+    {
+      "source": "lu-you",
+      "target": "yang-wanli",
+      "relation": "同代交游，中兴四大诗人",
+      "sourceType": "拓展",
+      "relationType": "交游",
+      "direction": "undirected",
+      "id": "seed-lu-you--yang-wanli--29"
+    },
+    {
+      "source": "fan-chengda",
+      "target": "yang-wanli",
+      "relation": "同代交游，中兴四大诗人",
+      "sourceType": "拓展",
+      "relationType": "交游",
+      "direction": "undirected",
+      "id": "seed-fan-chengda--yang-wanli--30"
+    },
+    {
+      "source": "guan-hanqing",
+      "target": "ma-zhiyuan",
+      "relation": "同列元曲四大家",
+      "sourceType": "拓展",
+      "relationType": "文学群体",
+      "direction": "undirected",
+      "id": "seed-guan-hanqing--ma-zhiyuan--31"
+    },
+    {
+      "source": "guan-hanqing",
+      "target": "bai-pu",
+      "relation": "同列元曲四大家",
+      "sourceType": "拓展",
+      "relationType": "文学群体",
+      "direction": "undirected",
+      "id": "seed-guan-hanqing--bai-pu--32"
+    },
+    {
+      "source": "guan-hanqing",
+      "target": "zheng-guangzu",
+      "relation": "同列元曲四大家",
+      "sourceType": "拓展",
+      "relationType": "文学群体",
+      "direction": "undirected",
+      "id": "seed-guan-hanqing--zheng-guangzu--33"
+    },
+    {
+      "source": "zhu-ge-liang",
+      "target": "liu-bei",
+      "relation": "君臣",
+      "sourceType": "课内",
+      "relationType": "君臣同朝",
+      "direction": "undirected",
+      "id": "seed-zhu-ge-liang--liu-bei--34"
+    },
+    {
+      "source": "liu-bei",
+      "target": "sun-quan",
+      "relation": "盟友后对立",
+      "sourceType": "课内",
+      "relationType": "君臣同朝",
+      "direction": "undirected",
+      "id": "seed-liu-bei--sun-quan--35"
+    },
+    {
+      "source": "sun-quan",
+      "target": "zhou-yu",
+      "relation": "君臣",
+      "sourceType": "课内",
+      "relationType": "君臣同朝",
+      "direction": "undirected",
+      "id": "seed-sun-quan--zhou-yu--36"
+    },
+    {
+      "source": "xiang-yu",
+      "target": "liu-bang",
+      "relation": "楚汉对手",
+      "sourceType": "课内",
+      "relationType": "军事对手",
+      "direction": "undirected",
+      "id": "seed-xiang-yu--liu-bang--37"
+    },
+    {
+      "source": "kongzi",
+      "target": "mengzi",
+      "relation": "儒家学派的先后代表（思想传承）",
+      "sourceType": "拓展",
+      "relationType": "文学传承",
+      "direction": "undirected",
+      "id": "extra-kongzi--mengzi--38"
+    },
+    {
+      "source": "fan-zhongyan",
+      "target": "ou-yang-xiu",
+      "relation": "庆历新政同僚与政治盟友",
+      "sourceType": "拓展",
+      "relationType": "君臣同朝",
+      "direction": "undirected",
+      "id": "extra-fan-zhongyan--ou-yang-xiu--39"
+    },
+    {
+      "source": "fan-zhongyan",
+      "target": "teng-zijing",
+      "relation": "同僚，受托作《岳阳楼记》",
+      "sourceType": "课内",
+      "relationType": "历史关联",
+      "direction": "undirected",
+      "id": "extra-fan-zhongyan--teng-zijing--40"
+    },
+    {
+      "source": "he-zhizhang",
+      "target": "li-bai",
+      "relation": "赏识并称李白为谪仙人",
+      "sourceType": "拓展",
+      "relationType": "文学群体",
+      "direction": "undirected",
+      "id": "extra-he-zhizhang--li-bai--41"
+    },
+    {
+      "source": "wang-bo",
+      "target": "luo-binwang",
+      "relation": "同列初唐四杰",
+      "sourceType": "拓展",
+      "relationType": "文学群体",
+      "direction": "undirected",
+      "id": "extra-wang-bo--luo-binwang--42"
+    },
+    {
+      "source": "wang-zhihuan",
+      "target": "wang-chang-ling",
+      "relation": "同代边塞诗人，交游唱和",
+      "sourceType": "拓展",
+      "relationType": "交游",
+      "direction": "undirected",
+      "id": "extra-wang-zhihuan--wang-chang-ling--43"
+    },
+    {
+      "source": "wang-chang-ling",
+      "target": "gao-shi",
+      "relation": "同代边塞诗人，交游唱和",
+      "sourceType": "拓展",
+      "relationType": "交游",
+      "direction": "undirected",
+      "id": "extra-wang-chang-ling--gao-shi--44"
+    },
+    {
+      "source": "han-yu",
+      "target": "meng-jiao",
+      "relation": "韩孟诗派代表，文学相承",
+      "sourceType": "拓展",
+      "relationType": "历史关联",
+      "direction": "undirected",
+      "id": "extra-han-yu--meng-jiao--45"
+    },
+    {
+      "source": "meng-jiao",
+      "target": "jia-dao",
+      "relation": "郊寒岛瘦（文学并称）",
+      "sourceType": "拓展",
+      "relationType": "文学群体",
+      "direction": "undirected",
+      "id": "extra-meng-jiao--jia-dao--46"
+    },
+    {
+      "source": "han-yu",
+      "target": "jia-dao",
+      "relation": "“推敲”典故所述师友关系",
+      "sourceType": "拓展",
+      "relationType": "师友",
+      "direction": "undirected",
+      "id": "extra-han-yu--jia-dao--47"
+    },
+    {
+      "source": "liu-yuxi",
+      "target": "liu-zongyuan",
+      "relation": "同倡古文、参与永贞革新，终生好友",
+      "sourceType": "拓展",
+      "relationType": "历史关联",
+      "direction": "undirected",
+      "id": "extra-liu-yuxi--liu-zongyuan--48"
+    },
+    {
+      "source": "bai-juyi",
+      "target": "yuan-zhen",
+      "relation": "元白唱和，新乐府运动同人",
+      "sourceType": "拓展",
+      "relationType": "交游",
+      "direction": "undirected",
+      "id": "extra-bai-juyi--yuan-zhen--49"
+    },
+    {
+      "source": "li-shen",
+      "target": "bai-juyi",
+      "relation": "新乐府运动同人",
+      "sourceType": "拓展",
+      "relationType": "历史关联",
+      "direction": "undirected",
+      "id": "extra-li-shen--bai-juyi--50"
+    },
+    {
+      "source": "li-shen",
+      "target": "yuan-zhen",
+      "relation": "新乐府运动同人",
+      "sourceType": "拓展",
+      "relationType": "历史关联",
+      "direction": "undirected",
+      "id": "extra-li-shen--yuan-zhen--51"
+    },
+    {
+      "source": "du-mu",
+      "target": "li-shangyin",
+      "relation": "小李杜并称",
+      "sourceType": "拓展",
+      "relationType": "文学群体",
+      "direction": "undirected",
+      "id": "extra-du-mu--li-shangyin--52"
+    },
+    {
+      "source": "zeng-ji",
+      "target": "lu-you",
+      "relation": "陆游曾从曾几学诗",
+      "sourceType": "拓展",
+      "relationType": "历史关联",
+      "direction": "undirected",
+      "id": "extra-zeng-ji--lu-you--53"
+    },
+    {
+      "source": "li-qingzhao",
+      "target": "zhao-mingcheng",
+      "relation": "夫妇，共同从事金石文献整理",
+      "sourceType": "拓展",
+      "relationType": "亲属",
+      "direction": "undirected",
+      "id": "extra-li-qingzhao--zhao-mingcheng--54"
+    }
+  ]
+}

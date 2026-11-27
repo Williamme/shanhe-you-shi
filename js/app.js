@@ -64,7 +64,12 @@ const state = {
   visitorCountLoaded: false,
   tongjiaEntriesById: new Map(),
   tongjiaByWork: new Map(),
-  tongjiaAnchor: null
+  tongjiaAnchor: null,
+  personRelations: null,
+  personRelationById: new Map(),
+  personRelationLinksByPerson: new Map(),
+  relationOriginPersonId: null,
+  relationCurrentPersonId: null
 };
 
 const $ = (selector, root = document) => root.querySelector(selector);
@@ -135,6 +140,8 @@ const dom = {
   authorLinksStatus: $("#authorLinksStatus"),
   routeList: $("#routeList"),
   authorLooseWorks: $("#authorLooseWorks"),
+  authorRelationsButton: $("#authorRelationsButton"),
+  authorRelationsSummary: $("#authorRelationsSummary"),
   authorMapSeal: $("#authorMapSeal"),
   authorMapYears: $("#authorMapYears"),
   authorMapLabel: $("#authorMapLabel"),
@@ -184,6 +191,18 @@ const dom = {
   eventModalEvaluation: $("#eventModalEvaluation"),
   eventRelatedSection: $("#eventRelatedSection"),
   eventModalWorks: $("#eventModalWorks"),
+  relationModal: $("#relationModal"),
+  relationModalTitle: $("#relationModalTitle"),
+  relationModalSubtitle: $("#relationModalSubtitle"),
+  relationResetButton: $("#relationResetButton"),
+  relationGraph: $("#relationGraph"),
+  relationLegend: $("#relationLegend"),
+  relationPersonSeal: $("#relationPersonSeal"),
+  relationPersonMeta: $("#relationPersonMeta"),
+  relationPersonName: $("#relationPersonName"),
+  relationPersonRemark: $("#relationPersonRemark"),
+  relationConnectionCount: $("#relationConnectionCount"),
+  relationList: $("#relationList"),
   aboutModal: $("#aboutModal"),
   aboutButton: $("#aboutButton"),
   emailContactButton: $("#emailContactButton"),
@@ -439,6 +458,17 @@ async function loadData() {
   } catch {
     state.authorLinks = {};
     state.authorLinkUnmatched = [];
+  }
+
+  try {
+    const relationResponse = await fetch("./data/person-relations.json", { cache: "no-cache" });
+    if (!relationResponse.ok) throw new Error(`Person relations request failed: ${relationResponse.status}`);
+    applyPersonRelations(await relationResponse.json());
+  } catch (error) {
+    console.error(error);
+    state.personRelations = null;
+    state.personRelationById = new Map();
+    state.personRelationLinksByPerson = new Map();
   }
 
   state.worksById = new Map(state.data.works.map((work) => [work.id, work]));
@@ -1423,12 +1453,250 @@ function renderAuthorProfile(author) {
     .join("");
   dom.authorContext.textContent = profile.context || "";
   renderAuthorLinks(author);
+  updateAuthorRelationButton(author);
 }
 
 function normalizeAuthorName(value) {
   return String(value)
     .replace(/[《》〈〉“”‘’（）()、，。；：！？·\s—…-]/g, "")
     .toLowerCase();
+}
+
+const RELATION_TYPE_CLASSES = {
+  亲属: "family",
+  师友: "mentor",
+  交游: "friend",
+  君臣同朝: "political",
+  政治论争: "rival",
+  军事对手: "rival",
+  文学群体: "group",
+  文学传承: "group",
+  历史关联: "other"
+};
+
+function normalizeRelationPersonName(value = "") {
+  return normalizeAuthorName(value)
+    .replace(/及其弟子|及其后学|及门客|后学|弟子|门客|传$/g, "")
+    .trim();
+}
+
+function applyPersonRelations(payload) {
+  const nodes = Array.isArray(payload?.nodes) ? payload.nodes : [];
+  const links = Array.isArray(payload?.links) ? payload.links : [];
+  state.personRelations = { ...payload, nodes, links };
+  state.personRelationById = new Map(nodes.map((node) => [node.id, node]));
+  state.personRelationLinksByPerson = new Map(nodes.map((node) => [node.id, []]));
+  links.forEach((link) => {
+    state.personRelationLinksByPerson.get(link.source)?.push({ link, otherId: link.target });
+    state.personRelationLinksByPerson.get(link.target)?.push({ link, otherId: link.source });
+  });
+}
+
+function findRelationPersonForAuthor(author) {
+  if (!author || !state.personRelations) return null;
+  const candidates = [author.name, author.alias]
+    .filter(Boolean)
+    .map(normalizeRelationPersonName)
+    .filter(Boolean);
+  return (
+    state.personRelations.nodes.find((node) =>
+      [node.name, ...(node.aliases || [])]
+        .map(normalizeRelationPersonName)
+        .some((name) => candidates.includes(name))
+    ) ||
+    state.personRelations.nodes.find((node) => {
+      const normalizedNode = normalizeRelationPersonName(node.name);
+      return candidates.some(
+        (candidate) =>
+          normalizedNode.length > 1 &&
+          candidate.length > 1 &&
+          (normalizedNode.includes(candidate) || candidate.includes(normalizedNode))
+      );
+    }) ||
+    null
+  );
+}
+
+function getPersonConnections(personId) {
+  const entries = state.personRelationLinksByPerson.get(personId) || [];
+  const grouped = new Map();
+  entries.forEach(({ link, otherId }) => {
+    const person = state.personRelationById.get(otherId);
+    if (!person) return;
+    if (!grouped.has(otherId)) grouped.set(otherId, { person, relations: [] });
+    grouped.get(otherId).relations.push(link);
+  });
+  return [...grouped.values()].sort(
+    (a, b) =>
+      Object.keys(RELATION_TYPE_CLASSES).indexOf(a.relations[0].relationType) -
+        Object.keys(RELATION_TYPE_CLASSES).indexOf(b.relations[0].relationType) ||
+      a.person.name.localeCompare(b.person.name, "zh-CN")
+  );
+}
+
+function updateAuthorRelationButton(author) {
+  const person = findRelationPersonForAuthor(author);
+  const connections = person ? getPersonConnections(person.id) : [];
+  dom.authorRelationsButton.classList.toggle("has-relations", connections.length > 0);
+  dom.authorRelationsButton.setAttribute(
+    "aria-label",
+    person
+      ? connections.length
+        ? `查看${author.name}的人物关系，${connections.length} 位关联人物`
+        : `查看${author.name}的人物关系，暂无直接关系`
+      : `查看${author.name}的人物关系，资料待补充`
+  );
+  dom.authorRelationsSummary.textContent = person
+    ? connections.length
+      ? `已整理 ${connections.length} 位关联人物`
+      : "人物已收录，暂无直接关系"
+    : "人物关系资料待补充";
+}
+
+function relationTypeClass(type) {
+  return RELATION_TYPE_CLASSES[type] || "other";
+}
+
+function relationNodeClass(person, center = false) {
+  const typeClasses = {
+    文人: "relation-person-writer",
+    帝王: "relation-person-ruler",
+    历史人物: "relation-person-historical"
+  };
+  return `relation-node${center ? " is-center" : ""} ${typeClasses[person.type] || "relation-person-writer"}`;
+}
+
+function renderRelationEmpty(author, message = "暂未整理这名人物的人物关系。") {
+  dom.relationModalTitle.textContent = `${author?.name || "人物"} · 人物关系`;
+  dom.relationModalSubtitle.textContent = "人物关系资料会持续补充，并标注课内依据与教学拓展。";
+  dom.relationPersonSeal.textContent = author?.name?.slice(0, 1) || "人";
+  dom.relationPersonMeta.textContent = [author?.era, "人物档案"].filter(Boolean).join(" · ");
+  dom.relationPersonName.textContent = author?.name || "资料待补充";
+  dom.relationPersonRemark.textContent = author?.profile?.tag || author?.alias || "";
+  dom.relationConnectionCount.textContent = "0 人";
+  dom.relationGraph.innerHTML = `<div class="relation-empty-state"><strong>暂无关系图</strong>${escapeHTML(message)}</div>`;
+  dom.relationLegend.innerHTML = "";
+  dom.relationLegend.hidden = true;
+  dom.relationList.innerHTML = `<div class="relation-empty-state"><strong>关系资料待补充</strong>可先在 <code>data/person-relations.json</code> 中添加人物与关系。</div>`;
+  dom.relationResetButton.hidden = true;
+}
+
+function renderRelationGraph(personId) {
+  const person = state.personRelationById.get(personId);
+  if (!person) return;
+  const connections = getPersonConnections(personId);
+  state.relationCurrentPersonId = personId;
+  dom.relationModalTitle.textContent = `${person.name} · 人物关系`;
+  dom.relationModalSubtitle.textContent = connections.length
+    ? `与 ${person.name} 直接相关的人物、交游与文学史关联。`
+    : `${person.name}已收录，暂未整理直接关系。`;
+  dom.relationPersonSeal.textContent = person.name.slice(0, 1);
+  dom.relationPersonMeta.textContent = [person.dynasty, person.type, person.stage?.join(" / ")]
+    .filter(Boolean)
+    .join(" · ");
+  dom.relationPersonName.textContent = person.name;
+  dom.relationPersonRemark.textContent =
+    person.remark || (person.workIds?.length ? `关联 ${person.workIds.length} 篇教材诗文` : "教材人物关系");
+  dom.relationConnectionCount.textContent = `${connections.length} 人`;
+  dom.relationResetButton.hidden =
+    !state.relationOriginPersonId || state.relationCurrentPersonId === state.relationOriginPersonId;
+
+  const positions = connections.map((_, index) => {
+    const angle = -Math.PI / 2 + (Math.PI * 2 * index) / Math.max(1, connections.length);
+    return {
+      x: 50 + Math.cos(angle) * 35,
+      y: 50 + Math.sin(angle) * 34
+    };
+  });
+  const edgeMarkup = connections
+    .map(
+      (connection, index) =>
+        `<line class="relation-edge relation-type-${relationTypeClass(
+          connection.relations[0].relationType
+        )}" x1="50" y1="50" x2="${positions[index].x.toFixed(2)}" y2="${positions[
+          index
+        ].y.toFixed(2)}"></line>`
+    )
+    .join("");
+  const neighborMarkup = connections
+    .map(
+      (connection, index) => `
+        <button
+          class="${relationNodeClass(connection.person)}"
+          type="button"
+          style="left:${positions[index].x.toFixed(2)}%;top:${positions[index].y.toFixed(2)}%"
+          data-relation-person-id="${escapeHTML(connection.person.id)}"
+          aria-label="查看${escapeHTML(connection.person.name)}的人物关系"
+        >
+          <strong>${escapeHTML(connection.person.name)}</strong>
+          <small>${escapeHTML(connection.person.type)}</small>
+        </button>
+      `
+    )
+    .join("");
+  dom.relationGraph.innerHTML = `
+    <svg class="relation-edges" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+      ${edgeMarkup}
+    </svg>
+    <div class="${relationNodeClass(person, true)}" aria-label="当前人物：${escapeHTML(person.name)}">
+      <strong>${escapeHTML(person.name)}</strong>
+      <small>${escapeHTML(person.dynasty)}</small>
+    </div>
+    ${neighborMarkup}
+  `;
+
+  const typeSet = [...new Set(connections.flatMap((connection) => connection.relations.map((link) => link.relationType)))];
+  dom.relationLegend.hidden = typeSet.length === 0;
+  dom.relationLegend.innerHTML = typeSet.length
+    ? typeSet
+        .map(
+          (type) =>
+            `<span><i class="relation-type-${relationTypeClass(type)}"></i>${escapeHTML(type)}</span>`
+        )
+        .join("")
+    : "";
+  dom.relationList.innerHTML = connections.length
+    ? connections
+        .map((connection) => {
+          const primaryRelation = connection.relations[0];
+          return `
+            <button
+              class="relation-list-item"
+              type="button"
+              data-relation-person-id="${escapeHTML(connection.person.id)}"
+            >
+              <span>
+                <strong>${escapeHTML(connection.person.name)}</strong>
+                <small>${escapeHTML(connection.person.dynasty)} · ${escapeHTML(connection.person.type)}</small>
+              </span>
+              <span class="relation-list-relation">
+                <p>${escapeHTML(connection.relations.map((link) => link.relation).join("；"))}</p>
+                <span class="relation-list-tags">
+                  <span>${escapeHTML(primaryRelation.relationType)}</span>
+                  <span class="${primaryRelation.sourceType === "拓展" ? "is-expanded" : ""}">${escapeHTML(
+                    primaryRelation.sourceType
+                  )}</span>
+                </span>
+              </span>
+            </button>
+          `;
+        })
+        .join("")
+    : `<div class="relation-empty-state"><strong>暂无直接关系</strong>该人物已纳入资料库，关系可继续补充。</div>`;
+}
+
+function openAuthorRelations() {
+  const author = state.currentAuthor;
+  if (!author) return;
+  const person = findRelationPersonForAuthor(author);
+  state.relationOriginPersonId = person?.id || null;
+  state.relationCurrentPersonId = person?.id || null;
+  dom.relationModal.hidden = false;
+  state.activeModal = "relation";
+  setBodyLock(true);
+  if (person) renderRelationGraph(person.id);
+  else renderRelationEmpty(author);
+  $(".modal-close", dom.relationModal).focus({ preventScroll: true });
 }
 
 function findEraWork(record) {
@@ -2205,6 +2473,12 @@ function closeModal(modalName) {
     dom.chronicleModal.hidden = true;
     state.activeModal = null;
   }
+  if (modalName === "relation") {
+    dom.relationModal.hidden = true;
+    state.activeModal = null;
+    state.relationOriginPersonId = null;
+    state.relationCurrentPersonId = null;
+  }
   setBodyLock(false);
 }
 
@@ -2588,6 +2862,18 @@ function bindGlobalEvents() {
   });
 
   dom.openAuthorJourney.addEventListener("click", openActiveAuthorJourney);
+  dom.authorRelationsButton.addEventListener("click", openAuthorRelations);
+  dom.relationResetButton.addEventListener("click", () => {
+    if (state.relationOriginPersonId) renderRelationGraph(state.relationOriginPersonId);
+  });
+  dom.relationGraph.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-relation-person-id]");
+    if (button) renderRelationGraph(button.dataset.relationPersonId);
+  });
+  dom.relationList.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-relation-person-id]");
+    if (button) renderRelationGraph(button.dataset.relationPersonId);
+  });
   dom.aboutButton.addEventListener("click", openAbout);
   dom.emailContactButton.addEventListener("click", () => {
     setEmailPopoverOpen(dom.emailPopover.hidden);
@@ -2607,6 +2893,8 @@ function bindGlobalEvents() {
             ? dom.eventModal
           : state.activeModal === "chronicle"
             ? dom.chronicleModal
+          : state.activeModal === "relation"
+            ? dom.relationModal
             : dom.aboutModal;
       const focusable = $$(
         'button:not([disabled]):not([hidden]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])',

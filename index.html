@@ -446,6 +446,29 @@
                     <span><strong id="authorWorkCount">4</strong> 篇诗文</span>
                     <span><strong id="authorYearSpan">701—762</strong></span>
                   </div>
+                  <button
+                    class="author-relations-trigger"
+                    id="authorRelationsButton"
+                    type="button"
+                    aria-haspopup="dialog"
+                    aria-controls="relationModal"
+                  >
+                    <span class="author-relations-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="5" r="2.5"></circle>
+                        <circle cx="5" cy="18" r="2.5"></circle>
+                        <circle cx="19" cy="18" r="2.5"></circle>
+                        <path d="m10.8 7.2-4.5 8.5M13.2 7.2l4.5 8.5M7.5 18h9"></path>
+                      </svg>
+                    </span>
+                    <span>
+                      <strong>人物关系</strong>
+                      <small id="authorRelationsSummary">查看关联人物与关系</small>
+                    </span>
+                    <svg class="author-relations-arrow" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="m9 18 6-6-6-6"></path>
+                    </svg>
+                  </button>
                   <section class="author-archive" id="authorArchive">
                     <div class="author-archive-head">
                       <div>
@@ -699,6 +722,52 @@
         </div>
       </div>
     </section>
+
+    <div class="modal" id="relationModal" hidden>
+      <div class="modal-backdrop" data-close-modal="relation"></div>
+      <article class="relation-dialog" role="dialog" aria-modal="true" aria-labelledby="relationModalTitle">
+        <button class="modal-close" type="button" data-close-modal="relation" aria-label="关闭人物关系">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg>
+        </button>
+        <header class="relation-dialog-head">
+          <div>
+            <p class="eyebrow">人物关系 · PERSONAL NETWORK</p>
+            <h2 id="relationModalTitle">人物关系</h2>
+            <p id="relationModalSubtitle">以当前作者为中心查看交游、师承、亲属与文学群体关系。</p>
+          </div>
+          <button class="relation-reset-button" id="relationResetButton" type="button" hidden>
+            回到当前作者
+          </button>
+        </header>
+        <div class="relation-dialog-body">
+          <section class="relation-graph-panel" aria-label="人物关系图">
+            <div class="relation-graph" id="relationGraph"></div>
+            <div class="relation-legend" id="relationLegend" aria-label="人物关系图例"></div>
+          </section>
+          <aside class="relation-side-panel">
+            <div class="relation-person-card">
+              <span id="relationPersonSeal">人</span>
+              <div>
+                <p class="eyebrow" id="relationPersonMeta">人物档案</p>
+                <h3 id="relationPersonName">人物</h3>
+                <p id="relationPersonRemark"></p>
+              </div>
+            </div>
+            <div class="relation-list-heading">
+              <div>
+                <p class="eyebrow">一度关系</p>
+                <h3>关联人物</h3>
+              </div>
+              <span id="relationConnectionCount">0 人</span>
+            </div>
+            <div class="relation-list" id="relationList"></div>
+            <p class="relation-source-note">
+              “文学群体”“文学传承”等关系表示作品与文学史关联，不表示人物一定直接交往。
+            </p>
+          </aside>
+        </div>
+      </article>
+    </div>
 
     <div class="modal" id="workModal" hidden>
       <div class="modal-backdrop" data-close-modal="work"></div>

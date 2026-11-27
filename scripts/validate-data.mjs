@@ -7,6 +7,9 @@ const chronicles = JSON.parse(fs.readFileSync(path.join(root, "data", "chronicle
 const eventDetails = JSON.parse(fs.readFileSync(path.join(root, "data", "history-event-details.json"), "utf8"));
 const tongjia = JSON.parse(fs.readFileSync(path.join(root, "data", "tongjia.json"), "utf8"));
 const mapAtlas = JSON.parse(fs.readFileSync(path.join(root, "data", "map-atlas.json"), "utf8"));
+const personRelations = JSON.parse(
+  fs.readFileSync(path.join(root, "data", "person-relations.json"), "utf8")
+);
 const errors = [];
 
 const dynastyIds = new Set();
@@ -40,6 +43,47 @@ for (const work of data.works || []) {
   }
   for (const field of ["title", "author", "original", "translation", "background"]) {
     if (!work[field]) errors.push(`${work.title} 缺少字段：${field}`);
+  }
+}
+
+const personIds = new Set();
+const relationTypes = new Set(["亲属", "师友", "交游", "君臣同朝", "政治论争", "军事对手", "文学群体", "文学传承", "历史关联"]);
+const relationStages = new Set(["小学", "初中", "高中"]);
+const relationPersonTypes = new Set(["文人", "帝王", "历史人物"]);
+for (const person of personRelations.nodes || []) {
+  if (!person.id || personIds.has(person.id)) {
+    errors.push(`人物关系节点 id 缺失或重复：${person.id || person.name || "(未命名)"}`);
+    continue;
+  }
+  personIds.add(person.id);
+  if (!person.name) errors.push(`人物关系节点 ${person.id} 缺少 name`);
+  if (!relationPersonTypes.has(person.type)) {
+    errors.push(`${person.name || person.id} 的人物类型无效：${person.type}`);
+  }
+  for (const stage of person.stage || []) {
+    if (!relationStages.has(stage)) errors.push(`${person.name || person.id} 的学段无效：${stage}`);
+  }
+  for (const workId of person.workIds || []) {
+    if (!workIds.has(workId)) {
+      errors.push(`${person.name || person.id} 引用了不存在的篇目：${workId}`);
+    }
+  }
+}
+
+const relationLinkIds = new Set();
+for (const link of personRelations.links || []) {
+  if (!link.id || relationLinkIds.has(link.id)) {
+    errors.push(`人物关系连线 id 缺失或重复：${link.id || "(无 id)"}`);
+  }
+  relationLinkIds.add(link.id);
+  if (!personIds.has(link.source)) errors.push(`人物关系连线引用了不存在的人物：${link.source}`);
+  if (!personIds.has(link.target)) errors.push(`人物关系连线引用了不存在的人物：${link.target}`);
+  if (link.source === link.target) errors.push(`人物关系不能连接自己：${link.source}`);
+  if (!relationTypes.has(link.relationType)) {
+    errors.push(`${link.id} 的关系类型无效：${link.relationType}`);
+  }
+  if (!["课内", "拓展"].includes(link.sourceType)) {
+    errors.push(`${link.id} 的 sourceType 无效：${link.sourceType}`);
   }
 }
 
@@ -154,5 +198,5 @@ if (errors.length) {
 }
 
 console.log(
-  `数据校验通过：${data.dynasties.length} 个朝代，${mapAtlas.periods.reduce((total, period) => total + period.snapshots.length, 0)} 个疆域阶段，${chronicleEventCount} 件大事，${Object.keys(eventDetails.events || {}).length} 组事件详解，${tongjia.entryCount || 0} 条通假字，${data.authors.length} 位作者，${data.works.length} 篇诗文，${(data.mapLabels || []).length} 个中文地图标注。`
+  `数据校验通过：${data.dynasties.length} 个朝代，${mapAtlas.periods.reduce((total, period) => total + period.snapshots.length, 0)} 个疆域阶段，${chronicleEventCount} 件大事，${Object.keys(eventDetails.events || {}).length} 组事件详解，${tongjia.entryCount || 0} 条通假字，${data.authors.length} 位作者，${data.works.length} 篇诗文，${(personRelations.nodes || []).length} 位关系人物，${(personRelations.links || []).length} 条人物关系，${(data.mapLabels || []).length} 个中文地图标注。`
 );
